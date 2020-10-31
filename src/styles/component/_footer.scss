@@ -1,0 +1,42 @@
+.footer {
+  background: bg("black");
+  @include text(text("white"), fs("h4"), fw("fwMedium"));
+  text-align: center;
+  &__contact {
+    padding: spacing(2, 0);
+    display: flex;
+    justify-content: space-between;
+    &__client {
+      .footer__client--list {
+        display: flex;
+        width: 100%;
+        .footer__client--item {
+          width: 25%;
+          img {
+            width: 60%;
+          }
+        }
+      }
+    }
+    &__info {
+      span {
+        @include text(text("gray1"), fs("h5"), fw("fwMedium"));
+      }
+      .footer__contact__link {
+        p {
+          @include text(text("secondary"), fs("h5"), fw("fwMedium"));
+          margin: spacing(0.4, 0);
+        }
+      }
+    }
+
+    .footer__social {
+      width: 100%;
+      img {
+        width: 20%;
+        margin: spacing(0, 0.4);
+      }
+    }
+  }
+}
+/* end footer */

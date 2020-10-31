@@ -1,0 +1,118 @@
+/* scss mycarousel */
+.mycarousel {
+  position: relative;
+  background: linear-gradient(to top, bg("linear-gradient"), transparent 100%);
+  &__brand {
+    position: relative;
+    height: 650px;
+    background-size: cover;
+    background-position: top center;
+    filter: brightness(50%) blur(10px);
+
+    -webkit-filter: brightness(50%) blur(10px);
+    // img{
+    //       filter: brightness(50%) blur(5px);
+    //       width: 100%;
+    //       height: 100%;
+    //       -webkit-filter: brightness(50%) blur(5px);
+    //     }
+  }
+  &__content {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__image {
+      img {
+        width: 290px;
+        height: 400px;
+      }
+      // .play {
+      //   position: absolute;
+      //   left: 30%;
+      //   top: 40%;
+      //   opacity: 0;
+      // }
+      // &:hover {
+      //   .play {
+      //     opacity: 1;
+      //   }
+      // }
+    }
+    &__title {
+      margin-left: spacing(3);
+      width: 40%;
+      padding-left: spacing(2);
+      p {
+        @include text(text("light"), fs("h4"), fw("fwMedium"));
+        margin: 0;
+      }
+      label {
+        padding: 0 5px;
+        margin-right: 5px;
+        border-radius: 5px;
+        background: bg("orange1");
+        @include text(text("white"), fs("h3"), fw("fwMedium"));
+      }
+      .mycarousel__content--name {
+        @include text(text("white"), 28px, fw("fwMedium"));
+        margin: 0;
+      }
+    }
+    &__evaluate {
+      width: 20%;
+      text-align: center;
+      margin-left: spacing(10);
+      p:first-child {
+        margin: 0;
+        @include text(text("white"), fs("number"), fw("fwRegular"));
+        border: 8px solid text("secondary");
+        text-align: center;
+        width: 100px;
+        height: 100px;
+        line-height: 80px;
+        display: inline-block;
+        border-radius: 50%;
+      }
+      .mycarousel__evaluate--rating {
+        i {
+          margin: spacing(0, 0.2);
+          @include text(text("secondary"), fs("h3"), fw("fwRegular"));
+        }
+      }
+      .number {
+        width: 25px;
+      }
+      // p:last-child {
+      //   @include text(text("light"), fs("h5"), fw("fwMedium"));
+      //   margin-top: 5px;
+      // }
+    }
+  }
+}
+@media screen and (min-width: 830px) and (max-width: 1150px) {
+  .mycarousel__content {
+    top: 8%;
+    left: 10%;
+  }
+  .mycarousel__content__evaluate {
+    margin-left: 60px;
+  }
+}
+@media screen and (max-width: 829px) {
+  .mycarousel__content {
+    opacity: 0;
+  }
+  .mycarousel__brand {
+    opacity: 1;
+    .play1 {
+      opacity: 1;
+    }
+  }
+  .mycarousel__content__title {
+    top: 60%;
+    opacity: 1;
+  }
+}
