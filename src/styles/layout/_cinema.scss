@@ -49,12 +49,15 @@
     border-right: 1px solid bg("gray1");
     width: 100%;
     .cinema__section--logo {
-      opacity: 0.5;
-      span {
+      button {
+        outline: none;
+        background: transparent;
+        border: none;
+        width: 100%;
         img {
           cursor: pointer;
-          width: 40%;
-          margin-left: 30%;
+          width: 60%;
+          margin-left: 20%;
           padding: 10px 0;
           border-bottom: 1px solid bg("gray1");
           @include MediaQuery($sm) {
@@ -66,9 +69,6 @@
       &:hover {
         opacity: 1;
       }
-    }
-    .active {
-      opacity: 1;
     }
   }
 
