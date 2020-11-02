@@ -1,9 +1,9 @@
-
 import { createAction } from ".";
 import { userService } from "../../services";
 import { SIGN_IN, SIGN_UP } from "../types/types";
 import { startLoading, stopLoading } from "./common.action";
 import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
 
 export const loginRequest = (user) => {
   return (dispatch) => {
@@ -39,10 +39,18 @@ export const registerRequest = (data) => {
       .signUp(data)
       .then((res) => {
         dispatch(createAction(SIGN_UP, res.data));
+        Swal.fire({
+          icon: "success",
+          title: "Login successfully",
+        });
         dispatch(stopLoading());
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Login error",
+          text: "account or email already exists",
+        });
         dispatch(stopLoading());
       });
   };

@@ -5,3 +5,4 @@ import { UserService } from "./user.service";
 export const filmService = new FilmService();
 export const userService = new UserService();
 export const cinemaService = new CinemaService();
+/* export const userSignUpService = new UserService(); */
