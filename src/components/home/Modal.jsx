@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal() {
+export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -52,7 +52,7 @@ export default function TransitionsModal() {
           <div className={classes.paper}>
             <iframe
               style={{ width: "100%", height: "600px" }}
-              src="https://www.youtube.com/embed/FTVL36d1gXY"
+              src={props.movie.trailer}
               frameBorder={0}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
