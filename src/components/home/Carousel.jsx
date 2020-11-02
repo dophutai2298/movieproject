@@ -7,23 +7,22 @@ import "swiper/components/pagination/pagination.scss";
 import SearchCombobox from "./SearchCombobox";
 import TransitionsModal from "./Modal";
 import { connect } from "react-redux";
+import { fetchBannerFilm } from "../../redux/actions/film.action";
 
 SwiperCore.use([Navigation, Pagination, Autoplay, A11y]);
 class Carousel extends PureComponent {
   renderCarousel = () => {
-    const { movieList } = this.props;
-    return movieList.map((movie, index) => {
-      if (index < 3) {
-        return (
-          <SwiperSlide>
-            <div className="swiper-slide">
-              <img style={{ height: "700px" }} src={movie.hinhAnh} alt="" />
+    const { bannerMovie } = this.props;
+    return bannerMovie.map((movie, index) => {
+      return (
+        <SwiperSlide>
+          <div className="swiper-slide">
+            <img style={{ height: "700px" }} src={movie.hinhAnh} alt="" />
 
-              <TransitionsModal movie={movie} />
-            </div>
-          </SwiperSlide>
-        );
-      }
+            <TransitionsModal movie={movie} />
+          </div>
+        </SwiperSlide>
+      );
     });
   };
   render() {
@@ -51,10 +50,13 @@ class Carousel extends PureComponent {
       </section>
     );
   }
+  componentDidMount() {
+    this.props.dispatch(fetchBannerFilm());
+  }
 }
 const mapStateToProps = (state) => {
   return {
-    movieList: state.filmReducer.movieList,
+    bannerMovie: state.filmReducer.bannerMovie,
   };
 };
 export default connect(mapStateToProps)(Carousel);
