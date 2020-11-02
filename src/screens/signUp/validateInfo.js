@@ -1,3 +1,4 @@
+import awl from "sweetalert2";
 const validateinfomation = [
   "Account required",
   "Password required",
@@ -6,13 +7,16 @@ const validateinfomation = [
   "Name required",
   "Password number",
   "Email incorrect format",
+  "Id group required",
+  "User Type Id required",
 ];
+
 export default function validateInfo(values) {
   let ktramatkhau = /^[0-9]$/;
   let email = /^([\w\.])+@([a-zA-Z0-9\-])+\.([a-zA-Z]{2,4})(\.[a-zA-Z]{2,4})?$/;
   let error = {};
   if (!values.taiKhoan.trim()) {
-    error.taiKhoan = { ...error } && validateinfomation[0];
+    error.taiKhoan = validateinfomation[0];
   }
   if (!values.matKhau.trim()) {
     error.matKhau = validateinfomation[1];
@@ -31,16 +35,10 @@ export default function validateInfo(values) {
     error.soDt = validateinfomation[3];
   }
   if (values.maNhom === "") {
-    error.maNhom = validateinfomation[3];
+    error.maNhom = validateinfomation[7];
   }
   if (values.maLoaiNguoiDung === "") {
-    error.maLoaiNguoiDung = validateinfomation[3];
+    error.maLoaiNguoiDung = validateinfomation[8];
   }
-  /*  if (!values.hoTen.trim()) {
-    error.matKhau = validateinfomation[5];
-  }
-  if (!values.matKhau.trim()) {
-    error.soDT = validateinfomation[3];
-  } */
   return error;
 }
