@@ -1,4 +1,5 @@
 import {
+  FETCH_BANNER_FILM,
   FETCH_FILM,
   FETCH_FILM_DETAIL,
   FETCH_FILM_FOLLOW_DAY,
@@ -8,6 +9,7 @@ let initialState = {
   movieList: [],
   movieNew: [],
   movieDetail: null,
+  bannerMovie: [],
 };
 
 const FilmReducer = (state = initialState, action) => {
@@ -22,6 +24,10 @@ const FilmReducer = (state = initialState, action) => {
     }
     case FETCH_FILM_DETAIL: {
       state.movieDetail = action.payload;
+      return { ...state };
+    }
+    case FETCH_BANNER_FILM: {
+      state.bannerMovie = action.payload;
       return { ...state };
     }
     default:

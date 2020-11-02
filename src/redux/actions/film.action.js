@@ -1,6 +1,7 @@
 import { createAction } from "./index";
 import { filmService } from "../../services";
 import {
+  FETCH_BANNER_FILM,
   FETCH_FILM,
   FETCH_FILM_DETAIL,
   FETCH_FILM_FOLLOW_DAY,
@@ -50,6 +51,19 @@ export const fetchFilmDetail = (id) => {
       .catch((err) => {
         console.log(err);
         dispatch(stopLoading());
+      });
+  };
+};
+
+export const fetchBannerFilm = () => {
+  return (dispatch) => {
+    filmService
+      .fetchBannerFilm()
+      .then((res) => {
+        dispatch(createAction(FETCH_BANNER_FILM, res.data));
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 };

@@ -21,4 +21,10 @@ export class FilmService {
       method: "GET",
     });
   }
+  fetchBannerFilm() {
+    return Axios({
+      url: "https://5fa04305e21bab0016dfd001.mockapi.io/api/v1/banner",
+      // method: "GET",
+    });
+  }
 }
