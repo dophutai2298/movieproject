@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TransitionsModal from "./TrailerModal";
 import { NavLink } from "react-router-dom";
 
-class FilmItem extends Component {
+class FilmNew extends Component {
   render() {
     const { movie } = this.props;
     return (
@@ -31,7 +31,7 @@ class FilmItem extends Component {
           {/* <p className="item__title--time">150 phút</p> */}
           <div className="showHover">
             <NavLink exact to={`/detail/${movie.maPhim}`}>
-              <button className="showHover--btn">Mua vé</button>
+              <button className="showHover--btn">Đặt vé ngay</button>
             </NavLink>
           </div>
         </div>
@@ -40,4 +40,4 @@ class FilmItem extends Component {
   }
 }
 
-export default FilmItem;
+export default FilmNew;
