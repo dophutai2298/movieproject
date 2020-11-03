@@ -17,7 +17,7 @@ class Carousel extends PureComponent {
       return (
         <SwiperSlide>
           <div className="swiper-slide">
-            <img style={{ height: "700px" }} src={movie.hinhAnh} alt="" />
+            <img src={movie.hinhAnh} alt="" />
 
             <TransitionsModal movie={movie} />
           </div>
