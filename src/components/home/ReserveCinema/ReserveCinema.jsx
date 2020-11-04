@@ -7,8 +7,10 @@ import {
   fetchCinemaInfoInSystem,
   fetchCinemaSystem,
 } from "../../../redux/actions/cinema.action";
+import { stopLoading } from "../../../redux/actions/common.action";
 
 class ReserveCinema extends Component {
+  //Render Hệ thống Rạp
   renderBranch = () => {
     const { cinemaList } = this.props;
     return cinemaList.map((cinema, index) => {
@@ -19,6 +21,8 @@ class ReserveCinema extends Component {
       );
     });
   };
+
+  //Render cụm Rạp
   renderCinemaReserse = () => {
     const { cinemaInfo } = this.props;
     if (cinemaInfo.length < 1) {
@@ -34,19 +38,21 @@ class ReserveCinema extends Component {
         </div>
       );
     }
-    return cinemaInfo.map((cinemaInfo, index) => {
+    return cinemaInfo.map((cum, index) => {
       return (
         <div key={index}>
-          <CinemaReserve cinemaInfo={cinemaInfo} />
+          <CinemaReserve cum={cum} />
         </div>
       );
     });
   };
 
+  //Render Phim
   renderFilm = () => {
     const { movieFowllowCinema } = this.props;
+    const { selectedCinema } = this.props;
 
-    if (movieFowllowCinema.length < 1) {
+    if (!selectedCinema) {
       return (
         <div className="cinema__section--film">
           <p
@@ -57,22 +63,38 @@ class ReserveCinema extends Component {
               marginLeft: "2%",
             }}
           >
-            Vui lòng chọn Hệ thống Rạp !!!
+            Vui lòng chọn Cụm Rạp !!!
           </p>
         </div>
       );
     }
-    return movieFowllowCinema.map((movie, index) => {
-      console.log("ten:", movie.tenHeThongRap.lstCumRap);
-      // return movie.tenHeThongRap.lstCumRap.map((item, index) => {
-      //   <div>{item.maCumRap}</div>;
-      // });
-      // return (
-      //   <div key={index}>
-      //     <p>DS:{movie.tenHeThongRap}</p>
-      //     <FilmReserve movie={movie} />
-      //   </div>
-      // );
+
+    let arrFilmNew = movieFowllowCinema.filter(
+      (movie) => movie.maCumRap === selectedCinema
+    );
+
+    if (arrFilmNew.length < 1) {
+      return (
+        <div className="cinema__section--film">
+          <p
+            style={{
+              color: "#fb4226",
+              fontSize: "18px",
+              fontWeight: " 700",
+              marginLeft: "2%",
+            }}
+          >
+            Rạp chưa có lịch chiếu !!!
+          </p>
+        </div>
+      );
+    }
+    return arrFilmNew.map((movie, index) => {
+      return (
+        <div key={index}>
+          <FilmReserve movie={movie} />
+        </div>
+      );
     });
   };
   render() {
@@ -115,6 +137,9 @@ const mapStateToProps = (state) => {
 
     //Danh sách phim theo cụm rạp
     movieFowllowCinema: state.cinemaReducer.movieFowllowCinema,
+
+    //Lấy id cụm rạp đã chọn
+    selectedCinema: state.cinemaReducer.selectedCinema,
   };
 };
 export default connect(mapStateToProps)(ReserveCinema);

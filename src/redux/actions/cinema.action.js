@@ -4,6 +4,7 @@ import {
   FETCH_CINEMA_INFO_IN_SYSTEM,
   FETCH_CINEMA_SYSTEM,
   FETCH_FILM_FOLLOW_CINEMA,
+  SELECTED_ID_CINEMA,
 } from "../types/types";
 import { startLoading, stopLoading } from "./common.action";
 
@@ -38,10 +39,16 @@ export const fetchFilmFollowCinema = (id) => {
     cinemaService
       .fetchFilmFollowCinema(id)
       .then((res) => {
-        dispatch(createAction(FETCH_FILM_FOLLOW_CINEMA, res.data));
+        dispatch(createAction(FETCH_FILM_FOLLOW_CINEMA, res.data[0].lstCumRap));
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+};
+
+export const selectedIdCinema = (id) => {
+  return (dispatch) => {
+    dispatch(createAction(SELECTED_ID_CINEMA, id));
   };
 };

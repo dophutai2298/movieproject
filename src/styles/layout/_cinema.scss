@@ -60,6 +60,7 @@
           margin-left: 20%;
           padding: 10px 0;
           border-bottom: 1px solid bg("gray1");
+          transition: all 0.3s;
           @include MediaQuery($sm) {
             width: 90%;
             margin-left: 5%;
@@ -67,7 +68,7 @@
         }
       }
       &:hover {
-        opacity: 1;
+        opacity: 0.75;
       }
     }
   }
@@ -83,7 +84,12 @@
       border-bottom: 1px solid bg("gray1");
       width: 80%;
       margin-left: 10%;
-
+      opacity: 1;
+      &:hover {
+        img {
+          opacity: 0.7;
+        }
+      }
       @include MediaQuery($sm) {
         display: block;
       }
@@ -91,7 +97,12 @@
       .cinema__rap--img {
         width: 40%;
         img {
+          transition: all 0.3s;
           width: 70%;
+          -webkit-transition: all 0.3s;
+          -moz-transition: all 0.3s;
+          -ms-transition: all 0.3s;
+          -o-transition: all 0.3s;
         }
         @include MediaQuery($sm) {
           width: 100%;
@@ -209,7 +220,8 @@
           @include MediaQuery($sm) {
             display: block;
           }
-          a {
+          .linkBook {
+            cursor: pointer;
             @include text(text("gray"), fs("h5"), fw("fwMedium"));
             margin: spacing(0.5);
             padding: spacing(1);
