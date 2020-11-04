@@ -63,11 +63,16 @@ class ReserveCinema extends Component {
       );
     }
     return movieFowllowCinema.map((movie, index) => {
-      return (
-        <div key={index}>
-          <FilmReserve movie={movie} />
-        </div>
-      );
+      console.log("ten:", movie.tenHeThongRap.lstCumRap);
+      // return movie.tenHeThongRap.lstCumRap.map((item, index) => {
+      //   <div>{item.maCumRap}</div>;
+      // });
+      // return (
+      //   <div key={index}>
+      //     <p>DS:{movie.tenHeThongRap}</p>
+      //     <FilmReserve movie={movie} />
+      //   </div>
+      // );
     });
   };
   render() {

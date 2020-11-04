@@ -11,15 +11,7 @@ class CarouselDetail extends Component {
   };
   render() {
     const { movieDetail } = this.props;
-    new Date("2016-07-25T00:00:00Z").getTime();
-    //  Reverse day
-    // const day = movieDetail.ngayKhoiChieu;
-    // const cutString = movieDetail.day.slice(0, 10);
-    // let date = new Date(cutString);
-    // let dd = date.getDate();
-    // let mm = date.getMonth() + 1;
-    // let yy = date.getFullYear();
-    // let newDay = dd + "/" + mm + "/" + yy;
+    let dateFormat = require("dateformat");
     return (
       <section className="mycarousel">
         <div
@@ -35,7 +27,7 @@ class CarouselDetail extends Component {
           </div>
 
           <div className="mycarousel__content__title">
-            <p>{movieDetail.ngayKhoiChieu}</p>
+            <p>{dateFormat(movieDetail.ngayKhoiChieu, "dd-mm-yyyy")}</p>
             <label htmlFor>C16</label>
             <p className="mycarousel__content--name">{movieDetail.tenPhim}</p>
             <p>{movieDetail.lichChieu.thoiLuong}</p>

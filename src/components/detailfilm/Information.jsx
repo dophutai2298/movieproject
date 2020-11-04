@@ -4,6 +4,7 @@ class Information extends Component {
   render() {
     console.log(this.props);
     const { movieDetail } = this.props;
+    let dateFormat = require("dateformat");
     return (
       <div className="introduce__title1__content1" id="notification">
         <div className="introduce__content1--info">
@@ -13,16 +14,16 @@ class Information extends Component {
                 <tr className="table__content">
                   <td>Ngày công chiếu</td>
                   <td>Tên phim</td>
-                  <td>Bí danh</td>
-                  <td>Mã nhóm</td>
+                  <td>Thể loại</td>
+                  <td>Diễn viên</td>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td> {movieDetail.ngayKhoiChieu}</td>
+                  <td>{dateFormat(movieDetail.ngayKhoiChieu, "dd-mm-yyyy")}</td>
                   <td>{movieDetail.tenPhim}</td>
-                  <td>{movieDetail.biDanh}</td>
-                  <td>{movieDetail.maNhom}</td>
+                  <td>N/A</td>
+                  <td>N/A</td>
                 </tr>
               </tbody>
             </table>

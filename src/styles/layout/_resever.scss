@@ -1,120 +1,509 @@
-.news__section {
-  margin: spacing(2.5);
-  &--title {
-    text-align: center;
-    span {
-      transition: all 0.2s;
-      -webkit-transition: all 0.2s;
-      -moz-transition: all 0.2s;
-      -ms-transition: all 0.2s;
-      -o-transition: all 0.2s;
-      cursor: pointer;
-      @include text(text("primary"), fs("h3"), fw("fwMedium"));
-      margin: spacing(2.5);
-      &:hover {
-        @include text(text("secondary"), fs("h2"), fw("fwMedium"));
-      }
-      @include MediaQuery($sm) {
-        font-size: fs("h4");
-      }
-    }
-    .active {
-      @include text(text("secondary"), fs("h2"), fw("fwMedium"));
+.book__section {
+  background: bg("primary");
+  .book__row {
+    overflow: scroll;
+  }
+  .col-md-8 {
+    padding: spacing(0);
+  }
+  .section--right {
+    background: bg("primary");
+    z-index: 5;
+    box-shadow: 0 0 15px rgba(bg("black"), 0.3);
+  }
+
+  .comboGroup-list {
+    @include MediaQuery($sm) {
+      margin-top: spacing(-4);
+      min-height: 600px !important;
     }
   }
-  &--content {
-    margin-top: spacing(2);
-    .news__content--detail {
-      .news__content--large {
-        display: flex;
-        .news__large--1 {
-          width: 48%;
-          margin: 1%;
-          a {
-            text-decoration: none;
-            .news__large--img {
-              width: 100%;
+
+  .comboGroup {
+    padding: spacing(2);
+    background: bg("primary");
+    position: absolute;
+    top: calc(100% - (100% - 50px));
+    right: 0%;
+    z-index: 0;
+    display: none;
+    transition: all 0.4s;
+    height: 95%;
+    overflow-y: scroll;
+    @include MediaQuery($sm) {
+      right: 0%;
+      min-height: 600px;
+    }
+    @include MediaQuery($xs) {
+      right: 0%;
+    }
+    .btn-close {
+      @include button(transparent, text("secondary"), fs("h1"), 0);
+      font-weight: fw("fwBold");
+      height: 30px;
+      outline: none;
+      border: none;
+    }
+    .comboList {
+      .comboList__title {
+        margin-bottom: spacing(1);
+        background-color: bg("white2");
+        border-bottom: 1px dashed bg("gray3");
+        p {
+          padding: 2% 1%;
+          @include text(text("primary"), fs("h4"), fw("fwMedium"));
+          margin: 0;
+        }
+      }
+      .comboList__item {
+        margin-top: spacing(1.5);
+        .logoitem {
+          img {
+            width: 100%;
+            @include MediaQuery($sm) {
+              width: 20%;
+            }
+          }
+        }
+        .iteminfo {
+          .combo__item--name {
+            p {
               img {
-                width: 100%;
-                border-radius: 3px;
-                -webkit-border-radius: 3px;
-                -moz-border-radius: 3px;
-                -ms-border-radius: 3px;
-                -o-border-radius: 3px;
+                width: 18px;
               }
+              margin: 0;
+              @include text(text("primary"), fs("h5"), fw("fwMedium"));
             }
-            .news__large--title {
-              @include text(text("primary"), fs("h5"), fw("fwBold"));
-              text-align: left;
+          }
+          .combo__item--detail {
+            span {
+              padding-left: spacing(3);
+              @include text(text("gray"), fs("subtext2"), fw("fwRegular"));
             }
-            .news__large--detail {
-              @include text(text("primary"), fs("subtext1"), fw("fwLight"));
-              text-align: justify;
-              @include MediaQuery($sm) {
-                width: 90%;
+          }
+          .combo__item--price {
+            span {
+              padding-left: spacing(3);
+              @include text(text("secondary"), fs("h4"), fw("fwMedium"));
+            }
+          }
+        }
+        .opnum {
+          .btn__combo {
+            @include button(bg("primary"), text("gray1"), fs("h4"), 0);
+            padding: 0;
+            outline: none;
+            cursor: initial;
+            border: transparent;
+            transform: scaleX(3);
+          }
+          .btn-decline {
+            margin-right: 10px;
+          }
+          .btn-add {
+            margin-left: 10px;
+            color: text("secondary");
+            transform: scale(1.5);
+            -webkit-transform: scale(1.5);
+            -moz-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            -o-transform: scale(1.5);
+          }
+          .combo__number {
+            @include text(text("primary"), fs("h4"), fw("fwMedium"));
+            @include size(32px, 32px);
+            border: 1px solid bg("gray2");
+            border-radius: 4px;
+            text-align: center;
+            display: inline-block;
+            padding-top: spacing(0.4);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            -o-border-radius: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  &--right {
+    position: relative;
+    z-index: 99;
+    .book__right--amount {
+      border-bottom: 1px dashed bg("gray1");
+      @include size(80%, 60px);
+      margin-left: 10%;
+      padding-top: spacing(0.8);
+      text-align: center;
+      span {
+        @include text(text("secondary"), fs("h0"), fw("fwMedium"));
+        margin: 0;
+      }
+    }
+    .book__right--name {
+      border-bottom: 1px dashed bg("gray1");
+      @include size(80%, 70px);
+      margin-left: 10%;
+      text-align: left;
+      p {
+        @include text(text("primary"), fs("subtext1"), fw("fwRegular"));
+        margin: 0;
+      }
+      p:first-child {
+        @include text(text("primary"), fs("h5"), fw("fwMedium"));
+        margin: spacing(0.5, 0);
+      }
+      .book__name--age {
+        @include text(text("white"), fs("h5"), fw("fwMedium"));
+        background-color: bg("orange1");
+        border-radius: 4px;
+        padding: spacing(0, 0.4);
+        min-width: 30px;
+        text-align: center;
+        display: inline-block;
+        margin-right: spacing(0.8);
+      }
+    }
+
+    .book__right--chair {
+      border-bottom: 1px dashed bg("gray1");
+      @include size(80%, 60px);
+      margin-left: 10%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .book__chair--number {
+        span {
+          @include text(text("secondary"), fs("h4"), fw("fwMedium"));
+        }
+      }
+      .book__chair--price {
+        span {
+          @include text(text("secondary"), fs("h4"), fw("fwMedium"));
+        }
+      }
+    }
+    .book__right--combo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed bg("gray1");
+      line-height: 55px;
+      @include size(80%, 55px);
+      margin-left: 10%;
+      .book__combo--title {
+        p {
+          cursor: pointer;
+          img {
+            width: 25px;
+          }
+          span {
+            @include text(text("secondary"), fs("h4"), fw("fwMedium"));
+          }
+        }
+        &:hover {
+          .comboGroup {
+            right: 33.3333%;
+            display: block;
+          }
+        }
+      }
+      .book__combo--price {
+        span {
+          @include text(text("secondary"), fs("h4"), fw("fwMedium"));
+        }
+      }
+    }
+    .book__right--input {
+      border-bottom: 1px dashed bg("gray1");
+      @include size(80%, 90px);
+      margin-left: 10%;
+      .input--madoka {
+        margin: spacing(0.5);
+      }
+    }
+    .input--discount {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      .input__discount--btn {
+        .btn--discount {
+          @include button(bg("orange1"), text("white"), fs("h5"), 3px);
+          border: none;
+          padding: spacing(0.5, 1);
+        }
+      }
+    }
+    .book__right--checkout {
+      .book__right--typeCheckout {
+        width: 80%;
+        margin-left: 10%;
+        border-bottom: 1px dashed bg("gray1");
+        p {
+          @include text(text("secondary"), fs("h4"), fw("fwMedium"));
+        }
+        .input-checkout {
+          input[type="radio"] {
+            margin-right: spacing(2);
+            background-color: bg("primary");
+            @include size(20px, 20px);
+            border: 1px solid bg("blue1");
+            border-radius: 50%;
+            outline: 0;
+          }
+          img {
+            @include size(200px, 35px);
+          }
+        }
+      }
+
+      .book__right--note {
+        padding-top: spacing(2);
+        text-align: center;
+        i {
+          @include text(text("secondary"), fs("h3"), fw("fwMedium"));
+        }
+        span {
+          @include text(text("primary"), fs("h5"), fw("fwRegular"));
+        }
+      }
+      .book__right--btn {
+        .btn--book {
+          margin-top: spacing(1);
+          outline: none;
+          border: none;
+          @include size(100%, 60px);
+          @include button(bg("gray3"), text("white"), fs("h3"), 3px);
+          padding: spacing(1, 2.5);
+          &:hover {
+            filter: brightness(20%);
+            -webkit-filter: brightness(80%);
+          }
+        }
+      }
+    }
+  }
+
+  &--left {
+    .book__left-header {
+      z-index: 10;
+      box-shadow: 0 2px 15px rgba(bg("black"), 0.3);
+      height: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .book__header--left {
+        ul {
+          height: 50px;
+          display: flex;
+          align-items: center;
+          li {
+            list-style: none;
+            margin-left: spacing(3);
+            margin-top: spacing(1);
+            @include MediaQuery($xs) {
+              margin-left: spacing(0.4);
+            }
+            span {
+              @include text(text("primary"), fs("h5"), fw("fwMedium"));
+              line-height: 50px;
+              position: relative;
+              @include MediaQuery($xs) {
+                font-size: fs("subtext2");
               }
+
+              // transform: translateX(-50%);
+              // -webkit-transform: translateX(-50%);
+              // -moz-transform: translateX(-50%);
+              // -ms-transform: translateX(-50%);
+              // -o-transform: translateX(-50%);
+            }
+          }
+          .active {
+            @include text(text("secondary"), fs("h5"), fw("fwMedium"));
+            @include MediaQuery($xs) {
+              font-size: fs("subtext2");
+            }
+            &::after {
+              content: "";
+              position: absolute;
+              left: 0%;
+              top: -10px;
+              border-bottom: 2px solid bg("orange1");
+              @include size(100%, 2px);
             }
           }
         }
       }
-      .new__content--medium {
-        display: none;
-        .news__medium--1 {
-          width: 32.33%;
-          margin: 1%;
-          a {
-            text-decoration: none;
-            .news__medium--img {
-              width: 100%;
-              img {
-                @include size(100%, 200px);
-                border-radius: 3px;
-                -webkit-border-radius: 3px;
-                -moz-border-radius: 3px;
-                -ms-border-radius: 3px;
-                -o-border-radius: 3px;
-                @include MediaQuery($sm) {
-                  @include size(100%, 150px);
+    }
+    .book__left--body {
+      .book__body--title {
+        padding: spacing(0, 1.5);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .left--title {
+          display: flex;
+          .title--logocinema {
+            img {
+              @include size(70px, 70px);
+            }
+          }
+          .title-content {
+            p {
+              @include text(text("gray"), fs("subtext1"), fw("fwMedium"));
+              margin: 0;
+              @include MediaQuery($xs) {
+                font-size: 70%;
+              }
+            }
+            p:first-child {
+              margin-top: spacing(2);
+              @include text(text("primary"), fs("h5"), fw("fwRegular"));
+              @include MediaQuery($xs) {
+                font-size: 80%;
+              }
+              span {
+                @include text(text("gray"), fs("h5"), fw("fwMedium"));
+                @include MediaQuery($xs) {
+                  font-size: 80%;
                 }
               }
             }
-            .news__medium--title {
-              @include text(text("primary"), fs("h5"), fw("fwBold"));
-              text-align: left;
-              @include MediaQuery($sm) {
-                width: 90%;
-                @include text(text("primary"), fs("subtext1"), fw("fwBold"));
-              }
-            }
-            .news__medium--detail {
-              @include text(text("primary"), fs("subtext2"), fw("fwLight"));
-              text-align: justify;
-              @include MediaQuery($sm) {
-                width: 80%;
+          }
+        }
+        .right--title {
+          p {
+            margin: 0;
+            @include text(text("gray"), fs("subtext2"), fw("fwMedium"));
+
+            span {
+              @include text(text("secondary"), fs("h2"), fw("fwMedium"));
+              @include MediaQuery($xs) {
+                font-size: fs("h3");
               }
             }
           }
         }
       }
-      .news__btn--view {
-        text-align: center;
-        .btn--view {
-          @include button(bg("primary"), text("gray1"), fs("h4"), 3px);
-          padding: spacing(0.8, 1);
-          border: 1px solid text("gray1");
-          outline: none;
-          transition: all 0.2s;
-          -webkit-transition: all 0.2s;
-          -moz-transition: all 0.2s;
-          -ms-transition: all 0.2s;
-          -o-transition: all 0.2s;
-          cursor: pointer;
-          &:hover {
-            @include button(bg("orange1"), text("white"), fs("h4"), 3px);
+      .book__body--seatmap {
+        margin-top: spacing(2);
+        .book__seatmap--resever {
+          .book__resever--screen {
+            .namescreen {
+              text-align: center;
+              @include MediaQuery($sm) {
+                img {
+                  width: 70%;
+                  margin-left: 15%;
+                }
+              }
+            }
+          }
+          .book__resever--listseat {
+            text-align: center;
+            .book__listseat--rowseat {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              span {
+                padding: spacing(1);
+                @include MediaQuery($sm) {
+                  padding: spacing(0.4);
+                }
+              }
+              .row--seat {
+                margin-right: spacing(5);
+                @include text(text("primary"), fs("h4"), fw("fwBold"));
+                @include MediaQuery($sm) {
+                  margin-right: spacing(2);
+                }
+              }
+              .number-seat {
+                font-size: fs("h3");
+                // font-family: icomoon!important;
+                line-height: 1;
+                cursor: pointer;
+
+                &::before {
+                  // content: "\e909";
+                  // font-family: FontAwesome;
+                  content: "\f0c8";
+                  font: 14px/1 FontAwesome;
+                  font-size: fs("h3");
+                  @include MediaQuery($sm) {
+                    font-size: fs("h4");
+                  }
+                }
+                &:focus {
+                  &::before {
+                    color: text("secondary");
+                  }
+                }
+              }
+            }
           }
         }
-        #hideNews {
-          display: none;
+
+        .book__seatmap-typeseat {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: spacing(3);
+          span {
+            font-size: fs("subtext1");
+            padding: spacing(1);
+            @include MediaQuery($xs) {
+              padding: spacing(0.3);
+            }
+            &::before {
+              content: "\f0c8";
+              font: 14px/1 FontAwesome;
+              font-size: fs("h4");
+            }
+          }
+        }
+
+        .colornormal {
+          color: text("green");
+          span {
+            &::before {
+              color: text("green");
+            }
+          }
+        }
+        .colorvip {
+          color: text("yellow");
+          span {
+            &::before {
+              color: text("yellow");
+            }
+          }
+        }
+        .colordeluxe {
+          color: text("blue");
+          span {
+            &::before {
+              color: text("blue");
+            }
+          }
+        }
+        .colorchosen {
+          color: text("secondary");
+          span {
+            &::before {
+              color: text("secondary");
+            }
+          }
+        }
+        .colornotchosen {
+          color: text("gray");
+          span {
+            &::before {
+              color: text("gray");
+            }
+          }
         }
       }
     }

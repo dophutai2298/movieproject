@@ -4,6 +4,7 @@ class NewsFilm extends Component {
   render() {
     return (
       <div>
+        {/* NEW LARGE */}
         <div className="news__content--large">
           <div className="news__large--1">
             <a href>
@@ -36,6 +37,7 @@ class NewsFilm extends Component {
             </a>
           </div>
         </div>
+        {/* NEW MEDIUM */}
         <div className="new__content--medium">
           <div className="news__medium--1">
             <a href>
@@ -83,14 +85,14 @@ class NewsFilm extends Component {
             </a>
           </div>
         </div>
-        <div className="news__btn--view">
+        {/* <div className="news__btn--view">
           <button className="btn--view viewMore" id="viewMore">
             Xem thêm
           </button>
           <button className="btn--view hideNews" id="hideNews">
             Thu gọn
           </button>
-        </div>
+        </div> */}
       </div>
     );
   }
