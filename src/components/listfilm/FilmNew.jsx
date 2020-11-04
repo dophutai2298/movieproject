@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import TransitionsModal from "./TrailerModal";
 import { NavLink } from "react-router-dom";
 
-class FilmNew extends Component {
+class FilmNew extends PureComponent {
   render() {
     const { movie } = this.props;
     return (

@@ -11,23 +11,61 @@ import {
 class ReserveCinema extends Component {
   renderBranch = () => {
     const { cinemaList } = this.props;
-    const { cinemaInfo } = this.props;
-    console.log(cinemaList.maHeThongRap);
     return cinemaList.map((cinema, index) => {
       return (
         <div key={index}>
-          <Branch cinema={cinema} cinemaInfo={cinemaInfo} />
+          <Branch cinema={cinema} />
         </div>
       );
     });
   };
-  renderCinemaReserse = (id) => {
+  renderCinemaReserse = () => {
     const { cinemaInfo } = this.props;
-
-    return cinemaInfo.map((cinameInfo, index) => {
+    if (cinemaInfo.length < 1) {
+      return (
+        <div className="cinema__rap--detail ">
+          <div className="cimena__rap--titile">
+            <p>
+              <span style={{ fontSize: "18px" }}>
+                Vui lòng chọn Hệ thống Rạp !!!
+              </span>
+            </p>
+          </div>
+        </div>
+      );
+    }
+    return cinemaInfo.map((cinemaInfo, index) => {
       return (
         <div key={index}>
-          <CinemaReserve cinameInfo={cinameInfo} />
+          <CinemaReserve cinemaInfo={cinemaInfo} />
+        </div>
+      );
+    });
+  };
+
+  renderFilm = () => {
+    const { movieFowllowCinema } = this.props;
+
+    if (movieFowllowCinema.length < 1) {
+      return (
+        <div className="cinema__section--film">
+          <p
+            style={{
+              color: "#fb4226",
+              fontSize: "18px",
+              fontWeight: " 700",
+              marginLeft: "2%",
+            }}
+          >
+            Vui lòng chọn Hệ thống Rạp !!!
+          </p>
+        </div>
+      );
+    }
+    return movieFowllowCinema.map((movie, index) => {
+      return (
+        <div key={index}>
+          <FilmReserve movie={movie} />
         </div>
       );
     });
@@ -42,11 +80,13 @@ class ReserveCinema extends Component {
           </div>
           {/* Cinema */}
           <div className="scroll scroll2">
-            {this.renderCinemaReserse(this.props.cinemaList.maHeThongRap)}
+            <div className="cinema__section--rap">
+              {this.renderCinemaReserse()}
+            </div>
           </div>
           {/* Film */}
           <div className="scroll scroll3">
-            <FilmReserve />
+            <div className="cinema__section--film">{this.renderFilm()}</div>
           </div>
         </div>
       </section>
@@ -54,14 +94,22 @@ class ReserveCinema extends Component {
   }
   componentDidMount() {
     this.props.dispatch(fetchCinemaSystem());
-    this.props.dispatch(fetchCinemaInfoInSystem());
+    this.props.dispatch(
+      fetchCinemaInfoInSystem(this.props.cinemaList.maHeThongRap)
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    //Danh sách hệ thống rạp
     cinemaList: state.cinemaReducer.cinemaList,
+
+    //Danh sách cụm hệ thống rạp
     cinemaInfo: state.cinemaReducer.cinemaInfo,
+
+    //Danh sách phim theo cụm rạp
+    movieFowllowCinema: state.cinemaReducer.movieFowllowCinema,
   };
 };
 export default connect(mapStateToProps)(ReserveCinema);

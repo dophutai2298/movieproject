@@ -25,16 +25,16 @@ export const fetchFilm = () => {
 
 export const fetchFilmFollowDay = (id) => {
   return (dispatch) => {
-    dispatch(startLoading());
+    // dispatch(startLoading());
     filmService
       .fetchFilmFollowDay(id)
       .then((res) => {
         dispatch(createAction(FETCH_FILM_FOLLOW_DAY, res.data));
-        dispatch(stopLoading());
+        // dispatch(stopLoading());
       })
       .catch((err) => {
         console.log(err);
-        dispatch(stopLoading());
+        //dispatch(stopLoading());
       });
   };
 };

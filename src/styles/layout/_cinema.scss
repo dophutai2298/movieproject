@@ -83,7 +83,7 @@
       border-bottom: 1px solid bg("gray1");
       width: 80%;
       margin-left: 10%;
-      opacity: 0.5;
+
       @include MediaQuery($sm) {
         display: block;
       }

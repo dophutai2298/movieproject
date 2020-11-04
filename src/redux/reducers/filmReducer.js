@@ -6,10 +6,10 @@ import {
 } from "../types/types";
 
 let initialState = {
-  movieList: [],
-  movieNew: [],
-  movieDetail: null,
-  bannerMovie: [],
+  movieList: [], //Danh sách phim
+  movieNew: [], //Danh sách phim sắp chiếu
+  movieDetail: null, //Chi tiết phim
+  bannerMovie: [], //Danh sách bannner carousel
 };
 
 const FilmReducer = (state = initialState, action) => {

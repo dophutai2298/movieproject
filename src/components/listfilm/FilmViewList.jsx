@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
@@ -126,6 +126,7 @@ export default function FilmViewList() {
       </div>
     );
   }
+
   return (
     <Container>
       <div className={classes.root}>

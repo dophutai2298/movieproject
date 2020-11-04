@@ -1,20 +1,38 @@
-import React, { Component } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
+import {
+  fetchCinemaInfoInSystem,
+  fetchFilmFollowCinema,
+} from "../../../redux/actions/cinema.action";
 
-class Branch extends Component {
-  render() {
-    const { cinema } = this.props;
-    const { cinemaInfo } = this.props;
-    return (
-      <div
-        className="cinema__section--logo active"
-        onClick={cinemaInfo.maHeThongRap}
+function Branch(props) {
+  const { cinema } = props;
+
+  const dispatch = useDispatch();
+
+  // const handleChange = (e, id) => {
+  //   // let idCinemaNew = {
+  //   //   ...idCinema,
+  //   // };
+
+  //   dispatch(fetchCinemaInfoInSystem(id));
+  // };
+
+  return (
+    <div className="cinema__section--logo active">
+      <button
+        onClick={() => {
+          dispatch(fetchCinemaInfoInSystem(`${cinema.maHeThongRap}`));
+          dispatch(fetchFilmFollowCinema(`${cinema.maHeThongRap}`));
+          console.log(`${cinema.maHeThongRap}`);
+          //handleChange(cinemaInfo.maHeThongRap);
+          // console.log(handleChange(cinemaInfo.maHeThongRap));
+        }}
       >
-        <button>
-          <img src={cinema.logo} alt />
-        </button>
-      </div>
-    );
-  }
+        <img src={cinema.logo} alt />
+      </button>
+    </div>
+  );
 }
 
 export default Branch;
