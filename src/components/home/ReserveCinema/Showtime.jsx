@@ -1,16 +1,23 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function Showtime() {
-  const { showTime } = this.props;
-  // const { lstLichChieuTheoPhim } = item;
-  return showTime.map((time, index) => {
-    return (
-      <NavLink key={index} className="linkBook">
-        {time.ngayChieuGioChieu}
-      </NavLink>
-    );
+const Showtime = (props) => {
+  const { showTime } = props;
+  const dateFormat = require("dateformat");
+  console.log("Tong time", showTime);
+  return showTime?.map((time, index) => {
+    if (index < 8) {
+      return (
+        <NavLink exact to="/" className="linkBook">
+          {dateFormat(time.ngayChieuGioChieu, "HH:MM")}
+        </NavLink>
+      );
+    }
   });
-}
+  //   // return <NavLink className="linkBook">a</NavLink>;
+  //   console.log(time);
+  //   //console.log(time.ngayChieuGioChieu);
+  // });
+};
 
 export default Showtime;

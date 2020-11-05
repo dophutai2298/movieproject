@@ -127,11 +127,11 @@ class DetailMovieScreen extends Component {
     }
     return (
       <div>
-        {/* <Header /> */}
+        <Header />
         <CarouselDetail movieDetail={movieDetail} />
         {/* <TabMovie movieDetail={movieDetail} /> */}
         <SimpleTabs movieDetail={movieDetail} />
-        {/* <Footer /> */}
+        <Footer />
       </div>
     );
   }

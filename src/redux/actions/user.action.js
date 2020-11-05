@@ -5,7 +5,7 @@ import { startLoading, stopLoading } from "./common.action";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 
-export const loginRequest = (user) => {
+export const loginRequest = (user, history) => {
   return (dispatch) => {
     dispatch(startLoading());
     userService
@@ -17,7 +17,10 @@ export const loginRequest = (user) => {
           title: "Login successfully",
         });
 
+        //Lưu vào local
         localStorage.setItem("creadentials", JSON.stringify(res.data));
+
+        history.push("/");
         dispatch(stopLoading());
       })
       .catch((err) => {

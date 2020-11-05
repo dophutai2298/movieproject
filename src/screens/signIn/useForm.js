@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loginRequest } from "../../redux/actions/user.action";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const useForm = (validateInfo) => {
   // const history = useHistory();
@@ -10,6 +10,7 @@ const useForm = (validateInfo) => {
   //     history.push("/");
   //   }
   // };
+  const history = useHistory();
   const dispatch = useDispatch();
   const [user, setUser] = useState({
     taiKhoan: "",
@@ -26,10 +27,12 @@ const useForm = (validateInfo) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    <Redirect to="/" />;
+
     setError(validateInfo(user));
+    if (user.taiKhoan !== "" && user.matKhau !== "") {
+      dispatch(loginRequest(user, history));
+    }
     //Post to API
-    dispatch(loginRequest(user));
   };
 
   return { handleChange, user, handleSubmit, errors };

@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Showtime from "./Showtime";
 
-function FilmReserve(props) {
+const FilmReserve = (props) => {
   const { movie } = props;
   const { danhSachPhim } = movie;
   return danhSachPhim.map((item, index) => {
@@ -27,18 +27,33 @@ function FilmReserve(props) {
             <p className="film-type">2D Digital</p>
           </div>
           <div className="film--reserve">
-            {/* <Showtime showTime={item.lstLichChieuTheoPhim} /> */}
-            <a href="google.com" className="linkBook">
+            <Showtime showTime={item.lstLichChieuTheoPhim} />
+            {/* <a href="google.com" className="linkBook">
               12:00
             </a>
             <a href="google.com" className="linkBook">
               18:00
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
     );
   });
-}
+};
+
+// const Showtime = () => {
+//   const { movie } = props;
+//   const { danhSachPhim } = movie;
+//   return danhSachPhim.map((item, index) => {
+//     let { lstLichChieuTheoPhim } = item[index];
+//     return lstLichChieuTheoPhim.map((time, index) => {
+//       return (
+//         <NavLink key={index} className="linkBook">
+//           {time.ngayChieuGioChieu}
+//         </NavLink>
+//       );
+//     });
+//   });
+// };
 
 export default FilmReserve;
