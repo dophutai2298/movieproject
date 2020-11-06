@@ -7,7 +7,6 @@
 
 .introduce {
   background-color: bg("linear-gradient");
-  height: 700px;
 
   &__title1 {
     margin-top: spacing(-3);
@@ -235,6 +234,14 @@
         p:first-child {
           @include text(text("secondary"), fs("h3"), fw("fwMedium"));
           margin-bottom: 0;
+        }
+        iframe {
+          width: 600px;
+          height: 320px;
+          @include MediaQuery($sm) {
+            width: 1900px;
+            height: 200px;
+          }
         }
       }
     }

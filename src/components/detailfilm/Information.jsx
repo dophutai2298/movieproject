@@ -36,8 +36,6 @@ class Information extends Component {
             <p className="content1">Trailer</p>
 
             <iframe
-              width={600}
-              height={315}
               src={movieDetail.trailer}
               frameBorder={0}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

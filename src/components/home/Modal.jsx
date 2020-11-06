@@ -17,6 +17,13 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  trailer: {
+    width: "100%",
+    height: "600px",
+    [theme.breakpoints.down("sm")]: {
+      height: "300px",
+    },
+  },
 }));
 
 export default function TransitionsModal(props) {
@@ -51,6 +58,7 @@ export default function TransitionsModal(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <iframe
+              className={classes.trailer}
               style={{ width: "100%", height: "600px" }}
               src={props.movie.trailer}
               frameBorder={0}

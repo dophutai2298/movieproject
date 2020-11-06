@@ -17,6 +17,7 @@ import Information from "../../components/detailfilm/Information";
 import Review from "../../components/detailfilm/Review";
 import { makeStyles } from "@material-ui/core";
 import SimpleTabs from "../../components/detailfilm/BookingMovieDetail";
+import HeaderMobile from "../../components/layout/HeaderMobile";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -128,6 +129,7 @@ class DetailMovieScreen extends Component {
     return (
       <div>
         <Header />
+        <HeaderMobile />
         <CarouselDetail movieDetail={movieDetail} />
         {/* <TabMovie movieDetail={movieDetail} /> */}
         <SimpleTabs movieDetail={movieDetail} />

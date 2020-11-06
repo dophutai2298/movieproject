@@ -49,7 +49,7 @@
       width: 80%;
       margin: auto;
       @include MediaQuery($sm) {
-        margin: spacing(1, 0);
+        width: 90%;
       }
       .item__img {
         position: relative;
@@ -63,6 +63,9 @@
           -moz-transition: all 0.3s;
           -ms-transition: all 0.3s;
           -o-transition: all 0.3s;
+          @include MediaQuery($sm) {
+            height: 250px;
+          }
         }
         .item__img--range {
           .item__img--point {
@@ -152,6 +155,9 @@
         }
         .item__title--name {
           @include text(text("primary"), fs("h4"), fw("fwMedium"));
+          @include MediaQuery($sm) {
+            @include text(text("primary"), fs("h5"), fw("fwMedium"));
+          }
         }
         .item__title--time {
           @include text(text("green"), fs("h5"), fw("fwLight"));

@@ -6,10 +6,7 @@ class Header extends Component {
     return (
       <header className="header">
         <NavLink className="header__brand" exact to="/">
-          <img src="/images/logo.png" alt />
-          <p>
-            <span>Cyber</span>film
-          </p>
+          <img src="/images/logoTT.png" alt />
         </NavLink>
         <div className="header__nav">
           <div className="header__nav--menu">

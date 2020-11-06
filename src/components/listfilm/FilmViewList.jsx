@@ -55,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
     background: "#fff",
     marginTop: "100px",
     boxShadow: "none",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "70px",
+    },
   },
   appBar: {
     boxShadow: "0",
@@ -65,11 +68,30 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "30px",
     fontWeight: "bold",
     margin: "auto",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "24px",
+    },
   },
   tabbtn: {
     fontSize: "20px",
   },
 }));
+
+const options = {
+  responsive: {
+    0: {
+      items: 2,
+    },
+
+    600: {
+      items: 2,
+    },
+
+    1000: {
+      items: 4,
+    },
+  },
+};
 
 export default function FilmViewList() {
   const classes = useStyles();
@@ -166,6 +188,7 @@ export default function FilmViewList() {
                 items="4"
                 margin={0}
                 autoPlay
+                {...options}
               >
                 {renderFilmNow()}
               </OwlCarousel>
@@ -179,6 +202,7 @@ export default function FilmViewList() {
                 items="4"
                 margin={0}
                 autoPlay
+                {...options}
               >
                 {renderFilmSoon()}
               </OwlCarousel>

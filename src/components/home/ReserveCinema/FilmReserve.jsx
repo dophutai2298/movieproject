@@ -28,32 +28,11 @@ const FilmReserve = (props) => {
           </div>
           <div className="film--reserve">
             <Showtime showTime={item.lstLichChieuTheoPhim} />
-            {/* <a href="google.com" className="linkBook">
-              12:00
-            </a>
-            <a href="google.com" className="linkBook">
-              18:00
-            </a> */}
           </div>
         </div>
       </div>
     );
   });
 };
-
-// const Showtime = () => {
-//   const { movie } = props;
-//   const { danhSachPhim } = movie;
-//   return danhSachPhim.map((item, index) => {
-//     let { lstLichChieuTheoPhim } = item[index];
-//     return lstLichChieuTheoPhim.map((time, index) => {
-//       return (
-//         <NavLink key={index} className="linkBook">
-//           {time.ngayChieuGioChieu}
-//         </NavLink>
-//       );
-//     });
-//   });
-// };
 
 export default FilmReserve;

@@ -1,4 +1,7 @@
 .carousel__section {
+  @include MediaQuery($sm) {
+    display: none;
+  }
   position: relative;
   .swiper-wrapper {
     .swiper-slide {
