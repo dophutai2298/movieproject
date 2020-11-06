@@ -7,9 +7,10 @@ import {
   Toolbar,
   Typography,
   IconButton,
+  Button,
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
-import { useMediaQuery } from "@material-ui/core";
+import { connect, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,8 +46,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function HeaderMobile() {
+function HeaderMobile() {
   const classes = useStyles();
+  let user = useSelector((state) => state.userReducer.credentials);
+
   const [open, setOpen] = useState(false);
 
   const handleDrawer = () => {
@@ -74,14 +77,32 @@ export default function HeaderMobile() {
               <img className={classes.logo} src="/images/logoTT.png" alt />
             </NavLink>
           </Typography>
-          <NavLink
-            className={classes.login}
-            exact
-            to="/sign-in"
-            color="inherit"
-          >
-            Login
-          </NavLink>
+          {user ? (
+            <>
+              <Button onClick={handleDrawer}>
+                <span
+                  style={{
+                    color: "#fb4226",
+                    fontStyle: "italic",
+                    fontSize: "16px",
+                  }}
+                >
+                  Hi! {user.hoTen}
+                </span>
+              </Button>
+            </>
+          ) : (
+            <>
+              <NavLink
+                className={classes.login}
+                exact
+                to="/sign-in"
+                color="inherit"
+              >
+                Login
+              </NavLink>
+            </>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -116,6 +137,23 @@ export default function HeaderMobile() {
                   Ứng dụng
                 </a>
               </li>
+              <li>
+                <NavLink exact to="/">
+                  Thông tin tài khoản
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  exact
+                  to="/logout"
+                  onClick={async () => {
+                    localStorage.removeItem("creadentials");
+                    window.location.replace("/");
+                  }}
+                >
+                  Đăng xuất
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
@@ -123,3 +161,5 @@ export default function HeaderMobile() {
     </div>
   );
 }
+
+export default connect()(HeaderMobile);
