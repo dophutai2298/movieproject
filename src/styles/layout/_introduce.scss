@@ -55,38 +55,35 @@
         display: flex;
         width: 100%;
         &__left {
-          width: 30%;
+          width: 15%;
           overflow-y: scroll;
           .active1 {
             opacity: 1;
           }
           &__logo {
-            opacity: 0.4;
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            opacity: 1;
             &:hover {
-              opacity: 1;
+              opacity: 0.8;
             }
             display: flex;
             width: 100%;
             &--imges {
-              width: 30%;
+              width: 70%;
+              margin-left: 15%;
               img {
                 width: 100%;
-                padding: 20%;
-              }
-            }
-            &--title {
-              width: 70%;
-              h4 {
-                margin-left: 10px;
-                padding-top: 20%;
-                @include text(text("primary"), fs("h5"), fw("fwMedium"));
+                padding: 10%;
               }
             }
           }
         }
         &__right {
-          width: 70%;
-          height: 700px;
+          width: 85%;
+          min-height: 700px;
           .scroll1 {
             border-bottom: 2px solid bg("orange1");
           }
@@ -303,5 +300,13 @@
         }
       }
     }
+  }
+}
+
+.error__showtime {
+  p:first-child {
+    color: black;
+    font-size: 18px;
+    font-style: italic;
   }
 }

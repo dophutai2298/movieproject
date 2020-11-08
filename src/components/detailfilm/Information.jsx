@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 class Information extends Component {
   render() {
-    console.log(this.props);
     const { movieDetail } = this.props;
     let dateFormat = require("dateformat");
     return (

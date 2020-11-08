@@ -5,6 +5,7 @@ import {
   FETCH_FILM,
   FETCH_FILM_DETAIL,
   FETCH_FILM_FOLLOW_DAY,
+  FETCH_FILM_SHOWTIME,
 } from "../types/types";
 import { startLoading, stopLoading } from "./common.action";
 
@@ -65,5 +66,16 @@ export const fetchBannerFilm = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+};
+
+export const fetchFilmShowTime = (id) => {
+  return (dispatch) => {
+    filmService
+      .fetchFilmShowTime(id)
+      .then((res) => {
+        dispatch(createAction(FETCH_FILM_SHOWTIME, res.data.heThongRapChieu));
+      })
+      .catch((err) => console.log(err));
   };
 };

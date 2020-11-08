@@ -1,6 +1,7 @@
 import Axios from "axios";
 
 export class FilmService {
+  //Lấy danh sách phim
   fetchFilm() {
     return Axios({
       url:
@@ -8,6 +9,8 @@ export class FilmService {
       method: "GET",
     });
   }
+
+  //Lấy danh sách phim theo ngày
   fetchFilmFollowDay() {
     return Axios({
       url:
@@ -15,16 +18,28 @@ export class FilmService {
       method: "GET",
     });
   }
+
+  //Lấy chi tiết phim
   fetchFilmDetail(id) {
     return Axios({
       url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=${id}`,
       method: "GET",
     });
   }
+
+  //Lấy danh sách carousel
   fetchBannerFilm() {
     return Axios({
       url: "https://5fa04305e21bab0016dfd001.mockapi.io/api/v1/banner",
-      // method: "GET",
+      method: "GET",
+    });
+  }
+
+  //Lấy thông tin lịch chiếu phim
+  fetchFilmShowTime(id) {
+    return Axios({
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`,
+      method: "GET",
     });
   }
 }

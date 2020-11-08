@@ -18,7 +18,6 @@ class Carousel extends PureComponent {
         <SwiperSlide>
           <div className="swiper-slide">
             <img src={movie.hinhAnh} alt="" />
-
             <TransitionsModal movie={movie} />
           </div>
         </SwiperSlide>

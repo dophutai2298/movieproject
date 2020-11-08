@@ -14,7 +14,7 @@ export const loginRequest = (user, history) => {
         dispatch(createAction(SIGN_IN, res.data));
         Swal.fire({
           icon: "success",
-          title: "Login successfully",
+          title: "Đăng nhập thành công",
         });
 
         //Lưu vào local
@@ -27,8 +27,8 @@ export const loginRequest = (user, history) => {
         console.log(err);
         Swal.fire({
           icon: "error",
-          title: "Login error",
-          text: "Username or Password isn't correct ",
+          title: "Lỗi !!",
+          text: "Tài khoản hoặc Mật khẩu không đúng ",
         });
         dispatch(stopLoading());
       });
@@ -44,15 +44,16 @@ export const registerRequest = (data) => {
         dispatch(createAction(SIGN_UP, res.data));
         Swal.fire({
           icon: "success",
-          title: "Login successfully",
+          title: "Đăng ký thành công",
         });
+        // history.push("/sign-in");
         dispatch(stopLoading());
       })
       .catch((err) => {
         Swal.fire({
           icon: "error",
-          title: "Login error",
-          text: "account or email already exists",
+              title: "Lỗi !!",
+          text: "Tài khoản hoặc Email đã tồn tại",
         });
         dispatch(stopLoading());
       });

@@ -58,6 +58,7 @@ export default function SimpleTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const { movieDetail } = props;
+  const { movieShowTime } = props;
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -91,7 +92,7 @@ export default function SimpleTabs(props) {
             </Tabs>
           </AppBar>
           <TabPanel value={value} index={0}>
-            <Showtimes movieDetail={movieDetail} />
+            <Showtimes movieShowTime={movieShowTime} />
           </TabPanel>
           <TabPanel value={value} index={1}>
             <Information movieDetail={movieDetail} />

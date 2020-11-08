@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { Button, Menu, MenuItem } from "@material-ui/core";
+import Swal from "sweetalert2"; 
 
 function Header() {
   let user = useSelector((state) => state.userReducer.credentials);
@@ -82,7 +83,7 @@ function Header() {
                 Thông tin tài khoản
               </Link>
               <Link
-                to="/logout"
+                to="/"
                 style={{
                   display: "block",
                   fontSize: "18px",
@@ -92,8 +93,25 @@ function Header() {
                   padding: "5px",
                 }}
                 onClick={async () => {
-                  localStorage.removeItem("creadentials");
-                  window.location.replace("/");
+                      Swal.fire({
+                        title: 'Bạn muốn đăng xuất ?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'OK !'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          localStorage.removeItem("creadentials");
+                                        window.location.replace("/");
+                          Swal.fire(
+                            'Đã đăng xuất tài khoản',
+                            
+                            'success'
+                          )
+                        }
+                      })
+                  
                 }}
               >
                 <i class="fa fa-sign-in-alt"></i> Đăng xuất

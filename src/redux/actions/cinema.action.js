@@ -4,6 +4,7 @@ import {
   FETCH_CINEMA_INFO_IN_SYSTEM,
   FETCH_CINEMA_SYSTEM,
   FETCH_FILM_FOLLOW_CINEMA,
+  SELECTED_DATE,
   SELECTED_ID_CINEMA,
 } from "../types/types";
 import { startLoading, stopLoading } from "./common.action";
@@ -50,5 +51,11 @@ export const fetchFilmFollowCinema = (id) => {
 export const selectedIdCinema = (id) => {
   return (dispatch) => {
     dispatch(createAction(SELECTED_ID_CINEMA, id));
+  };
+};
+
+export const selectedDate = (date) => {
+  return (dispatch) => {
+    dispatch(createAction(SELECTED_DATE, date));
   };
 };
