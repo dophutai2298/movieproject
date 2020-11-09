@@ -4,6 +4,7 @@ import {
   FETCH_CINEMA_INFO_IN_SYSTEM,
   FETCH_CINEMA_SYSTEM,
   FETCH_FILM_FOLLOW_CINEMA,
+  FETCH_FILM_SHOWTIME,
   SELECTED_DATE,
   SELECTED_ID_CINEMA,
 } from "../types/types";
@@ -57,5 +58,19 @@ export const selectedIdCinema = (id) => {
 export const selectedDate = (date) => {
   return (dispatch) => {
     dispatch(createAction(SELECTED_DATE, date));
+  };
+};
+
+export const fetchFilmShowTime = (id) => {
+  return (dispatch) => {
+    dispatch(startLoading());
+    cinemaService
+      .fetchFilmShowTime(id)
+      .then((res) => {
+        dispatch(createAction(FETCH_FILM_SHOWTIME, res.data.heThongRapChieu));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 };

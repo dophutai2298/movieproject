@@ -1,5 +1,6 @@
 .book__section {
   background: bg("primary");
+
   .book__row {
     overflow: scroll;
   }
@@ -10,6 +11,9 @@
     background: bg("primary");
     z-index: 5;
     box-shadow: 0 0 15px rgba(bg("black"), 0.3);
+    .input__discount--text {
+      padding: 0 10px 0 0px;
+    }
   }
 
   .comboGroup-list {
@@ -271,6 +275,7 @@
       .book__right--btn {
         .btn--book {
           margin-top: spacing(1);
+          margin-bottom: spacing(1);
           outline: none;
           border: none;
           @include size(100%, 60px);
@@ -289,63 +294,21 @@
     .book__left-header {
       z-index: 10;
       box-shadow: 0 2px 15px rgba(bg("black"), 0.3);
-      height: 50px;
+      height: 60px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      .book__header--left {
-        ul {
-          height: 50px;
-          display: flex;
-          align-items: center;
-          li {
-            list-style: none;
-            margin-left: spacing(3);
-            margin-top: spacing(1);
-            @include MediaQuery($xs) {
-              margin-left: spacing(0.4);
-            }
-            span {
-              @include text(text("primary"), fs("h5"), fw("fwMedium"));
-              line-height: 50px;
-              position: relative;
-              @include MediaQuery($xs) {
-                font-size: fs("subtext2");
-              }
-
-              // transform: translateX(-50%);
-              // -webkit-transform: translateX(-50%);
-              // -moz-transform: translateX(-50%);
-              // -ms-transform: translateX(-50%);
-              // -o-transform: translateX(-50%);
-            }
-          }
-          .active {
-            @include text(text("secondary"), fs("h5"), fw("fwMedium"));
-            @include MediaQuery($xs) {
-              font-size: fs("subtext2");
-            }
-            &::after {
-              content: "";
-              position: absolute;
-              left: 0%;
-              top: -10px;
-              border-bottom: 2px solid bg("orange1");
-              @include size(100%, 2px);
-            }
-          }
-        }
-      }
     }
     .book__left--body {
       .book__body--title {
-        padding: spacing(0, 1.5);
+        padding: spacing(2.5, 2);
         display: flex;
         justify-content: space-between;
         align-items: center;
         .left--title {
           display: flex;
           .title--logocinema {
+            padding-right: 10px;
             img {
               @include size(70px, 70px);
             }
@@ -396,23 +359,59 @@
               @include MediaQuery($sm) {
                 img {
                   width: 70%;
-                  margin-left: 15%;
+                  margin: 0 auto;
                 }
               }
             }
           }
+          .day {
+            padding-left: 2%;
+            width: 5%;
+            @include MediaQuery($xs) {
+              display: none;
+            }
+            Button {
+              clip-path: polygon(
+                0% 20%,
+                60% 20%,
+                60% 0%,
+                100% 50%,
+                60% 100%,
+                60% 80%,
+                0% 80%
+              );
+              background: bg("orange2");
+              margin: 6px 0;
+            }
+          }
+          .right {
+            @include MediaQuery($xs) {
+              display: none;
+            }
+          }
           .book__resever--listseat {
+            padding: 0 10%;
+            width: 90%;
+            @include MediaQuery($xs) {
+              width: 100%;
+              margin: 0 auto;
+              padding: 0;
+            }
             text-align: center;
+            width: 83%;
+            margin: 0 auto;
             .book__listseat--rowseat {
               display: flex;
               justify-content: center;
               align-items: center;
-              span {
+              Button {
+                margin: 5px 5px;
                 padding: spacing(1);
                 @include MediaQuery($sm) {
                   padding: spacing(0.4);
                 }
               }
+
               .row--seat {
                 margin-right: spacing(5);
                 @include text(text("primary"), fs("h4"), fw("fwBold"));
@@ -420,18 +419,21 @@
                   margin-right: spacing(2);
                 }
               }
+
               .number-seat {
-                font-size: fs("h3");
                 // font-family: icomoon!important;
                 line-height: 1;
                 cursor: pointer;
-
+                padding-left: 23px;
+                outline: none;
+                /* 
                 &::before {
                   // content: "\e909";
                   // font-family: FontAwesome;
                   content: "\f0c8";
+                  color: #417bb5;
                   font: 14px/1 FontAwesome;
-                  font-size: fs("h3");
+                  font-size: fs("h1");
                   @include MediaQuery($sm) {
                     font-size: fs("h4");
                   }
@@ -440,7 +442,31 @@
                   &::before {
                     color: text("secondary");
                   }
+                } */
+              }
+              .number-seat-vip {
+                // font-family: icomoon!important;
+                outline: none;
+                line-height: 1;
+                cursor: pointer;
+                padding-left: 23px;
+                /*  &::before {
+                  // content: "\e909";
+                  // font-family: FontAwesome;
+                  content: "\f0c8";
+                  color: #f7b500;
+                  font: 14px/1 FontAwesome;
+
+                  font-size: fs("h1");
+                  @include MediaQuery($sm) {
+                    font-size: fs("h4");
+                  }
                 }
+                &:focus {
+                  &::before {
+                    color: text("secondary");
+                  }
+                } */
               }
             }
           }

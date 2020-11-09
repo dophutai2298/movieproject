@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import bookingReducer from "./booking.Reducer";
 import CinemaReducer from "./cinemaReducer";
 import CommonReducer from "./commonReducer";
 import FilmReducer from "./filmReducer";
@@ -9,6 +10,8 @@ const rootReducer = combineReducers({
   commonReducer: CommonReducer,
   userReducer: UserReducer,
   cinemaReducer: CinemaReducer,
+
+  bookingReducer: bookingReducer,
 });
 
 export default rootReducer;

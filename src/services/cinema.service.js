@@ -25,4 +25,11 @@ export class CinemaService {
       method: "GET",
     });
   }
+
+  fetchCinemaInfoShowTimes(id) {
+    return Axios({
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`,
+      method: "GET",
+    });
+  }
 }

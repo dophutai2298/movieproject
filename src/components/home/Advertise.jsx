@@ -49,18 +49,18 @@ class Advertise extends Component {
                       <img
                         src={slidermobile2}
                         alt="img_mobile"
-                        // style={{
-                        //   transform: "translate(102%, -101.5%)",
-                        // }}
+                        style={{
+                          transform: "translate(101.5%, -101.5%)",
+                        }}
                       />
                     </div>
                     <div>
                       <img
                         src={slidermobile3}
                         alt="img_mobile"
-                        // style={{
-                        //   transform: "translate(203%, -202%)",
-                        // }}
+                        style={{
+                          transform: "translate(203%, -202%)",
+                        }}
                       />
                     </div>
                   </Slider>

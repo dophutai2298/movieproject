@@ -11,6 +11,7 @@ import { connect, useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 import { createAction } from "./redux/actions";
 import { SIGN_IN } from "./redux/types/types";
+import Booking from "./screens/booking";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ function App() {
         <Route path="/detail/:movieID" exact component={DetailMovieScreen} />
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/sign-up" exact component={SignUp} />
+        <Route path="/booking/:maLichChieu" exact component={Booking} />
       </Switch>
       {/* <Footer /> */}
     </BrowserRouter>
