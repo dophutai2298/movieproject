@@ -68,12 +68,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "30px",
     fontWeight: "bold",
     margin: "auto",
+    outline: "none",
     [theme.breakpoints.down("sm")]: {
       fontSize: "24px",
     },
   },
   tabbtn: {
-    fontSize: "20px",
+    fontSize: "18px",
+    outline: "none",
   },
 }));
 
@@ -150,7 +152,7 @@ export default function FilmViewList() {
   }
 
   return (
-    <Container>
+    <section className="container" id="lichchieu">
       <div className={classes.root}>
         <AppBar position="static" color="#fff" className={classes.appBar}>
           <Tabs
@@ -210,6 +212,6 @@ export default function FilmViewList() {
           </TabPanel>
         </SwipeableViews>
       </div>
-    </Container>
+    </section>
   );
 }

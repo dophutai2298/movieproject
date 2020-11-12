@@ -68,9 +68,11 @@ export const fetchFilmShowTime = (id) => {
       .fetchFilmShowTime(id)
       .then((res) => {
         dispatch(createAction(FETCH_FILM_SHOWTIME, res.data.heThongRapChieu));
+        dispatch(stopLoading());
       })
       .catch((err) => {
         console.log(err);
+        dispatch(stopLoading());
       });
   };
 };

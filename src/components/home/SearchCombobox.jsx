@@ -16,7 +16,7 @@ import Booking from "../../screens/booking";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    width: "200px",
+    width: "150px",
     marginTop: "0",
     zIndex: "10",
   },
@@ -181,7 +181,7 @@ export default function SearchCombobox() {
     });
   };
 
-  console.log("đặt vé", nameFilm);
+  // console.log("đặt vé", nameFilm);
   return (
     <div className="swiper-tabs">
       <FormControl variant="outlined" className={classes.formControl}>
@@ -220,13 +220,22 @@ export default function SearchCombobox() {
         </Select>
       </FormControl>
       <FormControl>
-        <Button variant="contained" color="secondary">
-          {nameFilm.maLichChieu ? (
-            <Link to={`/booking/${nameFilm.maLichChieu}`}>Mua Vé Ngay</Link>
-          ) : (
-            <Link to="/">Mua Vé Ngay</Link>
-          )}
-        </Button>
+        {nameFilm.maLichChieu ? (
+          //<Button variant="contained" color="secondary">
+          <Link
+            className="swipter-tabs__link"
+            to={`/booking/${nameFilm.maLichChieu}`}
+          >
+            Mua Vé Ngay
+          </Link>
+        ) : (
+          // </Button>
+          // <Button variant="contained" color="secondary">
+          <Link className="swipter-tabs__link" to="/">
+            Mua Vé Ngay
+          </Link>
+          //</Button>
+        )}
       </FormControl>
     </div>
   );

@@ -3,6 +3,7 @@ import bookingReducer from "./booking.Reducer";
 import CinemaReducer from "./cinemaReducer";
 import CommonReducer from "./commonReducer";
 import FilmReducer from "./filmReducer";
+import NewsReducer from "./newsReducer";
 import UserReducer from "./userReducer";
 
 const rootReducer = combineReducers({
@@ -10,7 +11,7 @@ const rootReducer = combineReducers({
   commonReducer: CommonReducer,
   userReducer: UserReducer,
   cinemaReducer: CinemaReducer,
-
+  newsReducer: NewsReducer,
   bookingReducer: bookingReducer,
 });
 

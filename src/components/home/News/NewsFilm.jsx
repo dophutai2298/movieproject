@@ -1,101 +1,86 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
+import { connect, useSelector, useDispatch } from "react-redux";
+import { fetchNewDetail, fetchNews } from "../../../redux/actions/news.action";
+import { NavLink } from "react-router-dom";
 
-class NewsFilm extends Component {
-  render() {
-    return (
-      <div>
-        {/* NEW LARGE */}
-        <div className="news__content--large">
-          <div className="news__large--1">
-            <a href>
+function NewsFilm() {
+  let news = useSelector((state) => state.newsReducer.news);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchNews());
+  }, []);
+
+  const renderNewsLarge = () => {
+    return news.map((item, index) => {
+      if (index < 2) {
+        return (
+          <div className="news__large--1" key={index}>
+            <NavLink
+              exact
+              to={`/news/${item.id}`}
+              onClick={() => dispatch(fetchNewDetail(item.id))}
+            >
               <div className="news__large--img">
-                <img src="./images/tindienanh1.png" alt />
+                <div
+                  className="img__bg"
+                  style={{
+                    backgroundImage: `url(${item.image})`,
+                  }}
+                ></div>
+                {/* <img src={item.image} alt /> */}
               </div>
-              <p className="news__large--title">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium, inventore.
-              </p>
+              <p className="news__large--title">{item.title}</p>
               <p className="news__large--detail">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptatem necessitatibus...
+                {item.brief.slice(0, 120) + "..."}
               </p>
-            </a>
+            </NavLink>
           </div>
-          <div className="news__large--1">
-            <a href>
-              <div className="news__large--img">
-                <img src="./images/tindienanh2.png" alt />
-              </div>
-              <p className="news__large--title">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium, inventore.
-              </p>
-              <p className="news__large--detail">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptatem necessitatibus...
-              </p>
-            </a>
-          </div>
-        </div>
-        {/* NEW MEDIUM */}
-        <div className="new__content--medium">
-          <div className="news__medium--1">
-            <a href>
+        );
+      }
+    });
+  };
+
+  const renderNewsMedium = () => {
+    return news.map((item, index) => {
+      if (index > 1 && index < 5) {
+        return (
+          <div className="news__medium--1" key={index}>
+            <NavLink
+              className="news__medium--link"
+              exact
+              to={`/news/${item.id}`}
+              onClick={() => dispatch(fetchNewDetail(item.id))}
+            >
               <div className="news__medium--img">
-                <img src="./images/tindienanh3.png" alt />
+                <div
+                  className="img__bgm"
+                  style={{
+                    backgroundImage: `url(${item.image})`,
+                  }}
+                ></div>
+                {/* <img src={item.image} alt /> */}
               </div>
-              <p className="news__medium--title">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium, inventore.
-              </p>
-              <p className="news__medium--detail">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptatem necessitatibus ...
-              </p>
-            </a>
-          </div>
-          <div className="news__medium--1">
-            <a href>
-              <div className="news__medium--img">
-                <img src="./images/tindienanh4.png" alt />
+              <div className="news__medium--content">
+                <p className="news__medium--title">{item.title}</p>
+                <p className="news__medium--detail">
+                  {item.brief.slice(0, 120) + "..."}
+                </p>
               </div>
-              <p className="news__medium--title">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium, inventore.
-              </p>
-              <p className="news__medium--detail">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptatem necessitatibus ...
-              </p>
-            </a>
+            </NavLink>
           </div>
-          <div className="news__medium--1">
-            <a href>
-              <div className="news__medium--img">
-                <img src="./images/tindienanh5.png" alt />
-              </div>
-              <p className="news__medium--title">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium, inventore.
-              </p>
-              <p className="news__medium--detail">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptatem necessitatibus ...
-              </p>
-            </a>
-          </div>
-        </div>
-        {/* <div className="news__btn--view">
-          <button className="btn--view viewMore" id="viewMore">
-            Xem thêm
-          </button>
-          <button className="btn--view hideNews" id="hideNews">
-            Thu gọn
-          </button>
-        </div> */}
-      </div>
-    );
-  }
+        );
+      }
+    });
+  };
+
+  return (
+    <div>
+      {/* NEW LARGE */}
+      <div className="news__content--large">{renderNewsLarge()}</div>
+      {/* NEW MEDIUM */}
+      <div className="new__content--medium">{renderNewsMedium()}</div>
+    </div>
+  );
 }
 
-export default NewsFilm;
+export default connect()(NewsFilm);

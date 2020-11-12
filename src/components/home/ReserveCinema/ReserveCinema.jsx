@@ -30,7 +30,7 @@ class ReserveCinema extends Component {
         <div className="cinema__rap--detail ">
           <div className="cimena__rap--titile">
             <p>
-              <span style={{ fontSize: "18px" }}>
+              <span style={{ fontSize: "16px" }}>
                 Vui lòng chọn Hệ thống Rạp !!!
               </span>
             </p>
@@ -58,7 +58,7 @@ class ReserveCinema extends Component {
           <p
             style={{
               color: "#fb4226",
-              fontSize: "18px",
+              fontSize: "16px",
               fontWeight: " 700",
               marginLeft: "2%",
             }}
@@ -79,7 +79,7 @@ class ReserveCinema extends Component {
           <p
             style={{
               color: "#fb4226",
-              fontSize: "18px",
+              fontSize: "16px",
               fontWeight: " 700",
               marginLeft: "2%",
             }}

@@ -10,6 +10,9 @@
   .adv__section--mobile {
     margin-top: 3%;
     margin-left: 10%;
+    @include MediaQuery($sm) {
+      margin-left: 40%;
+    }
   }
   &--content {
     display: flex;
@@ -94,7 +97,7 @@
         left: 1%;
         @include size(30%, 100%);
         @include MediaQuery($sm) {
-          @include size(47%, 80%);
+          @include size(47%, 100%);
         }
         img {
           border: none;

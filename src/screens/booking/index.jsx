@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import useStyles from "./style";
 import { postBookingRequest } from "../../services/booking.service";
+import BookRight from "../../components/booking/BookRight";
 
 export default function Booking() {
   /* jss */
@@ -24,30 +25,41 @@ export default function Booking() {
     setValue(newValue);
   };
   /* jss */
-  console.log("maLichChieu", maLichChieu);
+  // console.log("maLichChieu", maLichChieu);
   const dispatch = useDispatch();
   const listChair = useSelector((state) => state.bookingReducer.danhSachGhe);
   const infoMovie = useSelector((state) => state.bookingReducer.infoMovie);
+  const amountMoney = useSelector((state) => state.bookingReducer.amountMoney);
+  let isLoading = useSelector((state) => state.commonReducer.isLoading);
 
   useEffect(() => {
     dispatch(fetchTicketRoom(maLichChieu));
     dispatch(fetchTicketRoomChair(maLichChieu));
   }, []);
 
-  function trangThaiGhe(daDat, dangChon) {
+  function trangThaiGhe(daDat, dangChon, type) {
     if (daDat) return classes.daDat;
     else if (dangChon) {
       return classes.dangChon;
-    } else {
-      return classes.chuaDat;
+    } else if (type === "Thuong") {
+      return classes.chuaDatGheThuong;
+    } else if (type === "Vip") {
+      return classes.chuaDatGheVip;
     }
   }
 
+  const renderAmount = () => {
+    if (amountMoney) {
+      return <span>{amountMoney.toLocaleString()} đ</span>;
+    }
+    return <span>0đ</span>;
+  };
+
   const renderChair = () => {
     return listChair.map((ghe, index) => {
-      if (index < 90) {
+      if (index < 160) {
         return (
-          <Button
+          <button
             key={index}
             onClick={() => {
               dispatch({
@@ -55,19 +67,12 @@ export default function Booking() {
                 payload: ghe,
               });
             }}
-            className={trangThaiGhe(ghe.daDat, ghe.dangChon)}
+            className={trangThaiGhe(ghe.daDat, ghe.dangChon, ghe.loaiGhe)}
           >
             {ghe.tenGhe}
-          </Button>
+          </button>
         );
-      } /* else if (index < 90 && ghe.loaiGhe === "Vip") {
-        console.log(ghe.daDat === false);
-        return (
-          <Button key={index} className={trangThaiGhe(ghe.daDat, ghe.dangChon)}>
-            {ghe.tenGhe}
-          </Button>
-        );
-      } */
+      }
     });
   };
   const renderInFo = () => {
@@ -102,7 +107,14 @@ export default function Booking() {
     dispatch(postBookingRequest(maLichChieu, danhSachVe));
   }
 
-  console.log(danhSachVe);
+  // console.log(danhSachVe);
+  if (isLoading) {
+    return (
+      <div>
+        <div className="loader">Loading...</div>
+      </div>
+    );
+  }
   return (
     <>
       <section className="container-fluid book__section">
@@ -166,13 +178,13 @@ export default function Booking() {
                   <div className="book__seatmap-typeseat">
                     <span className="typeseat colorseat colorvip">Vip</span>
                     <span className="typeseat colorseat colordeluxe">
-                      Normal
+                      Thường
                     </span>
                     <span className="typeseat colorseat colorchosen">
-                      Đã chọn
+                      Đang chọn
                     </span>
                     <span className="typeseat colorseat colornotchosen">
-                      Đã có người chọn
+                      Đã đặt
                     </span>
                   </div>
                 </div>
@@ -181,8 +193,12 @@ export default function Booking() {
           </div>
           <div className="col-sm-12 col-md-4 section--right">
             <div className="book__section--right">
+              {/* TÍNH TỔNG TIỀN */}
               <div className="book__right--amount">
-                <span>0 đ</span>
+                <span style={{ fontSize: "16px", color: "#000" }}>
+                  Tổng tiền:
+                </span>
+                {renderAmount()}
               </div>
               <div className="book__right--name">
                 <p>
@@ -205,16 +221,14 @@ export default function Booking() {
               </div>
               <div className="book__right--combo">
                 <div className="book__combo--title">
-                  <p>
-                    <img src="../images/popcorn.png" alt />
-                    <span>Chọn combo</span>
-                  </p>
+                  {/* GỌI BẮP NƯỚC */}
+                  <BookRight />
                 </div>
                 <div className="book__combo--price">
                   <span>0 đ</span>{" "}
                 </div>
               </div>
-              <div className="book__right--input input--email">
+              {/* <div className="book__right--input input--email">
                 <form className={classes.root} noValidate autoComplete="off">
                   <TextField
                     id="outlined-basic"
@@ -229,8 +243,8 @@ export default function Booking() {
                     variant="outlined"
                   />
                 </form>
-              </div>
-              <div className="book__right--input input--phone"></div>
+              </div> */}
+
               <div className="book__right--input input--discount">
                 <div className="input__discount--text">
                   <TextField

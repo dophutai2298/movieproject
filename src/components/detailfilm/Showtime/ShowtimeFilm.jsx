@@ -21,7 +21,7 @@ function ShowtimeFilm(props) {
                 />
               </div>
               <div className="showtimes__right__content--address--title">
-                <span style={{ fontSize: "18px", textTransform: "uppercase" }}>
+                <span style={{ fontSize: "16px", textTransform: "uppercase" }}>
                   {movie.tenHeThongRap}
                 </span>
                 <p style={{ margin: "0" }}>{item.tenCumRap}</p>

@@ -10,35 +10,41 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
   },
   root2: {
-    marginTop: "20px",
+    marginTop: "5px",
   },
+
   chuaDat: {
-    backgroundColor: "red",
+    backgroundColor: "transparent",
+    border: "1px solid #333",
     "&:hover": {
-      backgroundColor: "red",
+      backgroundColor: "transparent",
+      border: "1px solid #333",
     },
   },
   chuaDatGheThuong: {
-    backgroundColor: "blue",
+    backgroundColor: "#4a90e2",
     "&:hover": {
-      backgroundColor: "aqua",
+      backgroundColor: "#4a90e2",
     },
   },
   chuaDatGheVip: {
-    backgroundColor: "yellow",
+    backgroundColor: "#f7b500",
     "&:hover": {
-      backgroundColor: "aqua",
+      backgroundColor: "#f7b500",
     },
   },
 
   daDat: {
-    backgroundColor: "blue",
+    backgroundColor: "#c5c5c5",
+    "&:hover": {
+      cursor: "no-drop",
+    },
   },
 
   dangChon: {
-    backgroundColor: "green",
+    backgroundColor: "#fb4226",
     "&:hover": {
-      backgroundColor: "aqua",
+      backgroundColor: "#fb4226",
     },
   },
 }));

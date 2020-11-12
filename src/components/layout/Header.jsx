@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { Button, Menu, MenuItem } from "@material-ui/core";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 
 function Header() {
   let user = useSelector((state) => state.userReducer.credentials);
@@ -47,16 +47,17 @@ function Header() {
               <i
                 style={{
                   color: "#fb4226",
-                  fontSize: "30px",
+                  fontSize: "20px",
                   marginRight: "5px",
                 }}
-                class="fa fa-id-card"
+                class="fa fa-user"
               ></i>
+
               <span
                 style={{
                   color: "#fb4226",
                   fontStyle: "italic",
-                  fontSize: "18px",
+                  fontSize: "14px",
                 }}
               >
                 Hi! {user.hoTen}
@@ -72,7 +73,7 @@ function Header() {
               <Link
                 style={{
                   display: "block",
-                  fontSize: "18px",
+                  fontSize: "14px",
                   textDecoration: "none",
                   color: "#444",
                   margin: "20px auto",
@@ -86,32 +87,31 @@ function Header() {
                 to="/"
                 style={{
                   display: "block",
-                  fontSize: "18px",
+                  fontSize: "14px",
                   textDecoration: "none",
                   color: "#444",
                   margin: "20px auto",
                   padding: "5px",
                 }}
                 onClick={async () => {
-                      Swal.fire({
-                        title: 'Bạn muốn đăng xuất ?',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'OK !'
-                      }).then((result) => {
-                        if (result.isConfirmed) {
-                          localStorage.removeItem("creadentials");
-                                        window.location.replace("/");
-                          Swal.fire(
-                            'Đã đăng xuất tài khoản',
-                            
-                            'success'
-                          )
-                        }
-                      })
-                  
+                  Swal.fire({
+                    title: "Bạn muốn đăng xuất ?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "OK !",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      localStorage.removeItem("creadentials");
+                      window.location.replace("/");
+                      Swal.fire(
+                        "Đã đăng xuất tài khoản",
+
+                        "success"
+                      );
+                    }
+                  });
                 }}
               >
                 <i class="fa fa-sign-in-alt"></i> Đăng xuất

@@ -8,7 +8,7 @@ const Showtime = (props) => {
   return showTime?.map((time, index) => {
     if (index < 8) {
       return (
-        <NavLink exact to="/" className="linkBook">
+        <NavLink exact to={`/booking/${time.maLichChieu}`} className="linkBook">
           {dateFormat(time.ngayChieuGioChieu, "HH:MM")}
         </NavLink>
       );

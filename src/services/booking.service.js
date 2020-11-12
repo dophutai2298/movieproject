@@ -7,6 +7,14 @@ export class BookingService {
       method: "GET",
     });
   }
+
+  //Lấy danh sách bắp nước
+  fetchFood() {
+    return Axios({
+      url: "https://5fa93e9ac9b4e90016e6a3be.mockapi.io/api/v1/food",
+      method: "GET",
+    });
+  }
 }
 
 // ĐẶT VÉ
@@ -32,11 +40,15 @@ export function postBookingRequest(maLichChieu, danhSachVe) {
       if (res.status === 200 || res.status === 201) {
         Swal.fire({
           icon: "success",
-          title: "Login successfully",
+          title: "Đặt vé thành công",
         });
       }
     } catch (error) {
-      alert("Thcdsfwvrw");
+      Swal.fire({
+        icon: "error",
+        title: "Không thành công ",
+        text: "Vui lòng đăng nhập trước khi đặt vé !",
+      });
     }
   };
 }

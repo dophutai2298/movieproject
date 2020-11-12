@@ -12,6 +12,7 @@ import React, { useEffect } from "react";
 import { createAction } from "./redux/actions";
 import { SIGN_IN } from "./redux/types/types";
 import Booking from "./screens/booking";
+import NewDetail from "./screens/news";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/sign-up" exact component={SignUp} />
         <Route path="/booking/:maLichChieu" exact component={Booking} />
+        <Route path="/news/:newID" exact component={NewDetail} />
       </Switch>
       {/* <Footer /> */}
     </BrowserRouter>

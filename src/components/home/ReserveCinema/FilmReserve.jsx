@@ -14,7 +14,7 @@ const FilmReserve = (props) => {
             to={`/detail/${item.maPhim}`}
             style={{ textDecoration: "none" }}
           >
-            <img style={{ height: "120px" }} src={item.hinhAnh} alt />
+            <img style={{ height: "100px" }} src={item.hinhAnh} alt />
           </NavLink>
         </div>
 

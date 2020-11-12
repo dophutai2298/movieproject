@@ -18,7 +18,7 @@
     cursor: pointer;
     text-decoration: none !important;
     img {
-      @include size(120px, 55px);
+      @include size(100px, 50px);
       margin-left: spacing(0.5);
     }
     p {

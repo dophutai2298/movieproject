@@ -132,11 +132,11 @@
             padding: spacing(1);
             text-align: center;
             border: none;
-            @include button(bg("orange1"), text("white"), fs("h3"), 4px);
+            @include button(bg("orange1"), text("white"), fs("h4"), 4px);
             background: linear-gradient(to left, bg("orange1"), bg("orange2"));
             a {
               text-decoration: none;
-              @include text(text("white"), fs("h3"), fw("fwMedium"));
+              @include text(text("white"), fs("h4"), fw("fwMedium"));
             }
             &:hover {
               background: bg("orange2");
@@ -154,10 +154,7 @@
           margin-right: spacing(0.8);
         }
         .item__title--name {
-          @include text(text("primary"), fs("h4"), fw("fwMedium"));
-          @include MediaQuery($sm) {
-            @include text(text("primary"), fs("h5"), fw("fwMedium"));
-          }
+          @include text(text("primary"), fs("h5"), fw("fwMedium"));
         }
         .item__title--time {
           @include text(text("green"), fs("h5"), fw("fwLight"));

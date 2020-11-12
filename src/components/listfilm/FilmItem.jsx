@@ -9,8 +9,17 @@ function FilmItem(props) {
   const dispatch = useDispatch();
   return (
     <div className="item">
-      <div className="item__img">
-        <img src={movie.hinhAnh} alt="hinhAnh" />
+      <div
+        className="item__img"
+        style={{
+          backgroundImage: `url(${movie.hinhAnh})`,
+          width: "100%",
+          height: "280px",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        {/* <img src={movie.hinhAnh} alt="hinhAnh" /> */}
         <div className="item__img--range">
           <span className="item__img--point">
             <p>{movie.danhGia}</p>

@@ -217,6 +217,8 @@
           }
         }
         .film--reserve {
+          display: flex;
+          flex-wrap: wrap;
           @include MediaQuery($sm) {
             display: block;
           }

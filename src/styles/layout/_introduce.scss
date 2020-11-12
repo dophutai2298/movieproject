@@ -92,7 +92,6 @@
             display: -webkit-inline-box;
             &--scroll1 {
               text-align: center;
-
               button {
                 cursor: pointer;
                 margin: spacing(0.5, 1);
@@ -100,12 +99,18 @@
                 border: none;
                 height: 40px;
                 font-weight: fw("fwMedium");
-                @include button(bg("white1"), text("secondary"), fs("h3"), 3px);
+                @include button(bg("white1"), text("secondary"), fs("h4"), 3px);
                 p {
                   margin: 0;
                 }
                 p:first-child {
-                  font-size: fs("h4");
+                  font-size: fs("h5");
+                }
+                &:focus {
+                  color: text("primary");
+                }
+                &:active {
+                  color: text("primary");
                 }
               }
             }
@@ -305,8 +310,7 @@
 
 .error__showtime {
   p:first-child {
-    color: black;
-    font-size: 18px;
+    @include text(text("primary"), fs("h4"), fw("fwMedium"));
     font-style: italic;
   }
 }

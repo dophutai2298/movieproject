@@ -20,3 +20,14 @@ export const SELECTED_DATE = "SELECTED_DATE";
 export const FETCH_TICKET_ROOM = "FETCH_TICKET_ROOM";
 export const FETCH_TICKET_ROOM_CHAIR = "FETCH_TICKET_ROOM_CHAIR";
 export const SELECT_CHAIR = "SELECT_CHAIR";
+
+//News
+export const FETCH_NEWS = "FETCH_NEWS";
+export const FETCH_NEWS_DETAIL = "FETCH_NEWS_DETAIL";
+
+//FOOD
+export const FETCH_FOOD = "FETCH_FOOD";
+export const ADD_FOOD = "ADD_FOOD";
+export const OPTIONAL_QUANTITY = "OPTIONAL_QUANTITY";
+export const DELETE_FOOD = "DELETE_FOOD";
+export const AMOUNT_MONEY = "AMOUNT_MONEY";
