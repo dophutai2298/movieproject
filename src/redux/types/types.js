@@ -31,3 +31,6 @@ export const ADD_FOOD = "ADD_FOOD";
 export const OPTIONAL_QUANTITY = "OPTIONAL_QUANTITY";
 export const DELETE_FOOD = "DELETE_FOOD";
 export const AMOUNT_MONEY = "AMOUNT_MONEY";
+
+//ADMIN
+export const FETCH_USER = "FETCH_USER";

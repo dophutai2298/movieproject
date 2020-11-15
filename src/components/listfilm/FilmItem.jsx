@@ -13,10 +13,9 @@ function FilmItem(props) {
         className="item__img"
         style={{
           backgroundImage: `url(${movie.hinhAnh})`,
-          width: "100%",
-          height: "280px",
           backgroundPosition: "center",
           backgroundSize: "cover",
+          width: "100%",
         }}
       >
         {/* <img src={movie.hinhAnh} alt="hinhAnh" /> */}

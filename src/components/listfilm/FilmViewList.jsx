@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     boxShadow: "0",
     boxShadow: "none",
+    outline: "none",
   },
   tabs: {
     color: "#fb4226",

@@ -1,0 +1,82 @@
+.dashboard {
+  width: 80%;
+  background: bg("white4");
+  h1 {
+    @include text(text("blue"), fs("h1"), fw("fwLight"));
+    margin: spacing(2);
+  }
+  .dashboard__manage {
+    width: 90%;
+    margin-left: 5%;
+    background: bg("primary");
+    .dashboard__manage--list {
+      display: flex;
+      height: 100%;
+
+      .dashboard__manage--item {
+        width: 33.33%;
+        text-decoration: none;
+
+        .dashboard__item--content {
+          padding: spacing(3);
+          text-align: center;
+          i {
+            @include text(text("blue"), fs("h1"), fw("fwLight"));
+          }
+          p {
+            @include text(text("primary"), fs("h2"), fw("fwLight"));
+          }
+          span {
+            @include text(text("gray1"), fs("h4"), fw("fwLight"));
+          }
+        }
+      }
+      .lineR {
+        border-right: 3px solid bg("white4");
+      }
+    }
+  }
+}
+
+//User
+.manageruser {
+  .manageruser__action {
+    display: flex;
+    width: 90%;
+    margin-left: 5%;
+    .manageruser__action--item {
+      width: 30%;
+    }
+  }
+  .manageruser__table {
+    margin-top: 4%;
+  }
+}
+
+//Film
+.managerfilm {
+  .managerfilm__action {
+    display: flex;
+    width: 90%;
+    margin-left: 5%;
+    .managerfilm__action--item {
+      width: 45%;
+    }
+  }
+  .managerfilm__table {
+    margin-top: 4%;
+  }
+}
+
+//Cinema
+.managercinema {
+  .managercinema__table {
+    margin: 2%;
+    width: 100%;
+    .cinemaInfo {
+      width: 80%;
+      margin-left: 10%;
+      margin-bottom: 1%;
+    }
+  }
+}

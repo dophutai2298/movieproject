@@ -1,3 +1,4 @@
+import { AdminService } from "./admin.service";
 import { BookingService } from "./booking.service";
 import { CinemaService } from "./cinema.service";
 import { FilmService } from "./film.service";
@@ -9,4 +10,5 @@ export const userService = new UserService();
 export const cinemaService = new CinemaService();
 export const bookingService = new BookingService();
 export const newsService = new NewsService();
+export const adminService = new AdminService();
 /* export const userSignUpService = new UserService(); */

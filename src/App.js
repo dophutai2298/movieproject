@@ -13,6 +13,11 @@ import { createAction } from "./redux/actions";
 import { SIGN_IN } from "./redux/types/types";
 import Booking from "./screens/booking";
 import NewDetail from "./screens/news";
+import AdminScreen from "./screens/admin";
+import UserScreen from "./screens/admin/user";
+import ManagerFilmScreen from "./screens/admin/film";
+import MangerCinemaScreen from "./screens/admin/cinema";
+import { Router } from "@material-ui/icons";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +41,18 @@ function App() {
         <Route path="/sign-up" exact component={SignUp} />
         <Route path="/booking/:maLichChieu" exact component={Booking} />
         <Route path="/news/:newID" exact component={NewDetail} />
+        <Route path="/admin" exact component={AdminScreen} />
+        <Route path="/admin/manager-user" exact component={UserScreen} />
+        <Router
+          path="/admin/manager-film"
+          exact
+          component={ManagerFilmScreen}
+        />
+        <Router
+          path="/admin/manager-cinema"
+          exact
+          component={MangerCinemaScreen}
+        />
       </Switch>
       {/* <Footer /> */}
     </BrowserRouter>
