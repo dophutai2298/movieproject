@@ -3,39 +3,39 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() => ({
   root: {
     "& > *": {
-      width: "33ch",
+      width: "70%",
     },
   },
+
   root1: {
     flexGrow: 1,
-  },
-  root2: {
-    marginTop: "5px",
+    backgroundColor: "white",
   },
 
+  root2: {
+    marginTop: "20px",
+  },
   chuaDat: {
-    backgroundColor: "transparent",
-    border: "1px solid #333",
+    backgroundColor: "red",
     "&:hover": {
-      backgroundColor: "transparent",
-      border: "1px solid #333",
+      backgroundColor: "red",
     },
   },
   chuaDatGheThuong: {
     backgroundColor: "#4a90e2",
     "&:hover": {
-      backgroundColor: "#4a90e2",
+      backgroundColor: "aqua",
     },
   },
   chuaDatGheVip: {
-    backgroundColor: "#f7b500",
+    backgroundColor: "yellow",
     "&:hover": {
-      backgroundColor: "#f7b500",
+      backgroundColor: "aqua",
     },
   },
 
   daDat: {
-    backgroundColor: "#c5c5c5",
+    backgroundColor: "#afafaf",
     "&:hover": {
       cursor: "no-drop",
     },
@@ -44,7 +44,7 @@ const useStyles = makeStyles(() => ({
   dangChon: {
     backgroundColor: "#fb4226",
     "&:hover": {
-      backgroundColor: "#fb4226",
+      backgroundColor: "aqua",
     },
   },
 }));

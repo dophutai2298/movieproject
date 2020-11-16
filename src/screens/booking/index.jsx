@@ -4,116 +4,162 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchTicketRoom,
   fetchTicketRoomChair,
+  postBookingRequest,
 } from "../../redux/actions/booking.actions";
 import Swal from "sweetalert2";
 import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { useParams } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import useStyles from "./style";
-import { postBookingRequest } from "../../services/booking.service";
+import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
+import AppBar from "@material-ui/core/AppBar";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 import BookRight from "../../components/booking/BookRight";
+import HistorySet from "../../components/booking/historySet";
+import Chair from "../../components/booking/chair";
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`wrapped-tabpanel-${index}`}
+      aria-labelledby={`wrapped-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+function a11yProps(index) {
+  return {
+    id: `wrapped-tab-${index}`,
+    "aria-controls": `wrapped-tabpanel-${index}`,
+  };
+}
 
 export default function Booking() {
   /* jss */
+  const history = useHistory();
+  const [value, setValue] = React.useState("one");
   const { maLichChieu } = useParams();
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [stringTime, settimeString] = useState("");
+  // const [state, setstate] = useState();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   /* jss */
-  // console.log("maLichChieu", maLichChieu);
+
+  // lấy dữ liệu redux về
   const dispatch = useDispatch();
   const listChair = useSelector((state) => state.bookingReducer.danhSachGhe);
   const infoMovie = useSelector((state) => state.bookingReducer.infoMovie);
+  const danhSachChonVe = useSelector(
+    (state) => state.bookingReducer.danhSachChonVe
+  );
   const amountMoney = useSelector((state) => state.bookingReducer.amountMoney);
   let isLoading = useSelector((state) => state.commonReducer.isLoading);
 
+  // gởi action lên
   useEffect(() => {
-    dispatch(fetchTicketRoom(maLichChieu));
+    // thong tin rap
     dispatch(fetchTicketRoomChair(maLichChieu));
+    // danh sach ghe
+    dispatch(fetchTicketRoom(maLichChieu));
+    // count down
+    formatDate(600);
   }, []);
 
-  function trangThaiGhe(daDat, dangChon, type) {
-    if (daDat) return classes.daDat;
-    else if (dangChon) {
-      return classes.dangChon;
-    } else if (type === "Thuong") {
-      return classes.chuaDatGheThuong;
-    } else if (type === "Vip") {
-      return classes.chuaDatGheVip;
+  // thời gian dtawj vé
+  function formatDate(date) {
+    if (!isNaN(date)) {
+      var timer = date,
+        minutes,
+        seconds;
+      const interVal = setInterval(function () {
+        minutes = parseInt(timer / 60);
+        seconds = parseInt(timer % 60);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        settimeString(`${minutes}:${seconds}`);
+        if (--timer < 0) {
+          clearInterval(interVal);
+          timer = date;
+          Swal.fire({
+            title: "Hết thời gian đặt vé",
+            icon: "warning",
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Đặt Vé Lại",
+          }).then((result) => {
+            if (result.value) {
+              window.location.reload(true);
+            } else {
+              window.location.reload(true);
+            }
+          });
+        }
+      }, 1000);
     }
   }
-
-  const renderAmount = () => {
-    if (amountMoney) {
-      return <span>{amountMoney.toLocaleString()} đ</span>;
-    }
-    return <span>0đ</span>;
-  };
-
-  const renderChair = () => {
-    return listChair.map((ghe, index) => {
-      if (index < 160) {
-        return (
-          <button
-            key={index}
-            onClick={() => {
-              dispatch({
-                type: "SELECT_CHAIR",
-                payload: ghe,
-              });
-            }}
-            className={trangThaiGhe(ghe.daDat, ghe.dangChon, ghe.loaiGhe)}
-          >
-            {ghe.tenGhe}
-          </button>
-        );
-      }
+  // render danh sách ghế đặt
+  const renderDanhSachGhe = () => {
+    return danhSachChonVe.map((tenGhe, index) => {
+      return <span key={index}>{tenGhe.tenGhe},</span>;
     });
   };
-  const renderInFo = () => {
-    return (
-      <div className="left--title">
-        <div className="title--logocinema">
-          <img src={infoMovie.hinhAnh} alt />
-        </div>
-        <div className="title-content">
-          <p style={{ color: "#ce3017" }}>{infoMovie.tenCumRap}</p>
-          <p>
-            {infoMovie.ngayChieu} - {infoMovie.gioChieu} - {infoMovie.tenRap}
-          </p>
-        </div>
-      </div>
-    );
+  // render ra tiền đặt vé
+  const renderMoney = () => {
+    return danhSachChonVe.reduce((total, item) => {
+      return (total += item.giaVe);
+    }, 0);
   };
+  // render tiền người đặt thức ăn + ghế
+  let total = Number(renderMoney()) + Number(amountMoney);
 
-  const [danhSachVe, setDanhSachVe] = useState([]);
-
+  // xử lí điều kiện onclick booking
   function handleBooking() {
-    //
     let danhSachVe = listChair.filter((ghe) => ghe.dangChon);
-    setDanhSachVe({
-      ...danhSachVe,
-      danhSachVe: danhSachVe.map((ghe) => ({
-        maGhe: ghe.maGhe,
-        giaVe: ghe.giaVe,
-      })),
-    });
-
-    dispatch(postBookingRequest(maLichChieu, danhSachVe));
-  }
-
-  // console.log(danhSachVe);
-  if (isLoading) {
-    return (
-      <div>
-        <div className="loader">Loading...</div>
-      </div>
-    );
+    danhSachVe = danhSachVe.map((ghe) => ({
+      maGhe: ghe.maGhe,
+      giaVe: ghe.giaVe,
+    }));
+    if (danhSachChonVe.length < 1) {
+      Swal.fire({
+        title: "Bạn chưa chọn vé",
+        confirmButtonText: `OK`,
+      });
+    } else {
+      Swal.fire({
+        title: "Bạn có muốn đặt vé không?",
+        showCancelButton: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Thành Công", "", "success");
+          dispatch(postBookingRequest(maLichChieu, danhSachVe));
+          history.push("/");
+          history.push("/booking/" + maLichChieu);
+        } else if (result.isDenied) {
+          Swal.fire("Bạn Đã hủy đặt vé", "", "info");
+        }
+      });
+    }
   }
   return (
     <>
@@ -122,83 +168,110 @@ export default function Booking() {
           <div className="col-sm-12 col-md-8 section--left">
             <div className="book__section--left">
               <div className="book__left-header">
-                <Paper className={classes.root1}>
-                  <Tabs
-                    className={classes.root2}
-                    value={value}
-                    onChange={handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    centered
+                <div className={classes.root1}>
+                  <AppBar
+                    style={{ background: "white", color: "black" }}
+                    position="static"
                   >
-                    <Tab label="Chọn Ghế & Thanh Toán" />
-                    <Tab label="Đã Đặt" />
-                  </Tabs>
-                </Paper>
-              </div>
-              <div className="book__left--body">
-                <div className="book__body--title">
-                  {renderInFo()}
-                  <div className="right--title">
-                    <p>Thời gian giữ chỗ</p>
-                    <p>
-                      <span>MM</span> : <span>SS</span>
-                    </p>
-                  </div>
+                    <Tabs
+                      value={value}
+                      onChange={handleChange}
+                      aria-label="wrapped label tabs example"
+                    >
+                      <Tab
+                        value="one"
+                        label="Chọn Ghế & Thanh Toán"
+                        {...a11yProps("one")}
+                      />
+                      <Tab
+                        value="two"
+                        label="Thông tin Đã Đặt"
+                        {...a11yProps("two")}
+                      />
+                    </Tabs>
+                  </AppBar>
                 </div>
-                <div className="book__body--seatmap">
-                  <div className="book__seatmap--resever">
-                    <div className="book__resever--screen">
-                      <div className="namescreen">
-                        <img src="../images/screen.png" alt />
+              </div>
+
+              <TabPanel value={value} index="one">
+                <div className="book__left--body">
+                  <div className="book__body--title">
+                    <div className="left--title">
+                      <div className="title--logocinema">
+                        <img src={infoMovie.hinhAnh} alt />
+                      </div>
+                      <div className="title-content">
+                        <p style={{ color: "#ce3017" }}>
+                          {infoMovie.tenCumRap}
+                        </p>
+                        <p>
+                          {infoMovie.ngayChieu} - {infoMovie.gioChieu} -{" "}
+                          {infoMovie.tenRap}
+                        </p>
                       </div>
                     </div>
-                    <div style={{ display: "flex" }}>
-                      <div className="day">
-                        <Button>A</Button>
-                        <Button>B</Button>
-                        <Button>C</Button>
-                        <Button>D</Button>
-                        <Button>E</Button>
-                        <Button>F</Button>
-                        <Button>G</Button>
-                        <Button>H</Button>
-                        <Button>I</Button>
-                        <Button>K</Button>
-                      </div>
-                      <div className="book__resever--listseat">
-                        <div className="book__listseat--rowseat ">
-                          <div>{renderChair()}</div>
+                    <div className="right--title">
+                      <p>Thời gian giữ chỗ</p>
+                      <p>
+                        <span>{stringTime}</span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="book__body--seatmap">
+                    <div className="book__seatmap--resever">
+                      <div className="book__resever--screen">
+                        <div className="namescreen">
+                          <img src="../images/screen.png" alt />
                         </div>
                       </div>
-
-                      <div className="right" style={{ width: "5%" }}></div>
+                      <div style={{ display: "flex" }}>
+                        <div className="day">
+                          <Button>A</Button>
+                          <Button>B</Button>
+                          <Button>C</Button>
+                          <Button>D</Button>
+                          <Button>E</Button>
+                          <Button>F</Button>
+                          <Button>G</Button>
+                          <Button>H</Button>
+                          <Button>I</Button>
+                          <Button>K</Button>
+                        </div>
+                        <div className="book__resever--listseat">
+                          <div className="book__listseat--rowseat ">
+                            <div className="book__listseat--chair">
+                              <Chair listChair={listChair} />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="right" style={{ width: "5%" }}></div>
+                      </div>
+                    </div>
+                    <div className="book__seatmap-typeseat">
+                      <span className="typeseat colorseat colorvip">Vip</span>
+                      <span className="typeseat colorseat colordeluxe">
+                        Normal
+                      </span>
+                      <span className="typeseat colorseat colorchosen">
+                        Đã chọn
+                      </span>
+                      <span className="typeseat colorseat colornotchosen">
+                        Đã có người chọn
+                      </span>
                     </div>
                   </div>
-                  <div className="book__seatmap-typeseat">
-                    <span className="typeseat colorseat colorvip">Vip</span>
-                    <span className="typeseat colorseat colordeluxe">
-                      Thường
-                    </span>
-                    <span className="typeseat colorseat colorchosen">
-                      Đang chọn
-                    </span>
-                    <span className="typeseat colorseat colornotchosen">
-                      Đã đặt
-                    </span>
-                  </div>
                 </div>
-              </div>
+              </TabPanel>
+              <TabPanel value={value} index="two">
+                <HistorySet />
+              </TabPanel>
             </div>
           </div>
+
           <div className="col-sm-12 col-md-4 section--right">
             <div className="book__section--right">
-              {/* TÍNH TỔNG TIỀN */}
               <div className="book__right--amount">
-                <span style={{ fontSize: "16px", color: "#000" }}>
-                  Tổng tiền:
-                </span>
-                {renderAmount()}
+                <span>{total.toLocaleString()}</span>
               </div>
               <div className="book__right--name">
                 <p>
@@ -215,20 +288,17 @@ export default function Booking() {
                 <div className="book__chair--number">
                   <span>Ghế</span>
                 </div>
-                <div className="book__chair--price">
-                  <span>0 đ</span>
-                </div>
+                <div className="book__chair--price">{renderDanhSachGhe()}</div>
               </div>
               <div className="book__right--combo">
                 <div className="book__combo--title">
-                  {/* GỌI BẮP NƯỚC */}
                   <BookRight />
                 </div>
                 <div className="book__combo--price">
                   <span>0 đ</span>{" "}
                 </div>
               </div>
-              {/* <div className="book__right--input input--email">
+              <div className="book__right--input input--email">
                 <form className={classes.root} noValidate autoComplete="off">
                   <TextField
                     id="outlined-basic"
@@ -243,8 +313,8 @@ export default function Booking() {
                     variant="outlined"
                   />
                 </form>
-              </div> */}
-
+              </div>
+              <div className="book__right--input input--phone"></div>
               <div className="book__right--input input--discount">
                 <div className="input__discount--text">
                   <TextField
@@ -276,7 +346,11 @@ export default function Booking() {
                   <span>Vé đã mua không thể đổi hoặc hoàn tiền</span>
                 </div>
                 <div className="book__right--btn">
-                  <button className="btn--book" onClick={handleBooking}>
+                  <button
+                    className="btn--book"
+                    type="button"
+                    onClick={handleBooking}
+                  >
                     Đặt vé
                   </button>
                 </div>

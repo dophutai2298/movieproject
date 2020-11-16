@@ -1,10 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addFood } from "../../redux/actions/booking.actions";
 
 export default function BookFood(props) {
   const { foodList } = props;
-
+  console.log(foodList);
   const dispatch = useDispatch();
 
   return foodList.map((item, index) => {

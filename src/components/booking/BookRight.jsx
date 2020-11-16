@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Drawer, IconButton, Button } from "@material-ui/core";
+import { Drawer, Button } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { amountMoney, fetchFood } from "../../redux/actions/booking.actions";
 import BookFood from "./BookFood";

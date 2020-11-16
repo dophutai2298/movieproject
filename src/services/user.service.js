@@ -15,4 +15,15 @@ export class UserService {
       data,
     });
   }
+  fetchInFoBooking(user) {
+    console.log("axios", user);
+    return Axios({
+      method: "POST",
+      url:
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan",
+      data: {
+        taiKhoan: user,
+      },
+    });
+  }
 }

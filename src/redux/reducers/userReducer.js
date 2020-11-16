@@ -1,7 +1,8 @@
-const { SIGN_IN } = require("../types/types");
+const { SIGN_IN, USER__INFO_BOOKING } = require("../types/types");
 
 let initialState = {
   credentials: null,
+  userInfoBooking: [],
 };
 
 const UserReducer = (state = initialState, action) => {
@@ -10,7 +11,11 @@ const UserReducer = (state = initialState, action) => {
       state.credentials = action.payload;
       return { ...state };
     }
-
+    case USER__INFO_BOOKING: {
+      console.log("reduce", action.payload);
+      state.userInfoBooking = action.payload;
+      return { ...state };
+    }
     default:
       return state;
   }

@@ -10,6 +10,7 @@ export const FETCH_FILM_SHOWTIME = "FETCH_FILM_SHOWTIME";
 //User
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_UP = "SIGN_UP";
+export const USER__INFO_BOOKING = "USER__INFO_BOOKING";
 
 //Cinema
 export const FETCH_CINEMA_SYSTEM = "FETCH_CINEMA_SYSTEM";
@@ -20,6 +21,7 @@ export const SELECTED_DATE = "SELECTED_DATE";
 export const FETCH_TICKET_ROOM = "FETCH_TICKET_ROOM";
 export const FETCH_TICKET_ROOM_CHAIR = "FETCH_TICKET_ROOM_CHAIR";
 export const SELECT_CHAIR = "SELECT_CHAIR";
+export const BOKING_TICKETS = "BOKING_TICKETS";
 
 //News
 export const FETCH_NEWS = "FETCH_NEWS";

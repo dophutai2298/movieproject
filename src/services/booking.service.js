@@ -15,9 +15,23 @@ export class BookingService {
       method: "GET",
     });
   }
+  postBookingRequest(maLichChieu, danhSachVe, user) {
+    return Axios({
+      method: "POST",
+      url: "https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/DatVe",
+      data: {
+        maLichChieu,
+        danhSachVe,
+        taiKhoanNguoiDung: user.taiKhoan,
+      },
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+  }
 }
 
-// ĐẶT VÉ
+/* // ĐẶT VÉ
 export function postBookingRequest(maLichChieu, danhSachVe) {
   return async function (dispatch) {
     try {
@@ -52,3 +66,4 @@ export function postBookingRequest(maLichChieu, danhSachVe) {
     }
   };
 }
+ */

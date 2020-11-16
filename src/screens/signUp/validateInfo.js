@@ -1,18 +1,18 @@
 import awl from "sweetalert2";
 const validateinfomation = [
-  "Account required",
-  "Password required",
-  "Email required",
-  "Phone required",
-  "Name required",
-  "Password number",
-  "Email incorrect format",
-  "Id group required",
-  "User Type Id required",
+  "Tài khoản không được bỏ trống",
+  "Mật khẩu không được bỏ trống",
+  "Email không được bỏ trống",
+  "SDT không được bỏ trống",
+  "Tên không được bỏ trống",
+  "ít nhất 6 kí tự ,có số và chữ",
+  "Email không hợp lệ",
+  "mã nhóm không bỏ trống",
+  "Người Dùng không được bỏ trống",
 ];
 
 export default function validateInfo(values) {
-  let ktramatkhau = /^[0-9]$/;
+  let ktramatkhau = /^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{6,}$/;
   let email = /^([\w\.])+@([a-zA-Z0-9\-])+\.([a-zA-Z]{2,4})(\.[a-zA-Z]{2,4})?$/;
   let error = {};
   if (!values.taiKhoan.trim()) {

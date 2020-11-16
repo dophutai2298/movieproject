@@ -1,6 +1,6 @@
 import { createAction } from ".";
 import { userService } from "../../services";
-import { SIGN_IN, SIGN_UP } from "../types/types";
+import { SIGN_IN, SIGN_UP, USER__INFO_BOOKING } from "../types/types";
 import { startLoading, stopLoading } from "./common.action";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
@@ -35,7 +35,7 @@ export const loginRequest = (user, history) => {
   };
 };
 
-export const registerRequest = (data) => {
+export const registerRequest = (data, history) => {
   return (dispatch) => {
     dispatch(startLoading());
     userService
@@ -46,16 +46,30 @@ export const registerRequest = (data) => {
           icon: "success",
           title: "Đăng ký thành công",
         });
-        // history.push("/sign-in");
+        history.push("/sign-in");
         dispatch(stopLoading());
       })
       .catch((err) => {
         Swal.fire({
           icon: "error",
-              title: "Lỗi !!",
+          title: "Lỗi !!",
           text: "Tài khoản hoặc Email đã tồn tại",
         });
         dispatch(stopLoading());
+      });
+  };
+};
+
+// lấy thông tin lịch sử người đặt vé
+export const fetchInFoBooking = (user) => {
+  return (dispatch) => {
+    userService
+      .fetchInFoBooking(user)
+      .then((res) => {
+        dispatch(createAction(USER__INFO_BOOKING, res.data.thongTinDatVe));
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 };

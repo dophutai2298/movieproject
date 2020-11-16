@@ -68,7 +68,7 @@ function SignIn() {
             required
             fullWidth
             id="taiKhoan"
-            label="Username"
+            label="Tài Khoản"
             name="taiKhoan"
             autoComplete="taiKhoan"
             autoFocus
@@ -81,7 +81,7 @@ function SignIn() {
             required
             fullWidth
             name="matKhau"
-            label="Password"
+            label="Mật Khẩu"
             type="password"
             id="matKhau"
             autoComplete="current-matKhau"
@@ -101,7 +101,7 @@ function SignIn() {
           <Grid container>
             <Grid item xs>
               <NavLink exact to="/" variant="body2">
-                Back
+                Back Home
               </NavLink>
             </Grid>
             <Grid item>

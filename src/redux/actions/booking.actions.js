@@ -1,4 +1,5 @@
 import { createAction } from ".";
+import Swal from "sweetalert2";
 import { bookingService } from "../../services";
 
 import {
@@ -9,9 +10,11 @@ import {
   FETCH_TICKET_ROOM,
   FETCH_TICKET_ROOM_CHAIR,
   OPTIONAL_QUANTITY,
+  BOKING_TICKETS,
 } from "../types/types";
 import { startLoading, stopLoading } from "./common.action";
 
+// lấy danh sách ghế
 export const fetchTicketRoom = (maLichChieu) => {
   return (dispatch) => {
     dispatch(startLoading());
@@ -28,6 +31,7 @@ export const fetchTicketRoom = (maLichChieu) => {
   };
 };
 
+// lấy thông tin phim
 export const fetchTicketRoomChair = (maLichChieu) => {
   return (dispatch) => {
     dispatch(startLoading());
@@ -41,6 +45,30 @@ export const fetchTicketRoomChair = (maLichChieu) => {
         console.log(err);
         dispatch(stopLoading());
       });
+  };
+};
+
+// đặt vé
+export const postBookingRequest = (maLichChieu, danhSachVe) => {
+  return async function (dispatch) {
+    try {
+      // getlocal
+      const user = JSON.parse(localStorage.getItem("creadentials"));
+      // call api
+      const res = await bookingService.postBookingRequest(
+        maLichChieu,
+        danhSachVe,
+        user
+      );
+      /*  localStorage.setItem("NguoiDatVe", JSON.stringify(res.data)); */
+
+      dispatch(createAction(BOKING_TICKETS, res));
+    } catch (error) {
+      Swal.fire({
+        title: "Bạn chưa đăng nhập tài khoản",
+        confirmButtonText: `OK`,
+      });
+    }
   };
 };
 

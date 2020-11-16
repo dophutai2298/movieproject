@@ -7,6 +7,7 @@ import {
   FETCH_TICKET_ROOM_CHAIR,
   OPTIONAL_QUANTITY,
   SELECT_CHAIR,
+  BOKING_TICKETS,
 } from "../types/types";
 import Swal from "sweetalert2";
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   foodList: [],
   cartFoodList: [],
   amountMoney: null,
+  danhSachChonVe: [],
 };
 
 const bookingReducer = (state = initialState, action) => {
@@ -29,19 +31,49 @@ const bookingReducer = (state = initialState, action) => {
       return { ...state };
     }
 
-    case SELECT_CHAIR: {
-      // console.log(action.payload);
+    case SELECT_CHAIR:
+      const updateDsChonVe = [...state.danhSachChonVe];
+      const updataamountMoney = state.amountMoney;
       // tìm index vị trí của ghế trong arr danhSachGhe
       let mangUpdate = [...state.danhSachGhe];
-
       let index = mangUpdate.findIndex(
         (ghe) => ghe.maGhe === action.payload.maGhe
       );
+      // ghế trong danh sách ghế
       let gheCu = mangUpdate[index];
+      // ghế mới trong danh sách ghế :+  thêm thuộc tính đang chọn ==true
       let gheMoi = { ...gheCu, dangChon: !gheCu.dangChon };
       mangUpdate[index] = gheMoi;
-      state.danhSachGhe = mangUpdate;
 
+      // chọn để push vào số lượng lớn hơn 8 thì post thông báo
+      if (gheMoi.dangChon) {
+        if (updateDsChonVe.length < 8) {
+          updateDsChonVe.push(gheMoi);
+        } else {
+          Swal.fire({
+            title: "Bạn chọn đặt vé quá số lượng vé",
+            confirmButtonText: `OK`,
+          });
+        }
+        state.danhSachChonVe = updateDsChonVe;
+      } else {
+        // tìm vị trí payload được chọn trong danh sách chọn để tìm index cần xóa
+        let index = updateDsChonVe.findIndex(
+          (ghe) => ghe.maGhe === action.payload.maGhe
+        );
+        updateDsChonVe.splice(index, 1);
+        state.danhSachChonVe = updateDsChonVe;
+      }
+
+      state.danhSachChonVe = updateDsChonVe;
+      state.danhSachGhe = mangUpdate;
+      return { ...state };
+
+    case BOKING_TICKETS: {
+      // đặt vé thành công thì gáng lại cho mảng vé bằng rỗng render lại giao diện ghế ngồi
+      let updateDsChonVe = [...state.danhSachChonVe];
+      updateDsChonVe = [];
+      state.danhSachChonVe = updateDsChonVe;
       return { ...state };
     }
 

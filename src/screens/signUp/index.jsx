@@ -20,6 +20,7 @@ import Select from "@material-ui/core/Select";
 import { useDispatch } from "react-redux";
 import { registerRequest } from "../../redux/actions/user.action";
 import valadateInfo from "./validateInfo";
+import { useHistory, NavLink } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -35,7 +36,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -68,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const history = useHistory();
   //const dispatch = useDispatch(function)
   const dispatch = useDispatch();
   const [error, setError] = useState({
@@ -101,7 +103,7 @@ export default function SignUp() {
 
   // submit
   function handleSubmit(event) {
-    let ktramatkhau = /^[0-9]$/;
+    let ktramatkhau = /^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{6,}$/;
     let email = /^([\w\.])+@([a-zA-Z0-9\-])+\.([a-zA-Z]{2,4})(\.[a-zA-Z]{2,4})?$/;
     event.preventDefault();
     setError(valadateInfo(userSignup));
@@ -116,7 +118,7 @@ export default function SignUp() {
       email.test(userSignup.email) &&
       ktramatkhau.test(userSignup.matKhau)
     ) {
-      dispatch(registerRequest(userSignup));
+      dispatch(registerRequest(userSignup, history));
     }
   }
 
@@ -127,7 +129,7 @@ export default function SignUp() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography style={{ color: "red" }} component="h1" variant="h5">
           Sign up
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
@@ -141,7 +143,7 @@ export default function SignUp() {
                 onChange={handleChange}
                 fullWidth
                 id="taiKhoan"
-                label="Account"
+                label="Tài Khoản"
                 autoFocus
                 value={userSignup.taiKhoan}
                 error={error.taiKhoan}
@@ -158,7 +160,7 @@ export default function SignUp() {
                 onChange={handleChange}
                 value={userSignup.matKhau}
                 id="matKhau"
-                label="Password"
+                label="Mật Khẩu"
                 name="matKhau"
                 type="password"
                 autoComplete="lname"
@@ -174,7 +176,7 @@ export default function SignUp() {
                 value={userSignup.email}
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Email"
                 name="email"
                 autoComplete="email"
                 error={error.email}
@@ -189,7 +191,7 @@ export default function SignUp() {
                 value={userSignup.soDt}
                 fullWidth
                 name="soDt"
-                label="Phone Number"
+                label="Số ĐT"
                 id="soDT"
                 autoComplete="current-password"
                 error={error.soDt}
@@ -204,7 +206,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="hoTen"
-                label="FullName"
+                label="Họ Tên"
                 id="hoTen"
                 autoComplete="current-password"
                 error={error.hoTen}
@@ -212,7 +214,7 @@ export default function SignUp() {
               />
             </Grid>
             <FormControl sm={6} className={classes.formControl}>
-              <InputLabel id="maNhom">Id Group</InputLabel>
+              <InputLabel id="maNhom">Mã Nhóm</InputLabel>
               <Select
                 labelId="maNhom"
                 name="maNhom"
@@ -223,13 +225,13 @@ export default function SignUp() {
                 helperText={error.maNhom}
               >
                 <MenuItem value="">
-                  <em>Select Group</em>
+                  <em>Chọn</em>
                 </MenuItem>
                 <MenuItem value="GP01">GP01</MenuItem>
               </Select>
             </FormControl>
             <FormControl sm={6} className={classes.formControlright}>
-              <InputLabel id="maLoaiNguoiDung">User Type Id</InputLabel>
+              <InputLabel id="maLoaiNguoiDung">Người Dùng</InputLabel>
               <Select
                 labelId="maLoaiNguoiDung"
                 id="maLoaiNguoiDung"
@@ -240,7 +242,7 @@ export default function SignUp() {
                 helperText={error.maLoaiNguoiDung}
               >
                 <MenuItem value="">
-                  <em>Select Type</em>
+                  <em>Chọn</em>
                 </MenuItem>
                 <MenuItem name="maLoaiNguoiDung" value="KhachHang">
                   KhachHang
@@ -264,10 +266,15 @@ export default function SignUp() {
             Sign Up
           </Button>
           <Grid container justify="flex-end">
+            <Grid item xs>
+              <NavLink exact to="/" variant="body2">
+                Back Home
+              </NavLink>
+            </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <NavLink to="/sign-in" variant="body2">
                 Already have an account? Sign in
-              </Link>
+              </NavLink>
             </Grid>
           </Grid>
         </form>
