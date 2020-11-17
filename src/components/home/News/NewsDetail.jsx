@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch, connect } from "react-redux";
-import { fetchNewDetail } from "../../../redux/actions/news.action";
-import { useParams } from "react-router-dom";
+import React from "react";
+import { connect } from "react-redux";
 
 function NewsDetail(props) {
   //   let newDetail = useSelector((state) => state.newsReducer.newDetail);

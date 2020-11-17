@@ -74,7 +74,7 @@
               @include text(text("primary"), fs("h5"), fw("fwRegular"));
               text-align: justify;
               @include MediaQuery($sm) {
-                font-size: fs("h5");
+                display: none;
               }
             }
           }
@@ -83,6 +83,9 @@
 
       .new__content--medium {
         display: flex;
+        @include MediaQuery($sm) {
+          display: block;
+        }
 
         .news__medium--1 {
           width: 32.33%;

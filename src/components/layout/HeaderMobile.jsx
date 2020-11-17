@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -139,47 +139,55 @@ function HeaderMobile() {
               </li>
               {user ? (
                 <>
-              <li>
-                <NavLink exact to="/">
-                  Thông tin tài khoản
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  exact
-                  to="/"
-                  onClick={async () => {
-                     setOpen(false);
-                   Swal.fire({
-                        title: 'Bạn muốn đăng xuất ?',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'OK !'
-                      }).then((result) => {
-                        if (result.isConfirmed) {
-                          localStorage.removeItem("creadentials");
-                                        window.location.replace("/");
-                                         
-                          Swal.fire(
-                            'Đã đăng xuất tài khoản',
-                            
-                            'success'
-                          )
-                        }
-                      })
-                  }}
-                >
-                  Đăng xuất
-                </NavLink>
-              </li>
+                  <li>
+                    <NavLink exact to="/">
+                      <i class="fa fa-address-card"></i> Thông tin tài khoản
+                    </NavLink>
+                  </li>
+                  {user.maLoaiNguoiDung === "QuanTri" ? (
+                    <li>
+                      {" "}
+                      <NavLink exact to="/admin">
+                        <i class="fa fa-cogs"></i> Trang quản trị
+                      </NavLink>
+                    </li>
+                  ) : (
+                    <></>
+                  )}
+                  <li>
+                    <NavLink
+                      exact
+                      to="/"
+                      onClick={async () => {
+                        setOpen(false);
+                        Swal.fire({
+                          title: "Bạn muốn đăng xuất ?",
+                          icon: "warning",
+                          showCancelButton: true,
+                          confirmButtonColor: "#3085d6",
+                          cancelButtonColor: "#d33",
+                          confirmButtonText: "OK !",
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            localStorage.removeItem("creadentials");
+                            window.location.replace("/");
+
+                            Swal.fire(
+                              "Đã đăng xuất tài khoản",
+
+                              "success"
+                            );
+                          }
+                        });
+                      }}
+                    >
+                      <i class="fa fa-power-off"></i> Đăng xuất
+                    </NavLink>
+                  </li>
                 </>
-              ):(
-                <>
-                </>
+              ) : (
+                <></>
               )}
-              
             </ul>
           </div>
         </div>

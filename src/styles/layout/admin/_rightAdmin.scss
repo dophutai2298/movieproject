@@ -1,3 +1,4 @@
+//GOBAL
 .dashboard {
   width: 80%;
   background: bg("white4");
@@ -36,6 +37,13 @@
       }
     }
   }
+  .manager__pagination {
+    // position: fixed;
+    // bottom: 2%;
+    // right: 5%;
+    margin: spacing(4);
+    float: right;
+  }
 }
 
 //User
@@ -45,11 +53,11 @@
     width: 90%;
     margin-left: 5%;
     .manageruser__action--item {
-      width: 30%;
+      width: 45%;
     }
   }
   .manageruser__table {
-    margin-top: 4%;
+    margin-top: 1%;
   }
 }
 
@@ -64,7 +72,7 @@
     }
   }
   .managerfilm__table {
-    margin-top: 4%;
+    margin-top: 1%;
   }
 }
 

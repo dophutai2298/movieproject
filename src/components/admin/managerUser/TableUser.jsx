@@ -7,7 +7,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 // import Paper from "@material-ui/core/Paper";
-import { Button, Container } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { deleteUser, resetNotify } from "../../../redux/actions/admin.action";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -16,7 +18,7 @@ const StyledTableCell = withStyles((theme) => ({
     fontWeight: "bold",
   },
   body: {
-    fontSize: 14,
+    fontSize: 13,
   },
 }))(TableCell);
 
@@ -44,38 +46,111 @@ const useStyles = makeStyles({
   btnDelete: { border: "1px solid #f7b500", color: "#f7b500" },
 });
 
-export default function TableUser() {
+export default function TableUser(props) {
   const classes = useStyles();
+  const { listUser } = props;
+  const { search } = props;
+  const dispatch = useDispatch();
+  const renderUserSearch = () => {
+    return search?.map((user, index) => {
+      if (index < 10) {
+        return (
+          <StyledTableRow key={index}>
+            <StyledTableCell align="left">{user.taiKhoan}</StyledTableCell>
+            <StyledTableCell align="left">{user.hoTen}</StyledTableCell>
+            <StyledTableCell align="left">{user.email}</StyledTableCell>
+            <StyledTableCell align="left">{user.soDt}</StyledTableCell>
+            <StyledTableCell align="left">
+              <span style={{ border: "3px dotted #fb4226", padding: "5px" }}>
+                {user.maLoaiNguoiDung}
+              </span>
+            </StyledTableCell>
+            <StyledTableCell align="left">
+              <Button className={classes.btnHistory}>Lịch sử</Button>
+              <Button className={classes.btnUpdate}>Sửa</Button>
+              <Button
+                className={classes.btnDelete}
+                onClick={() => {
+                  dispatch(deleteUser(user.taiKhoan));
+                  dispatch(resetNotify());
+                }}
+              >
+                Xóa
+              </Button>
+            </StyledTableCell>
+          </StyledTableRow>
+        );
+      }
+    });
+  };
+  const renderUser = () => {
+    return listUser.items?.map((user, index) => {
+      if (index < 10) {
+        return (
+          <StyledTableRow key={index}>
+            <StyledTableCell align="left">{user.taiKhoan}</StyledTableCell>
+            <StyledTableCell align="left">{user.hoTen}</StyledTableCell>
+            <StyledTableCell align="left">{user.email}</StyledTableCell>
+            <StyledTableCell align="left">{user.soDt}</StyledTableCell>
+            <StyledTableCell align="left">
+              <span style={{ border: "3px dotted #fb4226", padding: "5px" }}>
+                {user.maLoaiNguoiDung}
+              </span>
+            </StyledTableCell>
+            <StyledTableCell align="left">
+              <Button className={classes.btnHistory}>Lịch sử</Button>
+              <Button className={classes.btnUpdate} onClick={() => {}}>
+                Sửa
+              </Button>
+              <Button
+                className={classes.btnDelete}
+                onClick={() => {
+                  dispatch(deleteUser(user.taiKhoan));
+                  dispatch(resetNotify());
+                }}
+              >
+                Xóa
+              </Button>
+            </StyledTableCell>
+          </StyledTableRow>
+        );
+      }
+    });
+  };
 
+  if (search.length > 0) {
+    return (
+      <TableContainer className={classes.tablecontainer}>
+        <Table className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell align="left">Tài khoản</StyledTableCell>
+              <StyledTableCell align="left">Họ tên</StyledTableCell>
+              <StyledTableCell align="left">Email</StyledTableCell>
+              <StyledTableCell align="left">Số điện thoại</StyledTableCell>
+              <StyledTableCell align="left">Loại</StyledTableCell>
+              <StyledTableCell align="left">Chức năng</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{renderUserSearch()}</TableBody>
+        </Table>
+      </TableContainer>
+    );
+  }
   return (
     <TableContainer className={classes.tablecontainer}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">Tài khoản</StyledTableCell>
-            <StyledTableCell align="center">Họ tên</StyledTableCell>
-            <StyledTableCell align="center">Email</StyledTableCell>
-            <StyledTableCell align="center">Số điện thoại</StyledTableCell>
-            <StyledTableCell align="center">Loại</StyledTableCell>
-            <StyledTableCell align="center">Chức năng</StyledTableCell>
+            <StyledTableCell align="left">Tài khoản</StyledTableCell>
+            <StyledTableCell align="left">Họ tên</StyledTableCell>
+            <StyledTableCell align="left">Email</StyledTableCell>
+            <StyledTableCell align="left">Số điện thoại</StyledTableCell>
+            <StyledTableCell align="left">Loại</StyledTableCell>
+            <StyledTableCell align="left">Chức năng</StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          <StyledTableRow>
-            <StyledTableCell component="th" scope="row">
-              Demo
-            </StyledTableCell>
-            <StyledTableCell align="center">Demo</StyledTableCell>
-            <StyledTableCell align="center">Demo</StyledTableCell>
-            <StyledTableCell align="center">Demo</StyledTableCell>
-            <StyledTableCell align="center">Demo</StyledTableCell>
-            <StyledTableCell align="center">
-              <Button className={classes.btnHistory}>Lịch sử</Button>
-              <Button className={classes.btnUpdate}>Sửa</Button>
-              <Button className={classes.btnDelete}>Xóa</Button>
-            </StyledTableCell>
-          </StyledTableRow>
-        </TableBody>
+        <TableBody>{renderUser()}</TableBody>
       </Table>
     </TableContainer>
   );

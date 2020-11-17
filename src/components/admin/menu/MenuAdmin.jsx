@@ -1,23 +1,23 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: "25ch",
-    },
-    txtSearch: {
-      width: "90%",
-      marginLeft: "5%",
-    },
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     "& > *": {
+//       margin: theme.spacing(1),
+//       width: "25ch",
+//     },
+//     txtSearch: {
+//       width: "90%",
+//       marginLeft: "5%",
+//     },
+//   },
+// }));
 
 export default function MenuAdmin() {
-  const classes = useStyles();
+  // const classes = useStyles();
+  const credentials = useSelector((state) => state.userReducer.credentials);
   return (
     <div className="menuAdmin">
       <div className="menuAdmin__info">
@@ -25,20 +25,23 @@ export default function MenuAdmin() {
           <img src="/images/iconAd.png" alt="icon" />
         </div>
         <div className="menuAdmin__info--name">
-          <p>Name</p>
+          <p>
+            <span style={{ fontStyle: "italic" }}>Hi! </span>
+            {credentials?.hoTen}
+          </p>
           <p>
             <span></span>ONLINE
           </p>
         </div>
       </div>
-      <div className="menuAdmin__search">
+      {/* <div className="menuAdmin__search">
         <TextField
           className={classes.txtSearch}
           id="outlined-basic"
           label="Search"
           variant="outlined"
         />
-      </div>
+      </div> */}
       <div className="menuAdmin__nav">
         <ul>
           <li>

@@ -14,7 +14,7 @@ export default function DashBoard() {
           >
             <div className="lineR">
               <div className="dashboard__item--content ">
-                <i class="fa fa-user" style={{ color: "#1ebfae" }}></i>
+                <i className="fa fa-user" style={{ color: "#1ebfae" }}></i>
                 <p>120</p>
                 <span>QUẢN LÝ NGƯỜI DÙNG</span>
               </div>
@@ -28,7 +28,7 @@ export default function DashBoard() {
             {" "}
             <div className="lineR">
               <div className="dashboard__item--content ">
-                <i class="fa fa-film" style={{ color: "#ffb53e" }}></i>
+                <i className="fa fa-film" style={{ color: "#ffb53e" }}></i>
                 <p>120</p>
                 <span>QUẢN LÝ PHIM</span>
               </div>
@@ -41,7 +41,7 @@ export default function DashBoard() {
           >
             <div>
               <div className="dashboard__item--content">
-                <i class="fa fa-tv" style={{ color: "#f9243f" }}></i>
+                <i className="fa fa-tv" style={{ color: "#f9243f" }}></i>
                 <p>120</p>
                 <span>QUẢN LÝ RẠP</span>
               </div>

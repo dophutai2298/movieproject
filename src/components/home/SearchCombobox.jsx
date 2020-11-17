@@ -16,7 +16,7 @@ import Booking from "../../screens/booking";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    width: "150px",
+    width: "18%",
     marginTop: "0",
     zIndex: "10",
   },

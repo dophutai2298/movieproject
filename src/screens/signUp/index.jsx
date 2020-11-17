@@ -3,9 +3,9 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import Checkbox from "@material-ui/core/Checkbox";
+// import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -13,22 +13,22 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+// import InputLabel from "@material-ui/core/InputLabel";
+// import MenuItem from "@material-ui/core/MenuItem";
+// import FormControl from "@material-ui/core/FormControl";
+// import Select from "@material-ui/core/Select";
 import { useDispatch } from "react-redux";
 import { registerRequest } from "../../redux/actions/user.action";
 import valadateInfo from "./validateInfo";
-import { useHistory, NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
+      <NavLink color="inherit" exact to="/">
+        TTMovie
+      </NavLink>
       {new Date().getFullYear()}
     </Typography>
   );
@@ -36,7 +36,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -70,11 +70,11 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
   const history = useHistory();
-  //const dispatch = useDispatch(function)
   const dispatch = useDispatch();
   const [error, setError] = useState({
     taiKhoan: "",
     matKhau: "",
+    xacNhanMK: "",
     email: "",
     soDt: "",
     maNhom: "",
@@ -84,10 +84,11 @@ export default function SignUp() {
   const [userSignup, setUserSignup] = useState({
     taiKhoan: "",
     matKhau: "",
+    xacNhanMK: "",
     email: "",
     soDt: "",
-    maNhom: "",
-    maLoaiNguoiDung: "",
+    maNhom: "GP08",
+    maLoaiNguoiDung: "KhachHang",
     hoTen: "",
   });
 
@@ -100,25 +101,37 @@ export default function SignUp() {
     });
   }
   // end
-
+  const resetForm = () => {
+    setUserSignup({
+      taiKhoan: "",
+      email: "",
+      soDt: "",
+      hoTen: "",
+      matKhau: "",
+      xacNhanMK: "",
+    });
+  };
   // submit
   function handleSubmit(event) {
-    let ktramatkhau = /^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+    let regexPhone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
     let email = /^([\w\.])+@([a-zA-Z0-9\-])+\.([a-zA-Z]{2,4})(\.[a-zA-Z]{2,4})?$/;
     event.preventDefault();
     setError(valadateInfo(userSignup));
     if (
       userSignup.taiKhoan !== "" &&
+      userSignup.taiKhoan.length > 5 &&
+      userSignup.matKhau.length > 5 &&
       userSignup.matKhau !== "" &&
       userSignup.email !== "" &&
+      userSignup.xacNhanMK !== "" &&
       userSignup.soDt !== "" &&
-      userSignup.maNhom !== "" &&
       userSignup.hoTen !== "" &&
-      userSignup.maLoaiNguoiDung !== "" &&
       email.test(userSignup.email) &&
-      ktramatkhau.test(userSignup.matKhau)
+      regexPhone.test(userSignup.soDt) &&
+      userSignup.matKhau === userSignup.xacNhanMK
     ) {
       dispatch(registerRequest(userSignup, history));
+      resetForm();
     }
   }
 
@@ -129,12 +142,12 @@ export default function SignUp() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography style={{ color: "red" }} component="h1" variant="h5">
-          Sign up
+        <Typography component="h1" variant="h5">
+          Đăng ký
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 autoComplete="fname"
                 name="taiKhoan"
@@ -143,7 +156,7 @@ export default function SignUp() {
                 onChange={handleChange}
                 fullWidth
                 id="taiKhoan"
-                label="Tài Khoản"
+                label="Tên Tài khoản"
                 autoFocus
                 value={userSignup.taiKhoan}
                 error={error.taiKhoan}
@@ -152,7 +165,7 @@ export default function SignUp() {
 
               {/* {error.taiKhoan && <span>{error.taiKhoan}</span>} */}
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
@@ -160,12 +173,43 @@ export default function SignUp() {
                 onChange={handleChange}
                 value={userSignup.matKhau}
                 id="matKhau"
-                label="Mật Khẩu"
+                label="Mật khẩu"
                 name="matKhau"
                 type="password"
                 autoComplete="lname"
                 error={error.matKhau}
                 helperText={error.matKhau}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                onChange={handleChange}
+                value={userSignup.xacNhanMK}
+                id="xacNhanMK"
+                label="Xác nhận mật khẩu"
+                name="xacNhanMK"
+                type="password"
+                autoComplete="lname"
+                error={error.xacNhanMK}
+                helperText={error.xacNhanMK}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                onChange={handleChange}
+                value={userSignup.hoTen}
+                variant="outlined"
+                required
+                fullWidth
+                name="hoTen"
+                label="Họ tên"
+                id="hoTen"
+                autoComplete="current-password"
+                error={error.hoTen}
+                helperText={error.hoTen}
               />
             </Grid>
             <Grid item xs={12}>
@@ -191,30 +235,16 @@ export default function SignUp() {
                 value={userSignup.soDt}
                 fullWidth
                 name="soDt"
-                label="Số ĐT"
+                label="Số điện thoại"
                 id="soDT"
                 autoComplete="current-password"
                 error={error.soDt}
                 helperText={error.soDt}
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                onChange={handleChange}
-                value={userSignup.hoTen}
-                variant="outlined"
-                required
-                fullWidth
-                name="hoTen"
-                label="Họ Tên"
-                id="hoTen"
-                autoComplete="current-password"
-                error={error.hoTen}
-                helperText={error.hoTen}
-              />
-            </Grid>
-            <FormControl sm={6} className={classes.formControl}>
-              <InputLabel id="maNhom">Mã Nhóm</InputLabel>
+
+            {/* <FormControl sm={6} className={classes.formControl}>
+              <InputLabel id="maNhom">Id Group</InputLabel>
               <Select
                 labelId="maNhom"
                 name="maNhom"
@@ -225,13 +255,13 @@ export default function SignUp() {
                 helperText={error.maNhom}
               >
                 <MenuItem value="">
-                  <em>Chọn</em>
+                  <em>Select Group</em>
                 </MenuItem>
                 <MenuItem value="GP01">GP01</MenuItem>
               </Select>
-            </FormControl>
-            <FormControl sm={6} className={classes.formControlright}>
-              <InputLabel id="maLoaiNguoiDung">Người Dùng</InputLabel>
+            </FormControl> */}
+            {/* <FormControl sm={6} className={classes.formControlright}>
+              <InputLabel id="maLoaiNguoiDung">User Type Id</InputLabel>
               <Select
                 labelId="maLoaiNguoiDung"
                 id="maLoaiNguoiDung"
@@ -242,19 +272,19 @@ export default function SignUp() {
                 helperText={error.maLoaiNguoiDung}
               >
                 <MenuItem value="">
-                  <em>Chọn</em>
+                  <em>Select Type</em>
                 </MenuItem>
                 <MenuItem name="maLoaiNguoiDung" value="KhachHang">
                   KhachHang
                 </MenuItem>
               </Select>
-            </FormControl>
-            <Grid item xs={12}>
+            </FormControl> */}
+            {/* <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+                label="Tôi đồng ý các diều khoản của TTMovie"
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Button
             type="submit"
@@ -263,17 +293,17 @@ export default function SignUp() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Đăng ký
           </Button>
           <Grid container justify="flex-end">
             <Grid item xs>
               <NavLink exact to="/" variant="body2">
-                Back Home
+                Back
               </NavLink>
             </Grid>
             <Grid item>
-              <NavLink to="/sign-in" variant="body2">
-                Already have an account? Sign in
+              <NavLink exact to="/sign-in" variant="body2">
+                {" Bạn đã có Tài khoản?   Đăng nhập"}
               </NavLink>
             </Grid>
           </Grid>

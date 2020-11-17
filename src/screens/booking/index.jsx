@@ -82,7 +82,7 @@ export default function Booking() {
     // danh sach ghe
     dispatch(fetchTicketRoom(maLichChieu));
     // count down
-    formatDate(600);
+    formatDate(300);
   }, []);
 
   // thời gian dtawj vé
@@ -160,6 +160,13 @@ export default function Booking() {
         }
       });
     }
+  }
+  if (isLoading) {
+    return (
+      <div>
+        <div className="loader">Loading...</div>
+      </div>
+    );
   }
   return (
     <>
@@ -294,11 +301,8 @@ export default function Booking() {
                 <div className="book__combo--title">
                   <BookRight />
                 </div>
-                <div className="book__combo--price">
-                  <span>0 đ</span>{" "}
-                </div>
               </div>
-              <div className="book__right--input input--email">
+              {/* <div className="book__right--input input--email">
                 <form className={classes.root} noValidate autoComplete="off">
                   <TextField
                     id="outlined-basic"
@@ -313,8 +317,8 @@ export default function Booking() {
                     variant="outlined"
                   />
                 </form>
-              </div>
-              <div className="book__right--input input--phone"></div>
+              </div> */}
+
               <div className="book__right--input input--discount">
                 <div className="input__discount--text">
                   <TextField

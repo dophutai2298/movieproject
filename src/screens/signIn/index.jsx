@@ -59,7 +59,7 @@ function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5" className={classes.colorRed}>
-          Sign in
+          Đăng nhập
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
@@ -68,7 +68,7 @@ function SignIn() {
             required
             fullWidth
             id="taiKhoan"
-            label="Tài Khoản"
+            label="Tài khoản"
             name="taiKhoan"
             autoComplete="taiKhoan"
             autoFocus
@@ -81,7 +81,7 @@ function SignIn() {
             required
             fullWidth
             name="matKhau"
-            label="Mật Khẩu"
+            label="Mật khẩu"
             type="password"
             id="matKhau"
             autoComplete="current-matKhau"
@@ -96,17 +96,17 @@ function SignIn() {
             className={classes.submit}
             onClick={handleUrl}
           >
-            Sign In
+            Đăng nhập
           </Button>
           <Grid container>
             <Grid item xs>
               <NavLink exact to="/" variant="body2">
-                Back Home
+                Back
               </NavLink>
             </Grid>
             <Grid item>
               <NavLink exact to="/sign-up" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"Bạn chưa có Tài khoản?  Đăng ký"}
               </NavLink>
             </Grid>
           </Grid>

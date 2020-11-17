@@ -12,8 +12,8 @@ import TableDetailCinema from "./TableDetailCinema";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: "#4a90e2",
-    color: theme.palette.common.white,
+    backgroundColor: "#fafafa",
+    color: theme.palette.common.black,
     fontWeight: "bold",
   },
   body: {
@@ -37,18 +37,32 @@ const useStyles = makeStyles({
     width: "94%",
     marginLeft: "3%",
   },
-  btnDelete: { border: "1px solid #f7b500", color: "#f7b500" },
+  show: {
+    display: "block",
+  },
+  hide: {
+    display: "none",
+  },
+  btnDelete: {
+    border: "1px solid #f7b500",
+    color: "#f7b500",
+    outline: "none",
+    fontSize: "18px",
+  },
 });
 
 export default function TableCinema() {
   const classes = useStyles();
-  const [open, setOpen] = useState("style={{display:'none'}}");
-  const handlelDrawer = () => {
-    setOpen("style={{display:'block'}}");
+  const [open, setOpen] = useState(false);
+  const handleToggle = () => {
+    setOpen((open) => !open);
   };
-  const handleLink = () => {
-    setOpen("style={{display:'none'}}");
-  };
+  // const handlelDrawer = () => {
+  //   setOpen(true);
+  // };
+  // const handleLink = () => {
+  //   setOpen(false);
+  // };
   return (
     <TableContainer className={classes.tablecontainer}>
       <Table className={classes.table} aria-label="customized table">
@@ -58,7 +72,7 @@ export default function TableCinema() {
             <StyledTableCell align="center">Mã cụm rạp</StyledTableCell>
             <StyledTableCell align="center">Tên cụm rạp</StyledTableCell>
             <StyledTableCell align="center">Bí danh</StyledTableCell>
-            <StyledTableCell align="center">Chức năng</StyledTableCell>
+            <StyledTableCell align="center">Chi tiết cụm Rạp</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -71,14 +85,25 @@ export default function TableCinema() {
             <StyledTableCell align="center">Demo</StyledTableCell>
 
             <StyledTableCell align="center">
-              <Button className={classes.btnDelete} onClick={handlelDrawer}>
-                Xem chi tiết cụm Rạp
+              <Button className={classes.btnDelete} onClick={handleToggle}>
+                {open ? (
+                  <i className="fa fa-angle-down"></i>
+                ) : (
+                  <i className="fa fa-angle-up"></i>
+                )}
               </Button>
             </StyledTableCell>
           </StyledTableRow>
         </TableBody>
       </Table>
-      <div>{/* <TableDetailCinema open={open} /> */}</div>
+
+      <div>
+        {open && (
+          <>
+            <TableDetailCinema />
+          </>
+        )}
+      </div>
     </TableContainer>
   );
 }

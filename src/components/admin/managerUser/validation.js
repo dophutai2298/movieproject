@@ -1,4 +1,3 @@
-import awl from "sweetalert2";
 const validateinfomation = [
   "Tài khoản không được để trống",
   "Mật khẩu không được để trống",
@@ -9,10 +8,10 @@ const validateinfomation = [
   "Email Không đúng định dạng",
   "Xác nhận mật khẩu không được để trống",
   "Định dạng số điện thoại không đúng",
+  "Mã loại người dùng không được để trống",
 ];
 
-export default function validateInfo(values) {
-  // let ktramatkhau = /^[0-9]$/;
+export default function validation(values) {
   let regexPhone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
   let email = /^([\w\.])+@([a-zA-Z0-9\-])+\.([a-zA-Z]{2,4})(\.[a-zA-Z]{2,4})?$/;
   let error = {};
@@ -27,8 +26,8 @@ export default function validateInfo(values) {
     error.matKhau = "Mật khẩu phải nhiều hơn 6 ký tự";
   }
 
-  if (values.xacNhanMK !== values.matKhau) {
-    error.xacNhanMK = validateinfomation[5];
+  if (values.xacNhanMatKhau !== values.matKhau) {
+    error.xacNhanMatKhau = validateinfomation[5];
   }
   if (!values.email.trim()) {
     error.email = validateinfomation[2];
@@ -43,11 +42,11 @@ export default function validateInfo(values) {
   } else if (!regexPhone.test(values.soDt)) {
     error.soDt = validateinfomation[8];
   }
-  if (values.xacNhanMK === "") {
-    error.xacNhanMK = validateinfomation[7];
+  if (values.xacNhanMatKhau === "") {
+    error.xacNhanMatKhau = validateinfomation[7];
   }
-  // if (values.maLoaiNguoiDung === "") {
-  //   error.maLoaiNguoiDung = validateinfomation[8];
-  // }
+  if (values.maLoaiNguoiDung === "") {
+    error.maLoaiNguoiDung = validateinfomation[9];
+  }
   return error;
 }

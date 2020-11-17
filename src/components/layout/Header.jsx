@@ -81,8 +81,27 @@ function Header() {
                 }}
                 onClick={handleClose}
               >
-                Thông tin tài khoản
+                <i class="fa fa-address-card"></i> Thông tin tài khoản
               </Link>
+              {user.maLoaiNguoiDung === "QuanTri" ? (
+                <Link
+                  style={{
+                    display: "block",
+                    fontSize: "14px",
+                    textDecoration: "none",
+                    color: "#444",
+                    margin: "20px auto",
+                    padding: "5px",
+                  }}
+                  exact
+                  to="/admin"
+                  onClick={handleClose}
+                >
+                  <i class="fa fa-cogs"></i> Trang quản trị
+                </Link>
+              ) : (
+                <></>
+              )}
               <Link
                 to="/"
                 style={{
@@ -105,16 +124,12 @@ function Header() {
                     if (result.isConfirmed) {
                       localStorage.removeItem("creadentials");
                       window.location.replace("/");
-                      Swal.fire(
-                        "Đã đăng xuất tài khoản",
-
-                        "success"
-                      );
+                      Swal.fire("Đã đăng xuất tài khoản", "success");
                     }
                   });
                 }}
               >
-                <i class="fa fa-sign-in-alt"></i> Đăng xuất
+                <i class="fa fa-power-off"></i> Đăng xuất
               </Link>
             </Menu>
           </>

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import AddFilm from "./AddFilm";
 import TableFilm from "./TableFilm";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   input: {
@@ -12,6 +13,11 @@ const useStyles = makeStyles({
 
 export default function ManagerFilm() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [value, setValue] = useState("");
+  const handleChange = (event) => {
+    console.log(event.target.value);
+  };
   return (
     <div className="managerfilm dashboard">
       <h1>Quản lý Phim</h1>
@@ -19,8 +25,10 @@ export default function ManagerFilm() {
         <div className="managerfilm__action--item">
           <TextField
             className={classes.input}
-            id="txtSearchName"
-            label="Tìm theo Tên Phim"
+            id="key"
+            onChange={handleChange}
+            value={value}
+            label="Tìm kiếm..."
           />
         </div>
         <div className="managerfilm__action--item">

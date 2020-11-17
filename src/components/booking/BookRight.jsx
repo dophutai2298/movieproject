@@ -77,7 +77,7 @@ export default function BookRight() {
     dispatch(fetchFood());
   }, []);
 
-  let sum;
+  let sum = 0;
   const renderAmountMoney = () => {
     return cartFoodList
       .reduce((tongTien, item, index) => {

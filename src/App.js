@@ -5,8 +5,7 @@ import DetailMovieScreen from "./screens/detail";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import SignIn from "./screens/signIn";
 import SignUp from "./screens/signUp";
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
+
 import { connect, useDispatch } from "react-redux";
 import React, { useEffect } from "react";
 import { createAction } from "./redux/actions";
@@ -33,7 +32,6 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-      {/* <Header /> */}
       <Switch>
         <Route path="/" exact component={HomeScreen} />
         <Route path="/detail/:movieID" exact component={DetailMovieScreen} />
@@ -54,7 +52,6 @@ function App() {
           component={MangerCinemaScreen}
         />
       </Switch>
-      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

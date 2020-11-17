@@ -15,7 +15,7 @@ const initialState = {
   infoMovie: [],
   foodList: [],
   cartFoodList: [],
-  amountMoney: null,
+  amountMoney: 0,
   danhSachChonVe: [],
 };
 
@@ -45,13 +45,14 @@ const bookingReducer = (state = initialState, action) => {
       let gheMoi = { ...gheCu, dangChon: !gheCu.dangChon };
       mangUpdate[index] = gheMoi;
 
-      // chọn để push vào số lượng lớn hơn 8 thì post thông báo
+      // chọn để push vào số lượng lớn hơn 10 thì post thông báo
       if (gheMoi.dangChon) {
-        if (updateDsChonVe.length < 8) {
+        if (updateDsChonVe.length < 10) {
           updateDsChonVe.push(gheMoi);
         } else {
           Swal.fire({
-            title: "Bạn chọn đặt vé quá số lượng vé",
+            icon: "warning",
+            title: "Bạn không thể chọn quá 10 ghế",
             confirmButtonText: `OK`,
           });
         }
@@ -73,10 +74,16 @@ const bookingReducer = (state = initialState, action) => {
       // đặt vé thành công thì gáng lại cho mảng vé bằng rỗng render lại giao diện ghế ngồi
       let updateDsChonVe = [...state.danhSachChonVe];
       updateDsChonVe = [];
+
+      //renew card food
+      let renew = [];
+      state.cartFoodList = renew;
+
       state.danhSachChonVe = updateDsChonVe;
       return { ...state };
     }
 
+    //------- Phần xử lý Bắp nước---------
     case FETCH_FOOD: {
       state.foodList = action.payload;
       return { ...state };
@@ -119,10 +126,9 @@ const bookingReducer = (state = initialState, action) => {
     }
 
     case AMOUNT_MONEY: {
-      let renew = [];
       if (action.payload) {
         state.amountMoney = action.payload;
-        state.cartFoodList = renew;
+
         Swal.fire({
           icon: "success",
           title: "Đã thêm vào Thanh Toán !",
@@ -133,9 +139,9 @@ const bookingReducer = (state = initialState, action) => {
           title: "Bạn chưa chọn sản phẩm",
         });
       }
-
       return { ...state };
     }
+    //------- Phần xử lý Bắp nước---------
     default:
       return state;
   }

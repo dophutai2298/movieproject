@@ -40,7 +40,7 @@ export default function AddFilm() {
   return (
     <div>
       <button type="button" className={classes.btnAdd} onClick={handleOpen}>
-        <i class="fa fa-plus"></i> Thêm Phim
+        <i className="fa fa-plus"></i> Thêm Phim
       </button>
       <Modal
         aria-labelledby="transition-modal-title"
