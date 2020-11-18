@@ -41,3 +41,4 @@ export const ADD_USER = "ADD_USER";
 export const DELETE_USER = "DELETE_USER";
 export const UPDATE_NOTIFY = "UPDATE_NOTIFY";
 export const UPDATE_USER = "UPDATE_USER";
+export const GIVE_INFO_USER = "GIVE_INFO_USER";

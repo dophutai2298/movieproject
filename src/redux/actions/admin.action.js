@@ -4,11 +4,12 @@ import {
   ADD_USER,
   DELETE_USER,
   FETCH_USER,
+  GIVE_INFO_USER,
   SEARCH_USER,
   UPDATE_NOTIFY,
   UPDATE_USER,
 } from "../types/types";
-// import { startLoading, stopLoading } from "./common.action";
+import { startLoading, stopLoading } from "./common.action";
 import Swal from "sweetalert2";
 
 export const fetchUserPage = (page) => {
@@ -23,6 +24,19 @@ export const fetchUserPage = (page) => {
       .catch((err) => {
         console.log(err);
         // dispatch(stopLoading());
+      });
+  };
+};
+// fetchUserPage
+export const giveInfoUser = (user) => {
+  return (dispatch) => {
+    adminService
+      .giveInfoUser(user)
+      .then((res) => {
+        dispatch(createAction(GIVE_INFO_USER, res.data));
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 };
@@ -44,40 +58,52 @@ export const searchUser = (keyword) => {
   };
 };
 
-export const addUser = (data) => {
+export const addUser = (data, page) => {
+  console.log(data);
   return (dispatch) => {
     //dispatch(startLoading());
     adminService
       .addUser(data)
       .then((res) => {
         dispatch(createAction(ADD_USER, res.data));
-        //   dispatch(stopLoading());
+        dispatch(fetchUserPage(page));
         Swal.fire({
           icon: "success",
           title: "Thêm thành công",
         });
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.data);
         //   dispatch(stopLoading());
         Swal.fire({
           icon: "error",
-          title: "Không thành công ",
-          text: "Tài khoản bị trùng",
+          title: "Lỗi!! Không thành công ",
         });
       });
   };
 };
 
-export const updateUser = (data) => {
+export const updateUser = (data, page) => {
   return (dispatch) => {
+    dispatch(startLoading());
     adminService
       .updateUser(data)
       .then((res) => {
         dispatch(createAction(UPDATE_USER, res.data));
+        dispatch(fetchUserPage(page));
+        Swal.fire({
+          icon: "success",
+          title: "Cập nhật thành công",
+        });
+        dispatch(stopLoading());
       })
       .catch((err) => {
         console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Không thành công ",
+        });
+        dispatch(stopLoading());
       });
   };
 };

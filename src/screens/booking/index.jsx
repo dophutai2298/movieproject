@@ -85,7 +85,7 @@ export default function Booking() {
     formatDate(300);
   }, []);
 
-  // thời gian dtawj vé
+  // thời gian đặt vé
   function formatDate(date) {
     if (!isNaN(date)) {
       var timer = date,

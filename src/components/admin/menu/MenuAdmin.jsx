@@ -46,7 +46,7 @@ export default function MenuAdmin() {
         <ul>
           <li>
             <NavLink className="menuAdmin__link" exact to="/">
-              <i class="fa fa-home"></i>Trang chủ
+              <i className="fa fa-home"></i>Trang chủ
             </NavLink>
           </li>
           <li>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,8 +8,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 // import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { deleteUser, resetNotify } from "../../../redux/actions/admin.action";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteUser,
+  fetchUserPage,
+  resetNotify,
+} from "../../../redux/actions/admin.action";
+import ModalUpdate from "./ModalUpdate";
+import ModalHistoryUser from "./ModalHistoryUser";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -42,7 +48,6 @@ const useStyles = makeStyles({
     border: "1px solid #00ac4d",
     color: "#00ac4d",
   },
-  btnUpdate: { border: "1px solid #3e515d", color: "#3e515d" },
   btnDelete: { border: "1px solid #f7b500", color: "#f7b500" },
 });
 
@@ -50,71 +55,73 @@ export default function TableUser(props) {
   const classes = useStyles();
   const { listUser } = props;
   const { search } = props;
+  const { page } = props;
+  const domDataUser = useSelector((state) => state.adminReducer.user);
+
+  useEffect(() => {
+    dispatch(fetchUserPage(page));
+  }, [page]);
+
   const dispatch = useDispatch();
+
   const renderUserSearch = () => {
     return search?.map((user, index) => {
-      if (index < 10) {
-        return (
-          <StyledTableRow key={index}>
-            <StyledTableCell align="left">{user.taiKhoan}</StyledTableCell>
-            <StyledTableCell align="left">{user.hoTen}</StyledTableCell>
-            <StyledTableCell align="left">{user.email}</StyledTableCell>
-            <StyledTableCell align="left">{user.soDt}</StyledTableCell>
-            <StyledTableCell align="left">
-              <span style={{ border: "3px dotted #fb4226", padding: "5px" }}>
-                {user.maLoaiNguoiDung}
-              </span>
-            </StyledTableCell>
-            <StyledTableCell align="left">
-              <Button className={classes.btnHistory}>Lịch sử</Button>
-              <Button className={classes.btnUpdate}>Sửa</Button>
-              <Button
-                className={classes.btnDelete}
-                onClick={() => {
-                  dispatch(deleteUser(user.taiKhoan));
-                  dispatch(resetNotify());
-                }}
-              >
-                Xóa
-              </Button>
-            </StyledTableCell>
-          </StyledTableRow>
-        );
-      }
+      return (
+        <StyledTableRow key={index}>
+          <StyledTableCell align="left">{user.taiKhoan}</StyledTableCell>
+          <StyledTableCell align="left">{user.hoTen}</StyledTableCell>
+          <StyledTableCell align="left">{user.email}</StyledTableCell>
+          <StyledTableCell align="left">{user.soDt}</StyledTableCell>
+          <StyledTableCell align="left">
+            <span style={{ border: "3px dotted #fb4226", padding: "5px" }}>
+              {user.maLoaiNguoiDung}
+            </span>
+          </StyledTableCell>
+          <StyledTableCell align="left">
+            <ModalHistoryUser />
+            <ModalUpdate page={page} user={user} />
+            <Button
+              className={classes.btnDelete}
+              onClick={() => {
+                dispatch(deleteUser(user.taiKhoan));
+                dispatch(resetNotify());
+              }}
+            >
+              Xóa
+            </Button>
+          </StyledTableCell>
+        </StyledTableRow>
+      );
     });
   };
   const renderUser = () => {
-    return listUser.items?.map((user, index) => {
-      if (index < 10) {
-        return (
-          <StyledTableRow key={index}>
-            <StyledTableCell align="left">{user.taiKhoan}</StyledTableCell>
-            <StyledTableCell align="left">{user.hoTen}</StyledTableCell>
-            <StyledTableCell align="left">{user.email}</StyledTableCell>
-            <StyledTableCell align="left">{user.soDt}</StyledTableCell>
-            <StyledTableCell align="left">
-              <span style={{ border: "3px dotted #fb4226", padding: "5px" }}>
-                {user.maLoaiNguoiDung}
-              </span>
-            </StyledTableCell>
-            <StyledTableCell align="left">
-              <Button className={classes.btnHistory}>Lịch sử</Button>
-              <Button className={classes.btnUpdate} onClick={() => {}}>
-                Sửa
-              </Button>
-              <Button
-                className={classes.btnDelete}
-                onClick={() => {
-                  dispatch(deleteUser(user.taiKhoan));
-                  dispatch(resetNotify());
-                }}
-              >
-                Xóa
-              </Button>
-            </StyledTableCell>
-          </StyledTableRow>
-        );
-      }
+    return listUser?.map((user, index) => {
+      return (
+        <StyledTableRow key={index}>
+          <StyledTableCell align="left">{user.taiKhoan}</StyledTableCell>
+          <StyledTableCell align="left">{user.hoTen}</StyledTableCell>
+          <StyledTableCell align="left">{user.email}</StyledTableCell>
+          <StyledTableCell align="left">{user.soDt}</StyledTableCell>
+          <StyledTableCell align="left">
+            <span style={{ border: "3px dotted #fb4226", padding: "5px" }}>
+              {user.maLoaiNguoiDung}
+            </span>
+          </StyledTableCell>
+          <StyledTableCell align="left">
+            <ModalHistoryUser />
+            <ModalUpdate page={page} user={user} />
+            <Button
+              className={classes.btnDelete}
+              onClick={() => {
+                dispatch(deleteUser(user.taiKhoan));
+                dispatch(resetNotify());
+              }}
+            >
+              Xóa
+            </Button>
+          </StyledTableCell>
+        </StyledTableRow>
+      );
     });
   };
 

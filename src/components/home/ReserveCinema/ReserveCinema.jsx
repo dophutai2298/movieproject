@@ -7,7 +7,6 @@ import {
   fetchCinemaInfoInSystem,
   fetchCinemaSystem,
 } from "../../../redux/actions/cinema.action";
-import { stopLoading } from "../../../redux/actions/common.action";
 
 class ReserveCinema extends Component {
   //Render Hệ thống Rạp

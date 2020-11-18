@@ -1,5 +1,5 @@
 import Axios from "axios";
-import Swal from "sweetalert2";
+
 export class BookingService {
   fetchTicketRoom(maLichChieu) {
     return Axios({

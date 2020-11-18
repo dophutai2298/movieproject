@@ -16,7 +16,7 @@ import {
 import IconButton from "@material-ui/core/IconButton";
 import { useDispatch } from "react-redux";
 import validation from "./validation";
-import { addUser, fetchUserPage } from "../../../redux/actions/admin.action";
+import { updateUser } from "../../../redux/actions/admin.action";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -31,13 +31,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
-  btnAdd: {
-    width: "100%",
-    height: "50px",
-    border: "2px solid #30a5ff",
-    color: "#30a5ff",
-    fontSize: "18px",
-  },
+  btnUpdate: { border: "1px solid #3e515d", color: "#3e515d" },
   title: {
     textAlign: "center",
   },
@@ -56,30 +50,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ModalAdd(props) {
+export default function ModalUpdate(props) {
+  const { user } = props;
   const { page } = props;
-
   const classes = useStyles();
   const dispatch = useDispatch();
+
   const [open, setOpen] = useState(false);
-  useEffect(() => {
-    dispatch(fetchUserPage(page));
-  }, [page]);
+
   const [values, setValues] = useState({
-    taiKhoan: "",
-    email: "",
-    soDt: "",
-    maLoaiNguoiDung: "",
-    hoTen: "",
-    matKhau: "",
-    xacNhanMatKhau: "",
+    taiKhoan: user.taiKhoan,
+    email: user.email,
+    soDt: user.soDt,
+    maLoaiNguoiDung: user.maLoaiNguoiDung,
+    hoTen: user.hoTen,
+    matKhau: user.matKhau,
+    xacNhanMatKhau: user.matKhau,
     maNhom: "GP08",
     showPassword: false,
   });
+
   const [error, setError] = useState({
     taiKhoan: "",
     email: "",
     soDt: "",
+    maNhom: "",
     maLoaiNguoiDung: "",
     hoTen: "",
     matKhau: "",
@@ -94,23 +89,6 @@ export default function ModalAdd(props) {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-  //Reset Form
-
-  const resetForm = () => {
-    setValues({
-      taiKhoan: "",
-      email: "",
-      soDt: "",
-      maLoaiNguoiDung: "",
-      hoTen: "",
-      matKhau: "",
-      xacNhanMatKhau: "",
-      maNhom: "GP08",
-      showPassword: false,
-    });
-  };
-
   //---Show hide pass--
 
   const handleOpen = () => {
@@ -119,7 +97,6 @@ export default function ModalAdd(props) {
 
   const handleClose = () => {
     setOpen(false);
-    resetForm();
   };
 
   // Bắt sự kiện
@@ -146,18 +123,25 @@ export default function ModalAdd(props) {
       regexPhone.test(values.soDt) &&
       values.matKhau === values.xacNhanMatKhau
     ) {
-      dispatch(addUser(values, page));
-      console.log(values);
+      dispatch(updateUser(values, page));
       handleClose();
-      resetForm();
     }
   }
 
   return (
-    <div>
-      <button type="button" className={classes.btnAdd} onClick={handleOpen}>
-        <i className="fa fa-plus"></i> Thêm người dùng
-      </button>
+    <>
+      <Button
+        className={classes.btnUpdate}
+        onClick={() => {
+          handleOpen();
+          // dispatch(giveInfoUser(user.taiKhoan));
+          console.log("user:", user);
+          // console.log("dom:", domDataUsers);
+        }}
+        type="button"
+      >
+        Sửa
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -172,7 +156,7 @@ export default function ModalAdd(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 className={classes.title}>Thêm người dùng</h2>
+            <h2 className={classes.title}>Cập nhật người dùng</h2>
             <form className={classes.root} onSubmit={handleSubmit} noValidate>
               <FormControl className={clsx(classes.margin, classes.divInput)}>
                 <InputLabel htmlFor="standard-adornment-taiKhoan">
@@ -276,7 +260,6 @@ export default function ModalAdd(props) {
                 <Button
                   onClick={() => {
                     handleClose();
-                    resetForm();
                   }}
                 >
                   Thoát
@@ -287,13 +270,13 @@ export default function ModalAdd(props) {
                   color="primary"
                   variant="contained"
                 >
-                  Thêm mới
+                  Cập nhật
                 </Button>
               </div>
             </form>
           </div>
         </Fade>
       </Modal>
-    </div>
+    </>
   );
 }

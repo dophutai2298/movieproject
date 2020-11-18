@@ -9,16 +9,25 @@ export class AdminService {
     });
   }
 
+  //Lấy thông tin tài khoản người dùng
+  giveInfoUser(user) {
+    return Axios({
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP08&tuKhoa=${user}`,
+      method: "GET",
+    });
+  }
+
   //Thêm người dùng
   addUser(data) {
-    const user = JSON.parse(localStorage.getItem("creadentials"));
+    console.log(data);
+    const users = JSON.parse(localStorage.getItem("creadentials"));
     return Axios({
+      method: "POST",
       url:
         "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/ThemNguoiDung",
-      method: "POST",
       data,
       headers: {
-        Authorization: `Bearer ${user.accessToken}`,
+        Authorization: `Bearer ${users.accessToken}`,
       },
     });
   }
@@ -39,9 +48,10 @@ export class AdminService {
   updateUser(data) {
     const users = JSON.parse(localStorage.getItem("creadentials"));
     return Axios({
+      method: "PUT",
       url:
         "https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
-      method: "PUT",
+
       data,
       headers: {
         Authorization: `Bearer ${users.accessToken}`,

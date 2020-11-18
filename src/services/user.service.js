@@ -16,7 +16,7 @@ export class UserService {
     });
   }
   fetchInFoBooking(user) {
-    console.log("axios", user);
+    // console.log("axios", user);
     return Axios({
       method: "POST",
       url:

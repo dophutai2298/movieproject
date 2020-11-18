@@ -7,7 +7,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserPage, searchUser } from "../../../redux/actions/admin.action";
-import Swal from "sweetalert2";
+
 const useStyles = makeStyles({
   input: {
     width: "70%",
@@ -24,9 +24,6 @@ export default function ManagerUser() {
   const listUser = useSelector((state) => state.adminReducer.listUser);
   const notify = useSelector((state) => state.adminReducer.notify);
   const search = useSelector((state) => state.adminReducer.searchUser);
-  useEffect(() => {
-    dispatch(fetchUserPage(1));
-  }, []);
 
   const [key, setKey] = useState("");
   const handleChangeSearch = (event) => {
@@ -46,6 +43,9 @@ export default function ManagerUser() {
       dispatch(fetchUserPage(page));
     }
   }, [notify]);
+  useEffect(() => {
+    dispatch(fetchUserPage(page));
+  }, [page]);
   if (page === 1) {
     dispatch(fetchUserPage(1));
   }
@@ -89,12 +89,12 @@ export default function ManagerUser() {
         </div>
 
         <div className="manageruser__action--item">
-          <ModalAdd />
+          <ModalAdd page={page} />
         </div>
       </div>
       <div className="manageruser__table">
         <Typography>
-          <TableUser listUser={listUser} search={search} />
+          <TableUser page={page} listUser={listUser.items} search={search} />
         </Typography>
       </div>
       {renderPagination()}

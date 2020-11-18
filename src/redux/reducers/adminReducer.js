@@ -4,12 +4,14 @@ import {
   SEARCH_USER,
   DELETE_USER,
   UPDATE_NOTIFY,
+  GIVE_INFO_USER,
 } from "../types/types";
 
 const initialState = {
   listUser: [],
   searchUser: [],
   notify: "",
+  user: null,
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -18,12 +20,9 @@ const adminReducer = (state = initialState, action) => {
       state.listUser = action.payload;
       return { ...state };
     }
-    case ADD_USER: {
-      return { ...state };
-    }
+
     case SEARCH_USER: {
       state.searchUser = action.payload;
-
       return { ...state };
     }
     case DELETE_USER: {
@@ -34,8 +33,12 @@ const adminReducer = (state = initialState, action) => {
       state.notify = "";
       return { ...state };
     }
+    case GIVE_INFO_USER: {
+      state.user = action.payload;
+      return { ...state };
+    }
     default:
-      return state;
+      return { ...state };
   }
 };
 

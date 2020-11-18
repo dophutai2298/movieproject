@@ -73,7 +73,7 @@ export default function HistorySet() {
                 <td colSpan="2">
                   {handleUser() !== null
                     ? handleUser().email
-                    : "chưa đăng nhập tài khoảng"}
+                    : "chưa đăng nhập Tài khoản"}
                 </td>
               </tr>
               <tr>
@@ -83,7 +83,7 @@ export default function HistorySet() {
                 <td colSpan="2">
                   {handleUser() !== null
                     ? handleUser().soDT
-                    : "chưa đăng nhập tài khoảng"}
+                    : "chưa đăng nhập tài khoản"}
                 </td>
               </tr>
               <tr>

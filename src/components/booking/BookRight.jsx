@@ -88,6 +88,39 @@ export default function BookRight() {
     return sum;
   };
 
+  const renderListFood=()=>{
+    return(
+      <> <Button className={classes.btnClose} onClick={handleLink}>
+      X
+    </Button>
+    <div className="comboList__comboItem">
+      <div className="comboItem__comboType">
+        <h3 className="comboItem__comboType--title">
+          Đồ ăn và thức uống
+        </h3>
+        <BookFood foodList={foodList} />
+        <div>
+          <ModalFood />
+        </div>
+        <div>
+          <p className={classes.text}>
+            Tổng tiền: {renderAmountMoney()}{" "}
+          </p>
+          <Button
+            className={classes.button}
+            onClick={() => {
+              dispatch(amountMoney(sum));
+              setOpen(false);
+            }}
+          >
+           Chọn
+          </Button>
+        </div>
+      </div>
+    </div> </>
+    )
+  }
+
   return (
     <div className={classes.root}>
       <p onClick={handlelDrawer}>
@@ -102,36 +135,11 @@ export default function BookRight() {
         onClose={() => setOpen(false)}
       >
         <div className="comboList">
-          <Button className={classes.btnClose} onClick={handleLink}>
-            X
-          </Button>
-          <div className="comboList__comboItem">
-            <div className="comboItem__comboType">
-              <h3 className="comboItem__comboType--title">
-                Đồ ăn và thức uống
-              </h3>
-              <BookFood foodList={foodList} />
-              <div>
-                <ModalFood />
-              </div>
-              <div>
-                <p className={classes.text}>
-                  Tổng tiền: {renderAmountMoney()}{" "}
-                </p>
-                <Button
-                  className={classes.button}
-                  onClick={() => {
-                    dispatch(amountMoney(sum));
-                    setOpen(false);
-                  }}
-                >
-                  Mua
-                </Button>
-              </div>
-            </div>
-          </div>
+         {renderListFood()}
         </div>
       </Drawer>
+
+      {/* Mobile */}
       <Drawer
         className={classes.drawMobile}
         anchor="bottom"
@@ -139,32 +147,7 @@ export default function BookRight() {
         onClose={() => setOpen(false)}
       >
         <div className="comboList">
-          <Button className={classes.btnClose} onClick={handleLink}>
-            X
-          </Button>
-          <div className="comboList__comboItem">
-            <div className="comboItem__comboType">
-              <h3 className="comboItem__comboType--title">
-                Đồ ăn và thức uống
-              </h3>
-              <BookFood foodList={foodList} />
-              <div>
-                <ModalFood />
-              </div>
-              <div>
-                <p className={classes.text}>Tổng tiền: {renderAmountMoney()}</p>
-                <Button
-                  className={classes.button}
-                  onClick={() => {
-                    dispatch(amountMoney(sum));
-                    setOpen(false);
-                  }}
-                >
-                  Mua
-                </Button>
-              </div>
-            </div>
-          </div>
+         {renderListFood()}
         </div>
       </Drawer>
     </div>

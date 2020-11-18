@@ -126,19 +126,19 @@ const bookingReducer = (state = initialState, action) => {
     }
 
     case AMOUNT_MONEY: {
-      if (action.payload) {
+      // if (action.payload) {
         state.amountMoney = action.payload;
 
         Swal.fire({
           icon: "success",
           title: "Đã thêm vào Thanh Toán !",
         });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Bạn chưa chọn sản phẩm",
-        });
-      }
+      // } else {
+      //   Swal.fire({
+      //     icon: "error",
+      //     title: "Bạn chưa chọn sản phẩm",
+      //   });
+      // }
       return { ...state };
     }
     //------- Phần xử lý Bắp nước---------

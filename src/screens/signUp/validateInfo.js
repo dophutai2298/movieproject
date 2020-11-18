@@ -1,4 +1,3 @@
-import awl from "sweetalert2";
 const validateinfomation = [
   "Tài khoản không được để trống",
   "Mật khẩu không được để trống",

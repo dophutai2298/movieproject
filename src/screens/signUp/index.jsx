@@ -58,8 +58,6 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -104,11 +102,13 @@ export default function SignUp() {
   const resetForm = () => {
     setUserSignup({
       taiKhoan: "",
-      email: "",
-      soDt: "",
-      hoTen: "",
       matKhau: "",
       xacNhanMK: "",
+      email: "",
+      soDt: "",
+      maNhom: "GP08",
+      maLoaiNguoiDung: "KhachHang",
+      hoTen: "",
     });
   };
   // submit
