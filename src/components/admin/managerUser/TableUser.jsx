@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo, useState } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,7 +7,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 // import Paper from "@material-ui/core/Paper";
-import { Button } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteUser,
@@ -16,6 +16,7 @@ import {
 } from "../../../redux/actions/admin.action";
 import ModalUpdate from "./ModalUpdate";
 import ModalHistoryUser from "./ModalHistoryUser";
+import { updateUser } from "../../../redux/actions/admin.action";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -51,17 +52,13 @@ const useStyles = makeStyles({
   btnDelete: { border: "1px solid #f7b500", color: "#f7b500" },
 });
 
-export default function TableUser(props) {
+function TableUser(props) {
   const classes = useStyles();
   const { listUser } = props;
   const { search } = props;
   const { page } = props;
-  const domDataUser = useSelector((state) => state.adminReducer.user);
-
-  useEffect(() => {
-    dispatch(fetchUserPage(page));
-  }, [page]);
-
+  const userDom = useSelector((state) => state.adminReducer.userDom);
+  // const domDataUser = useSelector((state) => state.adminReducer.userDom);
   const dispatch = useDispatch();
 
   const renderUserSearch = () => {
@@ -78,7 +75,7 @@ export default function TableUser(props) {
             </span>
           </StyledTableCell>
           <StyledTableCell align="left">
-            <ModalHistoryUser />
+            <ModalHistoryUser user={user} />
             <ModalUpdate page={page} user={user} />
             <Button
               className={classes.btnDelete}
@@ -95,7 +92,7 @@ export default function TableUser(props) {
     });
   };
   const renderUser = () => {
-    return listUser?.map((user, index) => {
+    return listUser.items?.map((user, index) => {
       return (
         <StyledTableRow key={index}>
           <StyledTableCell align="left">{user.taiKhoan}</StyledTableCell>
@@ -108,8 +105,11 @@ export default function TableUser(props) {
             </span>
           </StyledTableCell>
           <StyledTableCell align="left">
-            <ModalHistoryUser />
-            <ModalUpdate page={page} user={user} />
+            <ModalHistoryUser user={user} />
+            <ModalUpdate user={user} page={page} />
+
+            {/* <Update page={page} userDom={userDom} user={user} /> */}
+
             <Button
               className={classes.btnDelete}
               onClick={() => {
@@ -145,20 +145,24 @@ export default function TableUser(props) {
     );
   }
   return (
-    <TableContainer className={classes.tablecontainer}>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="left">Tài khoản</StyledTableCell>
-            <StyledTableCell align="left">Họ tên</StyledTableCell>
-            <StyledTableCell align="left">Email</StyledTableCell>
-            <StyledTableCell align="left">Số điện thoại</StyledTableCell>
-            <StyledTableCell align="left">Loại</StyledTableCell>
-            <StyledTableCell align="left">Chức năng</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{renderUser()}</TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <TableContainer className={classes.tablecontainer}>
+        <Table className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell align="left">Tài khoản</StyledTableCell>
+              <StyledTableCell align="left">Họ tên</StyledTableCell>
+              <StyledTableCell align="left">Email</StyledTableCell>
+              <StyledTableCell align="left">Số điện thoại</StyledTableCell>
+              <StyledTableCell align="left">Loại</StyledTableCell>
+              <StyledTableCell align="left">Chức năng</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{renderUser()}</TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }
+
+export default memo(TableUser);

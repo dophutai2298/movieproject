@@ -6,6 +6,7 @@ const useStyles = makeStyles({});
 
 export default function ManagerCinema() {
   const classes = useStyles();
+
   return (
     <div className="managercinema dashboard">
       <h1>Quản lý Rạp</h1>

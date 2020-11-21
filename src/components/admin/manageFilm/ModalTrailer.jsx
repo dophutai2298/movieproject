@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -24,9 +25,10 @@ const useStyles = makeStyles((theme) => ({
       height: "300px",
     },
   },
+  btnXem: { border: "1px solid #3e515d", color: "#3e515d" },
 }));
 
-export default function TransitionsModal(props) {
+export default function ModalTrailer(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -40,9 +42,9 @@ export default function TransitionsModal(props) {
 
   return (
     <div>
-      <button className="slide--button" type="button" onClick={handleOpen}>
-        <i className="fa fa-play"></i>
-      </button>
+      <Button className={classes.btnXem} type="button" onClick={handleOpen}>
+        Xem
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -59,7 +61,7 @@ export default function TransitionsModal(props) {
           <div className={classes.paper}>
             <iframe
               className={classes.trailer}
-              src={props.movie.trailer}
+              src={props.trailer}
               frameBorder={0}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

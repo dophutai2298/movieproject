@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect, useState, memo } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-// import Paper from "@material-ui/core/Paper";
-import { Button, Container } from "@material-ui/core";
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+
+import ModalTrailer from "./ModalTrailer";
+import { deleteFilm, resetNotify } from "../../../redux/actions/admin.action";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -16,7 +21,7 @@ const StyledTableCell = withStyles((theme) => ({
     fontWeight: "bold",
   },
   body: {
-    fontSize: 14,
+    fontSize: 13,
   },
 }))(TableCell);
 
@@ -44,44 +49,159 @@ const useStyles = makeStyles({
   btnDelete: { border: "1px solid #f7b500", color: "#f7b500" },
 });
 
-export default function TableFilm() {
+function TableFilm(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  let dateFormat = require("dateformat");
+  const { movieList } = props;
+  const { search } = props;
+  const { page } = props;
+  console.log(movieList);
+
+  const renderFilmSearch = () => {
+    return search?.map((movie, index) => {
+      return (
+        <StyledTableRow key={index}>
+          <StyledTableCell component="th" scope="row">
+            {movie.maPhim}
+          </StyledTableCell>
+          <StyledTableCell align="center">{movie.tenPhim}</StyledTableCell>
+          <StyledTableCell align="center">{movie.biDanh}</StyledTableCell>
+          <StyledTableCell
+            // className="manageCinema__img"
+            style={{ width: "15%" }}
+            align="center"
+          >
+            <img style={{ width: "60%" }} src={movie.hinhAnh} alt="poster" />
+            {/* <div className="manageCinema__img__full">
+              <img src={movie.hinhAnh} alt="poster" />
+            </div> */}
+          </StyledTableCell>
+          <StyledTableCell className="manageCinema__discrible" align="left">
+            {movie.moTa.slice(0, 50) + "..."}
+            <div className="manageCinema__discrible__full">
+              <p>{movie.moTa}</p>
+            </div>
+          </StyledTableCell>
+          <StyledTableCell align="center">
+            <ModalTrailer trailer={movie.trailer} />
+          </StyledTableCell>
+          <StyledTableCell align="center" style={{ width: "10%" }}>
+            {dateFormat(movie.ngayChieuGioChieu, "dd-mm-yyyy")}
+          </StyledTableCell>
+          <StyledTableCell align="center">{movie.danhGia}</StyledTableCell>
+          <StyledTableCell style={{ width: "15%" }} align="center">
+            <Button className={classes.btnUpdate}>Sửa</Button>
+            <Button
+              className={classes.btnDelete}
+              onClick={() => {
+                dispatch(deleteFilm(parseInt(movie.maPhim, page)));
+                dispatch(resetNotify());
+              }}
+            >
+              Xóa
+            </Button>
+          </StyledTableCell>
+        </StyledTableRow>
+      );
+    });
+  };
+
+  const renderListFilm = () => {
+    return movieList?.map((movie, index) => {
+      return (
+        <StyledTableRow key={index}>
+          <StyledTableCell component="th" scope="row">
+            {movie.maPhim}
+          </StyledTableCell>
+          <StyledTableCell align="center">{movie.tenPhim}</StyledTableCell>
+          <StyledTableCell align="center">{movie.biDanh}</StyledTableCell>
+          <StyledTableCell
+            // className="manageCinema__img"
+            style={{ width: "15%" }}
+            align="center"
+          >
+            <img style={{ width: "60%" }} src={movie.hinhAnh} alt="poster" />
+            {/* <div className="manageCinema__img__full">
+              <img src={movie.hinhAnh} alt="poster" />
+            </div> */}
+          </StyledTableCell>
+          <StyledTableCell className="manageCinema__discrible" align="left">
+            {movie.moTa.slice(0, 50) + "..."}
+            <div className="manageCinema__discrible__full">
+              <p>{movie.moTa}</p>
+            </div>
+          </StyledTableCell>
+          <StyledTableCell align="center">
+            <ModalTrailer trailer={movie.trailer} />
+          </StyledTableCell>
+          <StyledTableCell align="center" style={{ width: "10%" }}>
+            {dateFormat(movie.ngayKhoiChieu, "dd-mm-yyyy")}
+          </StyledTableCell>
+          <StyledTableCell align="center">{movie.danhGia}</StyledTableCell>
+          <StyledTableCell style={{ width: "15%" }} align="center">
+            <Button className={classes.btnUpdate}>Sửa</Button>
+            <Button
+              className={classes.btnDelete}
+              onClick={() => {
+                dispatch(deleteFilm(parseInt(movie.maPhim, page)));
+                dispatch(resetNotify());
+              }}
+            >
+              Xóa
+            </Button>
+          </StyledTableCell>
+        </StyledTableRow>
+      );
+    });
+  };
+
+  if (search.length > 0) {
+    return (
+      <div>
+        <TableContainer className={classes.tablecontainer}>
+          <Table className={classes.table} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell align="center">Mã phim</StyledTableCell>
+                <StyledTableCell align="center">Tên phim</StyledTableCell>
+                <StyledTableCell align="center">Bí danh</StyledTableCell>
+                <StyledTableCell align="center">Hình ảnh</StyledTableCell>
+                <StyledTableCell align="center">Mô tả</StyledTableCell>
+                <StyledTableCell align="center">Trailer</StyledTableCell>
+                <StyledTableCell align="center">Ngày chiếu</StyledTableCell>
+                <StyledTableCell align="center">Đánh giá</StyledTableCell>
+                <StyledTableCell align="center">Chức năng</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>{renderFilmSearch()}</TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    );
+  }
 
   return (
-    <TableContainer className={classes.tablecontainer}>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="center">Mã phim</StyledTableCell>
-            <StyledTableCell align="center">Tên phim</StyledTableCell>
-            <StyledTableCell align="center">Bí danh</StyledTableCell>
-            <StyledTableCell align="center">Hình ảnh</StyledTableCell>
-            <StyledTableCell align="center">Mô tả</StyledTableCell>
-            <StyledTableCell align="center">Mã nhóm</StyledTableCell>
-            <StyledTableCell align="center">Ngày chiếu</StyledTableCell>
-            <StyledTableCell align="center">Đánh giá</StyledTableCell>
-            <StyledTableCell align="center">Chức năng</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <StyledTableRow>
-            <StyledTableCell component="th" scope="row">
-              Demo
-            </StyledTableCell>
-            <StyledTableCell align="center">Demo</StyledTableCell>
-            <StyledTableCell align="center">Demo</StyledTableCell>
-            <StyledTableCell align="center">Demo</StyledTableCell>
-            <StyledTableCell align="center">Demo</StyledTableCell>
-            <StyledTableCell align="center">Demo</StyledTableCell>
-            <StyledTableCell align="center">Demo</StyledTableCell>
-            <StyledTableCell align="center">Demo</StyledTableCell>
-            <StyledTableCell align="center">
-              <Button className={classes.btnUpdate}>Sửa</Button>
-              <Button className={classes.btnDelete}>Xóa</Button>
-            </StyledTableCell>
-          </StyledTableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div>
+      <TableContainer className={classes.tablecontainer}>
+        <Table className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell align="center">Mã phim</StyledTableCell>
+              <StyledTableCell align="center">Tên phim</StyledTableCell>
+              <StyledTableCell align="center">Bí danh</StyledTableCell>
+              <StyledTableCell align="center">Hình ảnh</StyledTableCell>
+              <StyledTableCell align="center">Mô tả</StyledTableCell>
+              <StyledTableCell align="center">Trailer</StyledTableCell>
+              <StyledTableCell align="center">Ngày chiếu</StyledTableCell>
+              <StyledTableCell align="center">Đánh giá</StyledTableCell>
+              <StyledTableCell align="center">Chức năng</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{renderListFilm()}</TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 }
+export default memo(TableFilm);

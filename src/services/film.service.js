@@ -19,6 +19,14 @@ export class FilmService {
     });
   }
 
+  //Lấy danh sách phim phân trang
+  fetchFilmFollowPage(page) {
+    return Axios({
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP10&soTrang=${page}&soPhanTuTrenTrang=5`,
+      method: "GET",
+    });
+  }
+
   //Lấy chi tiết phim
   fetchFilmDetail(id) {
     return Axios({

@@ -3,7 +3,6 @@ import { userService } from "../../services";
 import { SIGN_IN, SIGN_UP, USER__INFO_BOOKING } from "../types/types";
 import { startLoading, stopLoading } from "./common.action";
 import Swal from "sweetalert2";
-import { useHistory } from "react-router-dom";
 
 export const loginRequest = (user, history) => {
   return (dispatch) => {

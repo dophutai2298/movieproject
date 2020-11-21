@@ -14,9 +14,13 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import validation from "./validation";
-import { updateUser } from "../../../redux/actions/admin.action";
+import {
+  giveInfoUser,
+  updateUser,
+  fetchUserPage,
+} from "../../../redux/actions/admin.action";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -34,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
   btnUpdate: { border: "1px solid #3e515d", color: "#3e515d" },
   title: {
     textAlign: "center",
+    color: "#4a90e2",
   },
   divInput: {
     width: "90%",
@@ -55,9 +60,12 @@ export default function ModalUpdate(props) {
   const { page } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  const userDom = useSelector((state) => state.adminReducer.userDom);
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    dispatch(fetchUserPage(page));
+  }, [page]);
   const [values, setValues] = useState({
     taiKhoan: user.taiKhoan,
     email: user.email,
@@ -69,7 +77,6 @@ export default function ModalUpdate(props) {
     maNhom: "GP08",
     showPassword: false,
   });
-
   const [error, setError] = useState({
     taiKhoan: "",
     email: "",
@@ -135,8 +142,8 @@ export default function ModalUpdate(props) {
         onClick={() => {
           handleOpen();
           // dispatch(giveInfoUser(user.taiKhoan));
-          console.log("user:", user);
-          // console.log("dom:", domDataUsers);
+          handleChange();
+          dispatch(fetchUserPage(page));
         }}
         type="button"
       >
@@ -164,9 +171,11 @@ export default function ModalUpdate(props) {
                 </InputLabel>
                 <Input
                   id="standard-adornment-taiKhoan"
-                  value={values.taiKhoan}
-                  onChange={handleChange("taiKhoan")}
+                  value={user.taiKhoan}
+                  disabled
                 />
+                <p>value: {values.taiKhoan}</p>
+                <p>user: {user.taiKhoan}</p>
                 <p className={classes.error}>{error.taiKhoan}</p>
               </FormControl>
               <FormControl className={clsx(classes.margin, classes.divInput)}>
@@ -214,8 +223,8 @@ export default function ModalUpdate(props) {
                 </InputLabel>
                 <Input
                   id="standard-adornment-email"
-                  value={values.email}
-                  onChange={handleChange("email")}
+                  value={user.email}
+                  disabled
                 />
                 <p className={classes.error}>{error.email}</p>
               </FormControl>

@@ -1,6 +1,7 @@
 //Film
 export const FETCH_FILM = "FETCH_FILM";
 export const FETCH_FILM_FOLLOW_DAY = "FETCH_FILM_FOLLOW_DAY";
+export const FETCH_FILM_FOLLOW_PAGE = "FETCH_FILM_FOLLOW_PAGE";
 export const FETCH_BANNER_FILM = "FETCH_BANNER_FILM";
 export const START_LOADING = "START_LOADING";
 export const STOP_LOADING = "STOP_LOADING";
@@ -42,3 +43,6 @@ export const DELETE_USER = "DELETE_USER";
 export const UPDATE_NOTIFY = "UPDATE_NOTIFY";
 export const UPDATE_USER = "UPDATE_USER";
 export const GIVE_INFO_USER = "GIVE_INFO_USER";
+export const DELETE_MOVIE = "DELETE_MOVIE";
+export const SEARCH_FILM = "SEARCH_FILM";
+export const ADD_FILM = "ADD_FILM";

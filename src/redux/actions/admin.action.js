@@ -1,16 +1,20 @@
 import { createAction } from ".";
 import { adminService } from "../../services";
 import {
+  ADD_FILM,
   ADD_USER,
+  DELETE_MOVIE,
   DELETE_USER,
   FETCH_USER,
   GIVE_INFO_USER,
+  SEARCH_FILM,
   SEARCH_USER,
   UPDATE_NOTIFY,
   UPDATE_USER,
 } from "../types/types";
 import { startLoading, stopLoading } from "./common.action";
 import Swal from "sweetalert2";
+import { fetchFilmFollowPage } from "./film.action";
 
 export const fetchUserPage = (page) => {
   return (dispatch) => {
@@ -33,7 +37,7 @@ export const giveInfoUser = (user) => {
     adminService
       .giveInfoUser(user)
       .then((res) => {
-        dispatch(createAction(GIVE_INFO_USER, res.data));
+        dispatch(createAction(GIVE_INFO_USER, res.data[0]));
       })
       .catch((err) => {
         console.log(err);
@@ -59,7 +63,7 @@ export const searchUser = (keyword) => {
 };
 
 export const addUser = (data, page) => {
-  console.log(data);
+  // console.log(data);
   return (dispatch) => {
     //dispatch(startLoading());
     adminService
@@ -141,5 +145,82 @@ export const deleteUser = (user) => {
 export const resetNotify = () => {
   return (dispatch) => {
     dispatch(createAction(UPDATE_NOTIFY));
+  };
+};
+
+export const deleteFilm = (id, page) => {
+  return (dispatch) => {
+    Swal.fire({
+      title: "Bạn muốn xóa ?",
+      text: "Khi Phim đã bị xóa sẽ không phục hồi lại dữ liệu được!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Đồng ý !",
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          adminService.deleteMovie(id).then((res) => {
+            dispatch(createAction(DELETE_MOVIE, res.data));
+            dispatch(fetchFilmFollowPage(page));
+          });
+          Swal.fire("Phim đã bị xóa!", "success");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Lỗi !!! Không thành công",
+          text: "Phim đã có lịch chiếu",
+        });
+      });
+  };
+};
+
+export const searchFilm = (keyword) => {
+  return (dispatch) => {
+    adminService
+      .searchFilm(keyword)
+      .then((res) => {
+        dispatch(createAction(SEARCH_FILM, res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Không tìm thấy !!",
+        });
+      });
+  };
+};
+
+export const addFilm = (data, page) => {
+  return (dispatch) => {
+    adminService
+      .addFilm(data)
+      .then((res) => {
+        dispatch(createAction(ADD_FILM, res.data));
+        dispatch(fetchFilmFollowPage(page));
+        Swal.fire({
+          icon: "success",
+          title: "Thêm thành công",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const uploadImage = () => {
+  return (dispatch) => {
+    adminService
+      .uploadImage()
+      .then((res) => dispatch(createAction("UPLOAD_IMG", res.data)))
+      .catch((err) => {
+        console.log(err);
+      });
   };
 };

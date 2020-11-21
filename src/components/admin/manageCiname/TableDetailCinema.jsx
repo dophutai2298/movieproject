@@ -7,11 +7,13 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 // import Paper from "@material-ui/core/Paper";
-import { Button, Container } from "@material-ui/core";
+
+import { useSelector } from "react-redux";
+import ModalListCinemaDetail from "./ModalListCinemaDetail";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: "#fafafa",
+    backgroundColor: "#f1f4f7",
     color: theme.palette.common.black,
     fontWeight: "bold",
   },
@@ -23,7 +25,8 @@ const StyledTableCell = withStyles((theme) => ({
 const StyledTableRow = withStyles((theme) => ({
   root: {
     "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
+      // backgroundColor: theme.palette.action.hover,
+      backgroundColor: "#f1f4f7",
     },
   },
 }))(TableRow);
@@ -33,16 +36,31 @@ const useStyles = makeStyles({
     width: "100%",
   },
   table: {
-    width: "94%",
-    marginLeft: "3%",
+    width: "100%",
   },
-  btnUpdate: { border: "1px solid #3e515d", color: "#3e515d" },
-  btnDelete: { border: "1px solid #f7b500", color: "#f7b500" },
+  btnList: { border: "1px solid #3e515d", color: "#3e515d" },
 });
 
 export default function TableDetailCinema() {
   const classes = useStyles();
-
+  const cinemaInfo = useSelector((state) => state.cinemaReducer.cinemaInfo);
+  const renderCinemaInfo = () => {
+    return cinemaInfo?.map((cinema, index) => {
+      return (
+        <StyledTableRow key={index}>
+          <StyledTableCell style={{ width: "30%" }} align="center">
+            {cinema.tenCumRap}
+          </StyledTableCell>
+          <StyledTableCell style={{ width: "40%" }} align="center">
+            {cinema.diaChi}
+          </StyledTableCell>
+          <StyledTableCell style={{ width: "30%" }} align="center">
+            <ModalListCinemaDetail cinema={cinema} />
+          </StyledTableCell>
+        </StyledTableRow>
+      );
+    });
+  };
   return (
     <TableContainer className={classes.tablecontainer}>
       <Table className={classes.table} aria-label="customized table">
@@ -50,22 +68,10 @@ export default function TableDetailCinema() {
           <TableRow>
             <StyledTableCell align="center">Tên cụm rạp</StyledTableCell>
             <StyledTableCell align="center">Địa chỉ</StyledTableCell>
-            <StyledTableCell align="center">Chức năng</StyledTableCell>
+            <StyledTableCell align="center">Chi tiết</StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          <StyledTableRow>
-            <StyledTableCell component="th" scope="row">
-              Demo
-            </StyledTableCell>
-            <StyledTableCell align="center">Demo</StyledTableCell>
-
-            <StyledTableCell align="center">
-              <Button className={classes.btnUpdate}>Phim chiếu</Button>
-              <Button className={classes.btnDelete}>Thông tin Rạp</Button>
-            </StyledTableCell>
-          </StyledTableRow>
-        </TableBody>
+        <TableBody>{renderCinemaInfo()}</TableBody>
       </Table>
     </TableContainer>
   );

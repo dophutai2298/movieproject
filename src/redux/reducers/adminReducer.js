@@ -1,17 +1,26 @@
 import {
   FETCH_USER,
-  ADD_USER,
   SEARCH_USER,
   DELETE_USER,
   UPDATE_NOTIFY,
   GIVE_INFO_USER,
+  SEARCH_FILM,
 } from "../types/types";
 
 const initialState = {
   listUser: [],
   searchUser: [],
+  searchFilm: [],
   notify: "",
-  user: null,
+  userDom: null,
+  // {
+  //   // taiKhoan: "",
+  //   // hoTen: "",
+  //   // email: "",
+  //   // soDt: "",
+  //   // matKhau: "",
+  //   // maLoaiNguoiDung: "",
+  // },
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -25,6 +34,10 @@ const adminReducer = (state = initialState, action) => {
       state.searchUser = action.payload;
       return { ...state };
     }
+    case SEARCH_FILM: {
+      state.searchFilm = action.payload;
+      return { ...state };
+    }
     case DELETE_USER: {
       state.notify = action.payload;
       return { ...state };
@@ -34,7 +47,7 @@ const adminReducer = (state = initialState, action) => {
       return { ...state };
     }
     case GIVE_INFO_USER: {
-      state.user = action.payload;
+      state.userDom = action.payload;
       return { ...state };
     }
     default:

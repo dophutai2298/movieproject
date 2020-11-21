@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     textAlign: "center",
+    color: "#4a90e2",
   },
   divInput: {
     width: "90%",
@@ -62,9 +63,9 @@ export default function ModalAdd(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  useEffect(() => {
-    dispatch(fetchUserPage(page));
-  }, [page]);
+  // useEffect(() => {
+  //   dispatch(fetchUserPage(page));
+  // }, [page]);
   const [values, setValues] = useState({
     taiKhoan: "",
     email: "",

@@ -1,22 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import { TextField, Button } from "@material-ui/core";
 import AddFilm from "./AddFilm";
 import TableFilm from "./TableFilm";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import Pagination from "@material-ui/lab/Pagination";
+import { fetchFilmFollowPage } from "../../../redux/actions/film.action";
+import { searchFilm } from "../../../redux/actions/admin.action";
 const useStyles = makeStyles({
   input: {
-    width: "90%",
+    width: "70%",
+    height: "50px",
+  },
+  btnSearch: {
+    height: "60px",
   },
 });
 
 export default function ManagerFilm() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const movieListPage = useSelector((state) => state.filmReducer.movieListPage);
+  const notify = useSelector((state) => state.adminReducer.notify);
+  const search = useSelector((state) => state.adminReducer.searchFilm);
   const [value, setValue] = useState("");
-  const handleChange = (event) => {
-    console.log(event.target.value);
+  const [page, setPage] = useState(1);
+  const handleChangePage = (event, value) => {
+    setPage(value);
+  };
+  useEffect(() => {
+    if (notify === "Xóa thành công!") {
+      dispatch(fetchFilmFollowPage(page));
+    }
+  });
+  useEffect(() => {
+    dispatch(fetchFilmFollowPage(page));
+  }, [page]);
+  const renderPagination = () => {
+    if (search.length < 1) {
+      return (
+        <div className="manager__pagination">
+          <Pagination
+            count={movieListPage.totalPages}
+            page={page}
+            color="primary"
+            onChange={handleChangePage}
+            onClick={() => dispatch(fetchFilmFollowPage(page))}
+          />
+        </div>
+      );
+    }
+  };
+
+  const [key, setKey] = useState("");
+  const handleChangeSearch = (event) => {
+    let key = event.target.value;
+    setKey(key);
+  };
+  const handleSearch = (e) => {
+    e.preventDefault();
+    dispatch(searchFilm(key));
   };
   return (
     <div className="managerfilm dashboard">
@@ -26,17 +69,29 @@ export default function ManagerFilm() {
           <TextField
             className={classes.input}
             id="key"
-            onChange={handleChange}
-            value={value}
-            label="Tìm kiếm..."
+            onChange={handleChangeSearch}
+            value={key}
+            label="Tìm kiếm theo tên phim..."
           />
+          <Button onClick={handleSearch} className={classes.btnSearch}>
+            <i
+              className="fa fa-search"
+              style={{ fontSize: "16px", color: "#4a90e2" }}
+            ></i>
+          </Button>
         </div>
+
         <div className="managerfilm__action--item">
           <AddFilm />
         </div>
       </div>
       <div className="managerfilm__table">
-        <TableFilm />
+        <TableFilm
+          movieList={movieListPage.items}
+          page={page}
+          search={search}
+        />
+        {renderPagination()}
       </div>
     </div>
   );

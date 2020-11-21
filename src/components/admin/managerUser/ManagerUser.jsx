@@ -24,7 +24,10 @@ export default function ManagerUser() {
   const listUser = useSelector((state) => state.adminReducer.listUser);
   const notify = useSelector((state) => state.adminReducer.notify);
   const search = useSelector((state) => state.adminReducer.searchUser);
-
+  useEffect(() => {
+    dispatch(fetchUserPage(page));
+    console.log(listUser.items);
+  }, [listUser.currentPage]);
   const [key, setKey] = useState("");
   const handleChangeSearch = (event) => {
     let key = event.target.value;
@@ -36,6 +39,7 @@ export default function ManagerUser() {
   };
   const [page, setPage] = useState(1);
   const handleChange = (event, value) => {
+    event.preventDefault();
     setPage(value);
   };
   useEffect(() => {
@@ -46,9 +50,6 @@ export default function ManagerUser() {
   useEffect(() => {
     dispatch(fetchUserPage(page));
   }, [page]);
-  if (page === 1) {
-    dispatch(fetchUserPage(1));
-  }
 
   const renderPagination = () => {
     if (search.length < 1) {
@@ -58,7 +59,7 @@ export default function ManagerUser() {
             count={listUser.totalPages}
             page={page}
             onClick={() => {
-              dispatch(fetchUserPage(page));
+              dispatch(fetchUserPage(listUser.currentPage));
             }}
             color="primary"
             onChange={handleChange}
@@ -94,7 +95,7 @@ export default function ManagerUser() {
       </div>
       <div className="manageruser__table">
         <Typography>
-          <TableUser page={page} listUser={listUser.items} search={search} />
+          <TableUser page={page} listUser={listUser} search={search} />
         </Typography>
       </div>
       {renderPagination()}

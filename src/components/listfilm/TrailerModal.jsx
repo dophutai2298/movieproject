@@ -12,14 +12,13 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    width: "70%",
+    border: "1px solid #000",
+    width: "50%",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
   },
   trailer: {
     width: "100%",
-    height: "600px",
+    height: "500px",
     [theme.breakpoints.down("sm")]: {
       height: "300px",
     },

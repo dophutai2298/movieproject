@@ -5,6 +5,7 @@ import {
   FETCH_FILM,
   FETCH_FILM_DETAIL,
   FETCH_FILM_FOLLOW_DAY,
+  FETCH_FILM_FOLLOW_PAGE,
   FETCH_FILM_SHOWTIME,
 } from "../types/types";
 import { startLoading, stopLoading } from "./common.action";
@@ -37,6 +38,15 @@ export const fetchFilmFollowDay = (id) => {
         console.log(err);
         //dispatch(stopLoading());
       });
+  };
+};
+
+export const fetchFilmFollowPage = (page) => {
+  return (dispatch) => {
+    filmService
+      .fetchFilmFollowPage(page)
+      .then((res) => dispatch(createAction(FETCH_FILM_FOLLOW_PAGE, res.data)))
+      .catch((err) => console.log(err));
   };
 };
 

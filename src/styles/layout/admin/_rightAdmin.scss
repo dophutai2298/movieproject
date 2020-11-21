@@ -88,3 +88,46 @@
     }
   }
 }
+.manageCinema__discrible {
+  position: relative;
+  cursor: pointer;
+  .manageCinema__discrible__full {
+    box-shadow: 0 0 10px #444;
+    width: 200%;
+    z-index: 10;
+    padding: spacing(1);
+    position: absolute;
+    left: 50%;
+    top: 5%;
+    display: none;
+    background-color: bg("primary");
+    p {
+      @include text(text("primary"), fs("subtext1"), fw("fwLight"));
+    }
+  }
+  &:hover .manageCinema__discrible__full {
+    display: inline-block;
+  }
+}
+
+// .manageCinema__img {
+//   position: relative;
+//   cursor: pointer;
+//   .manageCinema__img__full {
+//     box-shadow: 0 0 10px #444;
+//     width: 130%;
+//     z-index: 10;
+//     padding: spacing(1);
+//     position: absolute;
+//     left: 40%;
+//     top: 0%;
+//     display: none;
+//     background-color: bg("primary");
+//     img {
+//       width: 100%;
+//     }
+//   }
+//   &:hover .manageCinema__img__full {
+//     display: inline-block;
+//   }
+// }

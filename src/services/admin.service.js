@@ -19,7 +19,6 @@ export class AdminService {
 
   //Thêm người dùng
   addUser(data) {
-    console.log(data);
     const users = JSON.parse(localStorage.getItem("creadentials"));
     return Axios({
       method: "POST",
@@ -59,11 +58,52 @@ export class AdminService {
     });
   }
 
-  //Tìm kiếm
+  //Tìm kiếm User
   searchUser(keyword) {
     return Axios({
       url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP08&tuKhoa=${keyword}`,
       method: "GET",
+    });
+  }
+
+  //Tìm phim
+  searchFilm(keyword) {
+    return Axios({
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP10&tenPhim=${keyword}`,
+      method: "GET",
+    });
+  }
+
+  //Thêm phim
+  addFilm(data) {
+    const users = JSON.parse(localStorage.getItem("creadentials"));
+    return Axios({
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/ThemPhim`,
+      method: "POST",
+      data,
+      headers: {
+        Authorization: `Bearer ${users.accessToken}`,
+      },
+    });
+  }
+
+  deleteMovie(id) {
+    const users = JSON.parse(localStorage.getItem("creadentials"));
+    return Axios({
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/XoaPhim?MaPhim=${id}`,
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${users.accessToken}`,
+      },
+    });
+  }
+
+  //Upload hình phim
+  uploadImage() {
+    return Axios({
+      url:
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/UploadHinhAnhPhim",
+      method: "POST",
     });
   }
 }
