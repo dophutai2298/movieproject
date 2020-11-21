@@ -9,14 +9,6 @@ export class AdminService {
     });
   }
 
-  //Lấy thông tin tài khoản người dùng
-  giveInfoUser(user) {
-    return Axios({
-      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP08&tuKhoa=${user}`,
-      method: "GET",
-    });
-  }
-
   //Thêm người dùng
   addUser(data) {
     const users = JSON.parse(localStorage.getItem("creadentials"));

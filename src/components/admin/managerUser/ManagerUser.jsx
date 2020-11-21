@@ -26,7 +26,7 @@ export default function ManagerUser() {
   const search = useSelector((state) => state.adminReducer.searchUser);
   useEffect(() => {
     dispatch(fetchUserPage(page));
-    console.log(listUser.items);
+    // console.log(listUser.items);
   }, [listUser.currentPage]);
   const [key, setKey] = useState("");
   const handleChangeSearch = (event) => {

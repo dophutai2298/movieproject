@@ -63,9 +63,6 @@ export default function ModalUpdate(props) {
   const userDom = useSelector((state) => state.adminReducer.userDom);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    dispatch(fetchUserPage(page));
-  }, [page]);
   const [values, setValues] = useState({
     taiKhoan: user.taiKhoan,
     email: user.email,
@@ -77,6 +74,11 @@ export default function ModalUpdate(props) {
     maNhom: "GP08",
     showPassword: false,
   });
+
+  useEffect(() => {
+    dispatch(fetchUserPage(page));
+    console.log(values);
+  }, [page]);
   const [error, setError] = useState({
     taiKhoan: "",
     email: "",
@@ -143,7 +145,18 @@ export default function ModalUpdate(props) {
           handleOpen();
           // dispatch(giveInfoUser(user.taiKhoan));
           handleChange();
-          dispatch(fetchUserPage(page));
+          //dispatch(fetchUserPage(page));
+          setValues({
+            taiKhoan: user.taiKhoan,
+            email: user.email,
+            soDt: user.soDt,
+            maLoaiNguoiDung: user.maLoaiNguoiDung,
+            hoTen: user.hoTen,
+            matKhau: user.matKhau,
+            xacNhanMatKhau: user.matKhau,
+            maNhom: "GP08",
+            showPassword: false,
+          });
         }}
         type="button"
       >
@@ -174,8 +187,7 @@ export default function ModalUpdate(props) {
                   value={user.taiKhoan}
                   disabled
                 />
-                <p>value: {values.taiKhoan}</p>
-                <p>user: {user.taiKhoan}</p>
+
                 <p className={classes.error}>{error.taiKhoan}</p>
               </FormControl>
               <FormControl className={clsx(classes.margin, classes.divInput)}>

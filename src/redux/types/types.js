@@ -42,7 +42,6 @@ export const ADD_USER = "ADD_USER";
 export const DELETE_USER = "DELETE_USER";
 export const UPDATE_NOTIFY = "UPDATE_NOTIFY";
 export const UPDATE_USER = "UPDATE_USER";
-export const GIVE_INFO_USER = "GIVE_INFO_USER";
 export const DELETE_MOVIE = "DELETE_MOVIE";
 export const SEARCH_FILM = "SEARCH_FILM";
 export const ADD_FILM = "ADD_FILM";

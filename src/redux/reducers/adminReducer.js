@@ -12,15 +12,6 @@ const initialState = {
   searchUser: [],
   searchFilm: [],
   notify: "",
-  userDom: null,
-  // {
-  //   // taiKhoan: "",
-  //   // hoTen: "",
-  //   // email: "",
-  //   // soDt: "",
-  //   // matKhau: "",
-  //   // maLoaiNguoiDung: "",
-  // },
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -46,10 +37,7 @@ const adminReducer = (state = initialState, action) => {
       state.notify = "";
       return { ...state };
     }
-    case GIVE_INFO_USER: {
-      state.userDom = action.payload;
-      return { ...state };
-    }
+
     default:
       return { ...state };
   }

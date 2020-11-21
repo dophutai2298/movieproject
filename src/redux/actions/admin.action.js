@@ -31,19 +31,6 @@ export const fetchUserPage = (page) => {
       });
   };
 };
-// fetchUserPage
-export const giveInfoUser = (user) => {
-  return (dispatch) => {
-    adminService
-      .giveInfoUser(user)
-      .then((res) => {
-        dispatch(createAction(GIVE_INFO_USER, res.data[0]));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-};
 
 export const searchUser = (keyword) => {
   return (dispatch) => {
