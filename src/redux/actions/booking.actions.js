@@ -105,12 +105,14 @@ export const deleteFood = (product) => {
   };
 };
 
+//Tăng giảm số lượng của đồ ăn
 export const optionalQuantity = (product, status) => {
   return (dispatch) => {
     dispatch(createAction(OPTIONAL_QUANTITY, { product, status }));
   };
 };
 
+// Tổng tiền đồ ăn
 export const amountMoney = (money) => {
   return (dispatch) => {
     dispatch(createAction(AMOUNT_MONEY, money));

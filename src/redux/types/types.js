@@ -46,3 +46,4 @@ export const DELETE_MOVIE = "DELETE_MOVIE";
 export const SEARCH_FILM = "SEARCH_FILM";
 export const ADD_FILM = "ADD_FILM";
 export const UPDATE_FILM = "UPDATE_FILM";
+export const CREATE_SHOWTIME = "CREATE_SHOWTIME";

@@ -13,6 +13,7 @@ import {
   TableRow,
   Paper,
 } from "@material-ui/core";
+import ModalCreateShowTime from "./ModalCreateShowtime";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -24,11 +25,19 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: "1px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(2, 3, 3),
+    width: "50%",
+  },
+  tableCell: {
+    padding: "5px",
+  },
+  cellTitle: {
+    fontWeight: "700",
   },
   btnList: { border: "1px solid #3e515d", color: "#3e515d" },
   table: {
-    width: "500px",
+    height: "80%",
+    overflowY: "scroll",
   },
   title: {
     textAlign: "center",
@@ -39,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ModalListCinemaDetail(props) {
   const classes = useStyles();
+
   const [open, setOpen] = React.useState(false);
   const { cinema } = props;
   const handleOpen = () => {
@@ -53,8 +63,18 @@ export default function ModalListCinemaDetail(props) {
     return cinema.danhSachRap?.map((cinema, index) => {
       return (
         <TableRow key={index}>
-          <TableCell align="center">{cinema.maRap}</TableCell>
-          <TableCell align="center">{cinema.tenRap}</TableCell>
+          <TableCell className={classes.tableCell} align="center">
+            {cinema.maRap}
+          </TableCell>
+          <TableCell className={classes.tableCell} align="center">
+            {cinema.tenRap}
+          </TableCell>
+          <TableCell className={classes.tableCell} align="center">
+            <ModalCreateShowTime
+              maRap={cinema.maRap}
+              handleClose={handleClose}
+            />
+          </TableCell>
         </TableRow>
       );
     });
@@ -63,7 +83,7 @@ export default function ModalListCinemaDetail(props) {
   return (
     <div>
       <Button className={classes.btnList} onClick={handleOpen}>
-        Danh sách Rạp{" "}
+        Danh sách Rạp
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -84,8 +104,24 @@ export default function ModalListCinemaDetail(props) {
               <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Mã Rạp</TableCell>
-                    <TableCell align="center">Tên Rạp</TableCell>
+                    <TableCell
+                      className={(classes.tableCell, classes.cellTitle)}
+                      align="center"
+                    >
+                      Mã Rạp
+                    </TableCell>
+                    <TableCell
+                      className={(classes.tableCell, classes.cellTitle)}
+                      align="center"
+                    >
+                      Tên Rạp
+                    </TableCell>
+                    <TableCell
+                      className={(classes.tableCell, classes.cellTitle)}
+                      align="center"
+                    >
+                      Tạo lịch chiếu
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody> {renderListCinema()}</TableBody>

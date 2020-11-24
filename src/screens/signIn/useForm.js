@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginRequest } from "../../redux/actions/user.action";
 import { useHistory } from "react-router-dom";

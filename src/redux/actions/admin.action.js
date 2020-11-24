@@ -3,6 +3,7 @@ import { adminService } from "../../services";
 import {
   ADD_FILM,
   ADD_USER,
+  CREATE_SHOWTIME,
   DELETE_MOVIE,
   DELETE_USER,
   FETCH_USER,
@@ -16,6 +17,7 @@ import { startLoading, stopLoading } from "./common.action";
 import Swal from "sweetalert2";
 import { fetchFilmFollowPage } from "./film.action";
 
+/*-----USER-----*/
 export const fetchUserPage = (page) => {
   return (dispatch) => {
     // dispatch(startLoading());
@@ -136,7 +138,9 @@ export const resetNotify = () => {
     dispatch(createAction(UPDATE_NOTIFY));
   };
 };
+/*-----USER-----*/
 
+/*-----FILM-----*/
 export const deleteFilm = (id, page) => {
   return (dispatch) => {
     Swal.fire({
@@ -221,6 +225,31 @@ export const updateFilm = (data, page) => {
         });
       })
       .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Không thành công",
+          text: err.response.data,
+        });
+      });
+  };
+};
+/*-----FILM-----*/
+
+/*-----CREATE SHOW TIME-----*/
+export const createShowtime = (data) => {
+  return (dispatch) => {
+    adminService
+      .createShowtime(data)
+      .then((res) => {
+        dispatch(createAction(CREATE_SHOWTIME, res.data));
+        Swal.fire({
+          icon: "success",
+          title: "Tạo Lịch chiếu thành công",
+        });
+      })
+      .catch((err) => {
+        console.log(err.response.data);
         console.log(err);
         Swal.fire({
           icon: "error",

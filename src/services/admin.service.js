@@ -1,5 +1,5 @@
 import Axios from "axios";
-
+const users = JSON.parse(localStorage.getItem("creadentials"));
 export class AdminService {
   //Lấy danh sách user phân trang
   fetchUserPage(page) {
@@ -11,7 +11,7 @@ export class AdminService {
 
   //Thêm người dùng
   addUser(data) {
-    const users = JSON.parse(localStorage.getItem("creadentials"));
+    //const users = JSON.parse(localStorage.getItem("creadentials"));
     return Axios({
       method: "POST",
       url:
@@ -25,7 +25,7 @@ export class AdminService {
 
   //Xóa người dùng
   deleteUser(user) {
-    const users = JSON.parse(localStorage.getItem("creadentials"));
+    // const users = JSON.parse(localStorage.getItem("creadentials"));
     return Axios({
       url: `https://movie0706.cybersoft.edu.vn/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${user}`,
       method: "DELETE",
@@ -37,7 +37,7 @@ export class AdminService {
 
   //Cập nhật thông tin người dùng
   updateUser(data) {
-    const users = JSON.parse(localStorage.getItem("creadentials"));
+    //const users = JSON.parse(localStorage.getItem("creadentials"));
     return Axios({
       method: "PUT",
       url:
@@ -68,7 +68,7 @@ export class AdminService {
 
   //Delete Phim
   deleteMovie(id) {
-    const users = JSON.parse(localStorage.getItem("creadentials"));
+    //const users = JSON.parse(localStorage.getItem("creadentials"));
     return Axios({
       url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/XoaPhim?MaPhim=${id}`,
       method: "DELETE",
@@ -80,7 +80,7 @@ export class AdminService {
 
   //Thêm phim
   addFilm(data) {
-    const users = JSON.parse(localStorage.getItem("creadentials"));
+    //const users = JSON.parse(localStorage.getItem("creadentials"));
     return Axios({
       url:
         "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/ThemPhimUploadHinh",
@@ -94,10 +94,22 @@ export class AdminService {
 
   //Update film
   updateFilm(data) {
-    const users = JSON.parse(localStorage.getItem("creadentials"));
+    //const users = JSON.parse(localStorage.getItem("creadentials"));
     return Axios({
       url:
         "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/CapNhatPhimUpload",
+      method: "POST",
+      data,
+      headers: {
+        Authorization: `Bearer ${users.accessToken}`,
+      },
+    });
+  }
+
+  //Tạo lịch chiếu
+  createShowtime(data) {
+    return Axios({
+      url: "https://movie0706.cybersoft.edu.vn/api/QuanLyDatVe/TaoLichChieu",
       method: "POST",
       data,
       headers: {

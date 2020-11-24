@@ -5,7 +5,6 @@ import Header from "../../components/layout/Header";
 import NewsDetail from "../../components/home/News/NewsDetail";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchNewDetail } from "../../redux/actions/news.action";
-import { useParams } from "react-router-dom";
 
 export default function NewDetail({ match }) {
   let newDetail = useSelector(
