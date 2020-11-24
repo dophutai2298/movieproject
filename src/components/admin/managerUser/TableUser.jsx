@@ -1,4 +1,4 @@
-import React, { useEffect, memo, useState } from "react";
+import React, { memo } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,14 +9,9 @@ import TableRow from "@material-ui/core/TableRow";
 // import Paper from "@material-ui/core/Paper";
 import { Button, TextField } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteUser,
-  fetchUserPage,
-  resetNotify,
-} from "../../../redux/actions/admin.action";
+import { deleteUser, resetNotify } from "../../../redux/actions/admin.action";
 import ModalUpdate from "./ModalUpdate";
 import ModalHistoryUser from "./ModalHistoryUser";
-import { updateUser } from "../../../redux/actions/admin.action";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -57,8 +52,6 @@ function TableUser(props) {
   const { listUser } = props;
   const { search } = props;
   const { page } = props;
-  const userDom = useSelector((state) => state.adminReducer.userDom);
-  // const domDataUser = useSelector((state) => state.adminReducer.userDom);
   const dispatch = useDispatch();
 
   const renderUserSearch = () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from "react";
+import React, { memo } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ModalTrailer from "./ModalTrailer";
 import { deleteFilm, resetNotify } from "../../../redux/actions/admin.action";
+import { fetchFilmFollowPage } from "../../../redux/actions/film.action";
+import UpdateFilm from "./UpdateFilm";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -45,7 +47,7 @@ const useStyles = makeStyles({
     border: "1px solid #00ac4d",
     color: "#00ac4d",
   },
-  btnUpdate: { border: "1px solid #3e515d", color: "#3e515d" },
+
   btnDelete: { border: "1px solid #f7b500", color: "#f7b500" },
 });
 
@@ -56,7 +58,6 @@ function TableFilm(props) {
   const { movieList } = props;
   const { search } = props;
   const { page } = props;
-  console.log(movieList);
 
   const renderFilmSearch = () => {
     return search?.map((movie, index) => {
@@ -91,12 +92,12 @@ function TableFilm(props) {
           </StyledTableCell>
           <StyledTableCell align="center">{movie.danhGia}</StyledTableCell>
           <StyledTableCell style={{ width: "15%" }} align="center">
-            <Button className={classes.btnUpdate}>Sửa</Button>
+            <UpdateFilm movie={movie} page={page} />
             <Button
               className={classes.btnDelete}
               onClick={() => {
-                dispatch(deleteFilm(parseInt(movie.maPhim, page)));
-                dispatch(resetNotify());
+                dispatch(deleteFilm(parseInt(movie.maPhim), page));
+                dispatch(fetchFilmFollowPage(page));
               }}
             >
               Xóa
@@ -108,7 +109,7 @@ function TableFilm(props) {
   };
 
   const renderListFilm = () => {
-    return movieList?.map((movie, index) => {
+    return movieList.items?.map((movie, index) => {
       return (
         <StyledTableRow key={index}>
           <StyledTableCell component="th" scope="row">
@@ -140,12 +141,12 @@ function TableFilm(props) {
           </StyledTableCell>
           <StyledTableCell align="center">{movie.danhGia}</StyledTableCell>
           <StyledTableCell style={{ width: "15%" }} align="center">
-            <Button className={classes.btnUpdate}>Sửa</Button>
+            <UpdateFilm movie={movie} page={page} />
             <Button
               className={classes.btnDelete}
               onClick={() => {
-                dispatch(deleteFilm(parseInt(movie.maPhim, page)));
-                dispatch(resetNotify());
+                dispatch(deleteFilm(parseInt(movie.maPhim), page));
+                dispatch(fetchFilmFollowPage(page));
               }}
             >
               Xóa

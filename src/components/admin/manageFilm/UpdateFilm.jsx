@@ -12,7 +12,7 @@ import {
   Input,
   InputAdornment,
 } from "@material-ui/core";
-import { addFilm } from "../../../redux/actions/admin.action";
+import { updateFilm } from "../../../redux/actions/admin.action";
 import validationFilm from "./validationFilm";
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -36,13 +36,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 3, 3),
   },
-  btnAdd: {
-    width: "100%",
-    height: "50px",
-    border: "2px solid #30a5ff",
-    color: "#30a5ff",
-    fontSize: "18px",
-  },
+  btnUpdate: { border: "1px solid #3e515d", color: "#3e515d" },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -70,8 +64,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AddFilm(props) {
+export default function UpdateFilm(props) {
   const { page } = props;
+  const { movie } = props;
   const classes = useStyles();
   let dateFormat = require("dateformat");
   const [open, setOpen] = useState(false);
@@ -86,18 +81,16 @@ export default function AddFilm(props) {
   };
   const [uploadImg, setUploadImg] = useState({});
 
-  const [imgBase64, setImgBase64] = useState(
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png"
-  );
+  const [imgBase64, setImgBase64] = useState(movie.hinhAnh);
   const [values, setValues] = useState({
-    maPhim: +"",
-    tenPhim: "",
-    biDanh: "",
-    trailer: "",
-    moTa: "",
+    maPhim: movie.maPhim,
+    tenPhim: movie.tenPhim,
+    biDanh: movie.biDanh,
+    trailer: movie.trailer,
+    moTa: movie.moTa,
     hinhAnh: uploadImg,
     maNhom: "GP10",
-    ngayKhoiChieu: dateFormat("", "dd/mm/yyyy"),
+    ngayKhoiChieu: dateFormat(movie.ngayKhoiChieu, "dd/mm/yyyy"),
     danhGia: 10,
   });
 
@@ -114,9 +107,7 @@ export default function AddFilm(props) {
   const resetForm = () => {
     setUploadImg({});
     setError("");
-    setImgBase64(
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png"
-    );
+
     setValues({
       maPhim: "",
       tenPhim: "",
@@ -164,11 +155,10 @@ export default function AddFilm(props) {
     event.preventDefault();
     setError(validationFilm(values));
     if (
-      regexNumber.test(values.maPhim) &&
-      values.maPhim.length > 3 &&
       values.tenPhim !== "" &&
       values.biDanh !== "" &&
       values.trailer !== "" &&
+      values.hinhAnh.name &&
       values.hinhAnh.name.match(/\.(jpg|png|gif)$/) &&
       values.moTa !== "" &&
       values.ngayKhoiChieu !== ""
@@ -180,16 +170,33 @@ export default function AddFilm(props) {
         //console.log(key + ":", values[key]);
       }
       // console.log("frm: ", frm);
-      dispatch(addFilm(frm, page));
+      dispatch(updateFilm(frm, page));
       handleClose();
       resetForm();
     }
   }
   return (
-    <div>
-      <button type="button" className={classes.btnAdd} onClick={handleOpen}>
-        <i className="fa fa-plus"></i> Thêm Phim
-      </button>
+    <>
+      <Button
+        className={classes.btnUpdate}
+        onClick={() => {
+          handleOpen();
+          setImgBase64(movie.hinhAnh);
+          setValues({
+            maPhim: movie.maPhim,
+            tenPhim: movie.tenPhim,
+            biDanh: movie.biDanh,
+            trailer: movie.trailer,
+            moTa: movie.moTa,
+            hinhAnh: movie.hinhAnh,
+            maNhom: "GP10",
+            ngayKhoiChieu: dateFormat(movie.ngayKhoiChieu, "dd/mm/yyyy"),
+            danhGia: 10,
+          });
+        }}
+      >
+        Sửa
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -204,7 +211,7 @@ export default function AddFilm(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 className={classes.title}>Thêm Phim</h2>
+            <h2 className={classes.title}>Cập nhật Phim</h2>
             <form className={classes.root} onSubmit={handleSubmit} noValidate>
               <Grid container spacing={1}>
                 <Grid item xs={12} sm={6}>
@@ -218,10 +225,10 @@ export default function AddFilm(props) {
                       id="standard-adornment-maPhim"
                       value={values.maPhim}
                       name="maPhim"
-                      onChange={handleChange}
+                      disabled
                     />
 
-                    <p className={classes.error}>{error.maPhim}</p>
+                    {/* <p className={classes.error}>{error.maPhim}</p> */}
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -354,13 +361,13 @@ export default function AddFilm(props) {
                   color="primary"
                   variant="contained"
                 >
-                  Thêm mới
+                  Cập nhật
                 </Button>
               </div>
             </form>
           </div>
         </Fade>
       </Modal>
-    </div>
+    </>
   );
 }

@@ -28,11 +28,20 @@ export default function ManagerFilm() {
   const handleChangePage = (event, value) => {
     setPage(value);
   };
-  useEffect(() => {
-    if (notify === "Xóa thành công!") {
-      dispatch(fetchFilmFollowPage(page));
-    }
-  });
+  const [key, setKey] = useState("");
+  const handleChangeSearch = (event) => {
+    let key = event.target.value;
+    setKey(key);
+  };
+  const handleSearch = (e) => {
+    e.preventDefault();
+    dispatch(searchFilm(key));
+  };
+  // useEffect(() => {
+  //   if (notify === "Xóa thành công!") {
+  //     dispatch(fetchFilmFollowPage(page));
+  //   }
+  // });
   useEffect(() => {
     dispatch(fetchFilmFollowPage(page));
   }, [page]);
@@ -52,15 +61,6 @@ export default function ManagerFilm() {
     }
   };
 
-  const [key, setKey] = useState("");
-  const handleChangeSearch = (event) => {
-    let key = event.target.value;
-    setKey(key);
-  };
-  const handleSearch = (e) => {
-    e.preventDefault();
-    dispatch(searchFilm(key));
-  };
   return (
     <div className="managerfilm dashboard">
       <h1>Quản lý Phim</h1>
@@ -82,15 +82,11 @@ export default function ManagerFilm() {
         </div>
 
         <div className="managerfilm__action--item">
-          <AddFilm />
+          <AddFilm page={page} />
         </div>
       </div>
       <div className="managerfilm__table">
-        <TableFilm
-          movieList={movieListPage.items}
-          page={page}
-          search={search}
-        />
+        <TableFilm movieList={movieListPage} page={page} search={search} />
         {renderPagination()}
       </div>
     </div>

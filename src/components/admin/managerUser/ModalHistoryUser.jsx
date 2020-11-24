@@ -76,19 +76,19 @@ export default function ModalHistoryUser(props) {
     if (infoUser.length > 0) {
       return infoUser.map((phim) => {
         return (
-          <>
-            <StyledTableCell align="center">{phim.maVe}</StyledTableCell>
-            <StyledTableCell align="center">{phim.tenPhim}</StyledTableCell>
-            <StyledTableCell align="center">
+          <StyledTableRow>
+            <StyledTableCell align="left">{phim.maVe}</StyledTableCell>
+            <StyledTableCell align="left">{phim.tenPhim}</StyledTableCell>
+            <StyledTableCell align="left">
               {dateFormat(phim.ngayDat, "dd-mm-yyyy")}
             </StyledTableCell>
-            <StyledTableCell align="center">{phim.giaVe}</StyledTableCell>
-          </>
+            <StyledTableCell align="left">{phim.giaVe}</StyledTableCell>
+          </StyledTableRow>
         );
       });
     }
     return (
-      <StyledTableCell colSpan="7" align="center">
+      <StyledTableCell colSpan="7" align="left">
         <img
           className={classes.imgNoData}
           src="/images/noData.png"
@@ -104,19 +104,19 @@ export default function ModalHistoryUser(props) {
       return infoUser.map((phim) => {
         return phim.danhSachGhe.map((ghe) => {
           return (
-            <>
-              <StyledTableCell align="center">{phim.maVe}</StyledTableCell>
-              <StyledTableCell align="center">{phim.tenPhim}</StyledTableCell>
-              <StyledTableCell align="center">
+            <StyledTableRow>
+              <StyledTableCell align="left">{phim.maVe}</StyledTableCell>
+              <StyledTableCell align="left">{phim.tenPhim}</StyledTableCell>
+              <StyledTableCell align="left">
                 {dateFormat(phim.ngayDat, "dd-mm-yyyy")}
               </StyledTableCell>
-              <StyledTableCell align="center">{phim.giaVe}</StyledTableCell>
-              <StyledTableCell align="center">
+              <StyledTableCell align="left">{phim.giaVe}</StyledTableCell>
+              <StyledTableCell align="left">
                 {ghe.tenHeThongRap}
               </StyledTableCell>
-              <StyledTableCell align="center">{ghe.tenRap}</StyledTableCell>
-              <StyledTableCell align="center">{ghe.tenGhe}</StyledTableCell>
-            </>
+              <StyledTableCell align="left">{ghe.tenRap}</StyledTableCell>
+              <StyledTableCell align="left">{ghe.tenGhe}</StyledTableCell>
+            </StyledTableRow>
           );
         });
       });
@@ -166,18 +166,22 @@ export default function ModalHistoryUser(props) {
                 <Table className={classes.table} aria-label="customized table">
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell align="center">Mã vé</StyledTableCell>
-                      <StyledTableCell align="center">Tên phim</StyledTableCell>
-                      <StyledTableCell align="center">Ngày đặt</StyledTableCell>
-                      <StyledTableCell align="center">Gía vé</StyledTableCell>
-                      <StyledTableCell align="center">Tên Rạp</StyledTableCell>
-                      <StyledTableCell align="center">Phòng</StyledTableCell>
-                      <StyledTableCell align="center">Số Ghế</StyledTableCell>
+                      <StyledTableCell align="left">Mã vé</StyledTableCell>
+                      <StyledTableCell align="left">Tên phim</StyledTableCell>
+                      <StyledTableCell align="left" style={{ width: "15%" }}>
+                        Ngày đặt
+                      </StyledTableCell>
+                      <StyledTableCell align="left" style={{ width: "12%" }}>
+                        Giá vé
+                      </StyledTableCell>
+                      <StyledTableCell align="left">Tên Rạp</StyledTableCell>
+                      <StyledTableCell align="left">Phòng</StyledTableCell>
+                      <StyledTableCell align="left" style={{ width: "10%" }}>
+                        Số Ghế
+                      </StyledTableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody>
-                    <StyledTableRow>{renderInfoBooking()}</StyledTableRow>
-                  </TableBody>
+                  <TableBody>{renderInfoBooking()}</TableBody>
                 </Table>
               </TableContainer>
               <Button

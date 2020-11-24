@@ -66,19 +66,7 @@ export class AdminService {
     });
   }
 
-  //Thêm phim
-  addFilm(data) {
-    const users = JSON.parse(localStorage.getItem("creadentials"));
-    return Axios({
-      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/ThemPhim`,
-      method: "POST",
-      data,
-      headers: {
-        Authorization: `Bearer ${users.accessToken}`,
-      },
-    });
-  }
-
+  //Delete Phim
   deleteMovie(id) {
     const users = JSON.parse(localStorage.getItem("creadentials"));
     return Axios({
@@ -90,12 +78,31 @@ export class AdminService {
     });
   }
 
-  //Upload hình phim
-  uploadImage() {
+  //Thêm phim
+  addFilm(data) {
+    const users = JSON.parse(localStorage.getItem("creadentials"));
     return Axios({
       url:
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/UploadHinhAnhPhim",
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/ThemPhimUploadHinh",
       method: "POST",
+      data,
+      headers: {
+        Authorization: `Bearer ${users.accessToken}`,
+      },
+    });
+  }
+
+  //Update film
+  updateFilm(data) {
+    const users = JSON.parse(localStorage.getItem("creadentials"));
+    return Axios({
+      url:
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/CapNhatPhimUpload",
+      method: "POST",
+      data,
+      headers: {
+        Authorization: `Bearer ${users.accessToken}`,
+      },
     });
   }
 }

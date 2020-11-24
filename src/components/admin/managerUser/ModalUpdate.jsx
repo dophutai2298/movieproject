@@ -16,11 +16,7 @@ import {
 import IconButton from "@material-ui/core/IconButton";
 import { useDispatch, useSelector } from "react-redux";
 import validation from "./validation";
-import {
-  giveInfoUser,
-  updateUser,
-  fetchUserPage,
-} from "../../../redux/actions/admin.action";
+import { updateUser, fetchUserPage } from "../../../redux/actions/admin.action";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -77,7 +73,6 @@ export default function ModalUpdate(props) {
 
   useEffect(() => {
     dispatch(fetchUserPage(page));
-    console.log(values);
   }, [page]);
   const [error, setError] = useState({
     taiKhoan: "",

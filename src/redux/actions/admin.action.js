@@ -6,9 +6,9 @@ import {
   DELETE_MOVIE,
   DELETE_USER,
   FETCH_USER,
-  GIVE_INFO_USER,
   SEARCH_FILM,
   SEARCH_USER,
+  UPDATE_FILM,
   UPDATE_NOTIFY,
   UPDATE_USER,
 } from "../types/types";
@@ -43,7 +43,7 @@ export const searchUser = (keyword) => {
         console.log(err);
         Swal.fire({
           icon: "error",
-          title: "Không tìm thấy !!",
+          title: "Không tìm thấy",
         });
       });
   };
@@ -64,11 +64,12 @@ export const addUser = (data, page) => {
         });
       })
       .catch((err) => {
-        console.log(err.data);
+        console.log(err);
         //   dispatch(stopLoading());
         Swal.fire({
           icon: "error",
-          title: "Lỗi!! Không thành công ",
+          title: "Không thành công",
+          text: err.response.data,
         });
       });
   };
@@ -92,7 +93,8 @@ export const updateUser = (data, page) => {
         console.log(err);
         Swal.fire({
           icon: "error",
-          title: "Không thành công ",
+          title: "Không thành công",
+          text: err.response.data,
         });
         dispatch(stopLoading());
       });
@@ -122,8 +124,8 @@ export const deleteUser = (user) => {
         console.log(err);
         Swal.fire({
           icon: "error",
-          title: "Lỗi !!! Không thành công",
-          text: "Tài khoản này đã mua vé",
+          title: "Không thành công",
+          text: "Tài khoản đã mua vé",
         });
       });
   };
@@ -159,7 +161,7 @@ export const deleteFilm = (id, page) => {
         console.log(err);
         Swal.fire({
           icon: "error",
-          title: "Lỗi !!! Không thành công",
+          title: "Không thành công",
           text: "Phim đã có lịch chiếu",
         });
       });
@@ -177,7 +179,7 @@ export const searchFilm = (keyword) => {
         console.log(err);
         Swal.fire({
           icon: "error",
-          title: "Không tìm thấy !!",
+          title: "Không tìm thấy",
         });
       });
   };
@@ -197,17 +199,34 @@ export const addFilm = (data, page) => {
       })
       .catch((err) => {
         console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Không thành công",
+          text: err.response.data,
+        });
       });
   };
 };
 
-export const uploadImage = () => {
+export const updateFilm = (data, page) => {
   return (dispatch) => {
     adminService
-      .uploadImage()
-      .then((res) => dispatch(createAction("UPLOAD_IMG", res.data)))
+      .updateFilm(data)
+      .then((res) => {
+        dispatch(createAction(UPDATE_FILM, res.data));
+        dispatch(fetchFilmFollowPage(page));
+        Swal.fire({
+          icon: "success",
+          title: "Cập nhật thành công",
+        });
+      })
       .catch((err) => {
         console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Không thành công",
+          text: err.response.data,
+        });
       });
   };
 };
