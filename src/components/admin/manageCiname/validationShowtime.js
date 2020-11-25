@@ -13,7 +13,7 @@ export default function validationShowtime(values) {
   if (!values.maPhim) {
     error.maPhim = validationInfomation[0];
   }
-  if (!values.ngayChieuGioChieu.trim()) {
+  if (!values.ngayChieuGioChieu) {
     error.ngayChieuGioChieu = validationInfomation[1];
   }
   if (values.giaVe < 1) {

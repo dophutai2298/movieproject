@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import Swal from "sweetalert2";
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     "& > *": {
@@ -74,7 +74,27 @@ export default function MenuAdmin() {
             </NavLink>
           </li>
           <li>
-            <NavLink className="menuAdmin__link" exact to="/admin">
+            <NavLink
+              className="menuAdmin__link"
+              exact
+              to="/admin"
+              onClick={async () => {
+                Swal.fire({
+                  title: "Bạn muốn đăng xuất ?",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "OK !",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    localStorage.removeItem("creadentials");
+                    window.location.replace("/");
+                    Swal.fire("Đã đăng xuất tài khoản", "success");
+                  }
+                });
+              }}
+            >
               <i className="fa fa-power-off"></i>Đăng xuất
             </NavLink>
           </li>

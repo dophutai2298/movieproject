@@ -22,7 +22,10 @@ const StyledTableCell = withStyles((theme) => ({
     fontWeight: "bold",
   },
   body: {
-    fontSize: 14,
+    fontSize: 13,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 12,
+    },
   },
 }))(TableCell);
 const StyledTableRow = withStyles((theme) => ({
@@ -44,17 +47,40 @@ const useStyles = makeStyles((theme) => ({
     width: "60%",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
+      padding: theme.spacing(2),
+    },
   },
-  btnHistory: { border: "1px solid #964040", color: "#964040" },
+  btnHistory: {
+    border: "1px solid #964040",
+    color: "#964040",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2px",
+    },
+  },
   divBtn: {
     marginTop: "3%",
   },
   title: {
     textAlign: "center",
     color: "#4a90e2",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "22px",
+    },
   },
   imgNoData: {
     width: "10%",
+    [theme.breakpoints.down("sm")]: {
+      width: "30%",
+    },
+  },
+  tableCell: {
+    [theme.breakpoints.down("sm")]: {
+      width: "15%",
+      padding: "5px 2px",
+      border: "1px solid #fff",
+    },
   },
 }));
 
@@ -77,18 +103,24 @@ export default function ModalHistoryUser(props) {
       return infoUser.map((phim) => {
         return (
           <StyledTableRow>
-            <StyledTableCell align="left">{phim.maVe}</StyledTableCell>
-            <StyledTableCell align="left">{phim.tenPhim}</StyledTableCell>
-            <StyledTableCell align="left">
+            <StyledTableCell className={classes.tableCell} align="left">
+              {phim.maVe}
+            </StyledTableCell>
+            <StyledTableCell className={classes.tableCell} align="left">
+              {phim.tenPhim}
+            </StyledTableCell>
+            <StyledTableCell className={classes.tableCell} align="left">
               {dateFormat(phim.ngayDat, "dd-mm-yyyy")}
             </StyledTableCell>
-            <StyledTableCell align="left">{phim.giaVe}</StyledTableCell>
+            <StyledTableCell className={classes.tableCell} align="left">
+              {phim.giaVe}
+            </StyledTableCell>
           </StyledTableRow>
         );
       });
     }
     return (
-      <StyledTableCell colSpan="7" align="left">
+      <StyledTableCell className={classes.tableCell} colSpan="7" align="left">
         <img
           className={classes.imgNoData}
           src="/images/noData.png"
@@ -105,17 +137,27 @@ export default function ModalHistoryUser(props) {
         return phim.danhSachGhe.map((ghe) => {
           return (
             <StyledTableRow>
-              <StyledTableCell align="left">{phim.maVe}</StyledTableCell>
-              <StyledTableCell align="left">{phim.tenPhim}</StyledTableCell>
-              <StyledTableCell align="left">
+              <StyledTableCell className={classes.tableCell} align="left">
+                {phim.maVe}
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                {phim.tenPhim}
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
                 {dateFormat(phim.ngayDat, "dd-mm-yyyy")}
               </StyledTableCell>
-              <StyledTableCell align="left">{phim.giaVe}</StyledTableCell>
-              <StyledTableCell align="left">
+              <StyledTableCell className={classes.tableCell} align="left">
+                {phim.giaVe}
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
                 {ghe.tenHeThongRap}
               </StyledTableCell>
-              <StyledTableCell align="left">{ghe.tenRap}</StyledTableCell>
-              <StyledTableCell align="left">{ghe.tenGhe}</StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                {ghe.tenRap}
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                {ghe.tenGhe}
+              </StyledTableCell>
             </StyledTableRow>
           );
         });
@@ -123,7 +165,7 @@ export default function ModalHistoryUser(props) {
     }
 
     return (
-      <StyledTableCell colSpan="7" align="center">
+      <StyledTableCell className={classes.tableCell} colSpan="7" align="center">
         <img
           className={classes.imgNoData}
           src="/images/noData.png"
@@ -166,17 +208,49 @@ export default function ModalHistoryUser(props) {
                 <Table className={classes.table} aria-label="customized table">
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell align="left">Mã vé</StyledTableCell>
-                      <StyledTableCell align="left">Tên phim</StyledTableCell>
-                      <StyledTableCell align="left" style={{ width: "15%" }}>
+                      <StyledTableCell
+                        className={classes.tableCell}
+                        align="left"
+                      >
+                        Mã vé
+                      </StyledTableCell>
+                      <StyledTableCell
+                        className={classes.tableCell}
+                        align="left"
+                      >
+                        Tên phim
+                      </StyledTableCell>
+                      <StyledTableCell
+                        className={classes.tableCell}
+                        align="left"
+                        style={{ width: "15%" }}
+                      >
                         Ngày đặt
                       </StyledTableCell>
-                      <StyledTableCell align="left" style={{ width: "12%" }}>
+                      <StyledTableCell
+                        className={classes.tableCell}
+                        align="left"
+                        style={{ width: "12%" }}
+                      >
                         Giá vé
                       </StyledTableCell>
-                      <StyledTableCell align="left">Tên Rạp</StyledTableCell>
-                      <StyledTableCell align="left">Phòng</StyledTableCell>
-                      <StyledTableCell align="left" style={{ width: "10%" }}>
+                      <StyledTableCell
+                        className={classes.tableCell}
+                        align="left"
+                      >
+                        Tên Rạp
+                      </StyledTableCell>
+                      <StyledTableCell
+                        className={classes.tableCell}
+                        align="left"
+                      >
+                        Phòng
+                      </StyledTableCell>
+                      <StyledTableCell
+                        className={classes.tableCell}
+                        align="left"
+                        style={{ width: "10%" }}
+                      >
                         Số Ghế
                       </StyledTableCell>
                     </TableRow>

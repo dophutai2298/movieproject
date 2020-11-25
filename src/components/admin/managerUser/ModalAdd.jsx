@@ -20,6 +20,7 @@ import { addUser, fetchUserPage } from "../../../redux/actions/admin.action";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
+    overflowY: "scroll",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -30,6 +31,10 @@ const useStyles = makeStyles((theme) => ({
     width: "40%",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
+      padding: theme.spacing(2),
+    },
   },
   btnAdd: {
     width: "100%",
@@ -37,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #30a5ff",
     color: "#30a5ff",
     fontSize: "18px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "16px",
+    },
   },
   title: {
     textAlign: "center",

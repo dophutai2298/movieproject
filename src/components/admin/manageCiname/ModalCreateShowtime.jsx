@@ -25,8 +25,20 @@ const useStyles = makeStyles((theme) => ({
     width: "40%",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
+      padding: theme.spacing(2),
+      fontSize: "12px",
+    },
   },
-  btnList: { border: "1px solid #3e515d", color: "#3e515d" },
+  btnList: {
+    border: "1px solid #3e515d",
+    color: "#3e515d",
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
+      padding: "2px",
+    },
+  },
   title: {
     textAlign: "center",
     color: "#4a90e2",

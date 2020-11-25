@@ -24,6 +24,9 @@ const StyledTableCell = withStyles((theme) => ({
   },
   body: {
     fontSize: 13,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 12,
+    },
   },
 }))(TableCell);
 
@@ -35,7 +38,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   tablecontainer: {
     width: "100%",
   },
@@ -47,9 +50,48 @@ const useStyles = makeStyles({
     border: "1px solid #00ac4d",
     color: "#00ac4d",
   },
-
-  btnDelete: { border: "1px solid #f7b500", color: "#f7b500" },
-});
+  tableCell: {
+    [theme.breakpoints.down("sm")]: {
+      padding: "2px",
+      marginLeft: "2px",
+      width: "20%",
+      textAlign: "center",
+      border: "1px solid #fff",
+    },
+  },
+  tableCellBanner: {
+    width: "20%",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2px",
+      marginLeft: "2px",
+      width: "35%",
+      textAlign: "center",
+      border: "1px solid #fff",
+    },
+  },
+  tableCellMoTa: {
+    [theme.breakpoints.down("sm")]: {
+      padding: "2px",
+      marginLeft: "2px",
+      width: "35%",
+      textAlign: "left",
+      border: "1px solid #fff",
+    },
+  },
+  bannerFilm: {
+    width: "40%",
+    [theme.breakpoints.down("sm")]: {
+      width: "98%",
+    },
+  },
+  btnDelete: {
+    border: "1px solid #f7b500",
+    color: "#f7b500",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2px",
+    },
+  },
+}));
 
 function TableFilm(props) {
   const classes = useStyles();
@@ -63,35 +105,62 @@ function TableFilm(props) {
     return search?.map((movie, index) => {
       return (
         <StyledTableRow key={index}>
-          <StyledTableCell component="th" scope="row">
+          <StyledTableCell
+            className={classes.tableCell}
+            component="th"
+            scope="row"
+          >
             {movie.maPhim}
           </StyledTableCell>
-          <StyledTableCell align="center">{movie.tenPhim}</StyledTableCell>
-          <StyledTableCell align="center">{movie.biDanh}</StyledTableCell>
+          <StyledTableCell className={classes.tableCell} align="center">
+            {movie.tenPhim}
+          </StyledTableCell>
+          <StyledTableCell className={classes.tableCell} align="center">
+            {movie.biDanh}
+          </StyledTableCell>
           <StyledTableCell
+            className={classes.tableCellBanner}
             // className="manageCinema__img"
-            style={{ width: "15%" }}
+
             align="center"
           >
-            <img style={{ width: "60%" }} src={movie.hinhAnh} alt="poster" />
+            <img
+              className={classes.bannerFilm}
+              src={movie.hinhAnh}
+              alt="poster"
+            />
             {/* <div className="manageCinema__img__full">
               <img src={movie.hinhAnh} alt="poster" />
             </div> */}
           </StyledTableCell>
-          <StyledTableCell className="manageCinema__discrible" align="left">
+          <StyledTableCell
+            className={classes.tableCellMoTa}
+            className="manageCinema__discrible"
+            align="left"
+          >
             {movie.moTa.slice(0, 50) + "..."}
             <div className="manageCinema__discrible__full">
               <p>{movie.moTa}</p>
             </div>
           </StyledTableCell>
-          <StyledTableCell align="center">
+          <StyledTableCell className={classes.tableCell} align="center">
             <ModalTrailer trailer={movie.trailer} />
           </StyledTableCell>
-          <StyledTableCell align="center" style={{ width: "10%" }}>
+          <StyledTableCell
+            className={classes.tableCell}
+            align="center"
+            style={{ width: "10%" }}
+          >
             {dateFormat(movie.ngayChieuGioChieu, "dd-mm-yyyy")}
           </StyledTableCell>
-          <StyledTableCell align="center">{movie.danhGia}</StyledTableCell>
-          <StyledTableCell style={{ width: "15%" }} align="center">
+          <StyledTableCell className={classes.tableCell} align="center">
+            {movie.danhGia}
+          </StyledTableCell>
+          <StyledTableCell
+            className={classes.tableCell}
+            style={{ width: "15%" }}
+            align="center"
+          >
             <UpdateFilm movie={movie} page={page} />
             <Button
               className={classes.btnDelete}
@@ -112,35 +181,62 @@ function TableFilm(props) {
     return movieList.items?.map((movie, index) => {
       return (
         <StyledTableRow key={index}>
-          <StyledTableCell component="th" scope="row">
+          <StyledTableCell
+            className={classes.tableCell}
+            component="th"
+            scope="row"
+          >
             {movie.maPhim}
           </StyledTableCell>
-          <StyledTableCell align="center">{movie.tenPhim}</StyledTableCell>
-          <StyledTableCell align="center">{movie.biDanh}</StyledTableCell>
+          <StyledTableCell className={classes.tableCell} align="center">
+            {movie.tenPhim}
+          </StyledTableCell>
+          <StyledTableCell className={classes.tableCell} align="center">
+            {movie.biDanh}
+          </StyledTableCell>
           <StyledTableCell
-            // className="manageCinema__img"
-            style={{ width: "15%" }}
+            className={classes.tableCellBanner}
+            //className="manageCinema__img"
+
             align="center"
           >
-            <img style={{ width: "60%" }} src={movie.hinhAnh} alt="poster" />
+            <img
+              className={classes.bannerFilm}
+              src={movie.hinhAnh}
+              alt="poster"
+            />
             {/* <div className="manageCinema__img__full">
               <img src={movie.hinhAnh} alt="poster" />
             </div> */}
           </StyledTableCell>
-          <StyledTableCell className="manageCinema__discrible" align="left">
+          <StyledTableCell
+            className={classes.tableCellMoTa}
+            className="manageCinema__discrible"
+            align="left"
+          >
             {movie.moTa.slice(0, 50) + "..."}
             <div className="manageCinema__discrible__full">
               <p>{movie.moTa}</p>
             </div>
           </StyledTableCell>
-          <StyledTableCell align="center">
+          <StyledTableCell className={classes.tableCell} align="center">
             <ModalTrailer trailer={movie.trailer} />
           </StyledTableCell>
-          <StyledTableCell align="center" style={{ width: "10%" }}>
+          <StyledTableCell
+            className={classes.tableCell}
+            align="center"
+            style={{ width: "10%" }}
+          >
             {dateFormat(movie.ngayKhoiChieu, "dd-mm-yyyy")}
           </StyledTableCell>
-          <StyledTableCell align="center">{movie.danhGia}</StyledTableCell>
-          <StyledTableCell style={{ width: "15%" }} align="center">
+          <StyledTableCell className={classes.tableCell} align="center">
+            {movie.danhGia}
+          </StyledTableCell>
+          <StyledTableCell
+            className={classes.tableCell}
+            style={{ width: "15%" }}
+            align="center"
+          >
             <UpdateFilm movie={movie} page={page} />
             <Button
               className={classes.btnDelete}
@@ -164,15 +260,39 @@ function TableFilm(props) {
           <Table className={classes.table} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell align="center">Mã phim</StyledTableCell>
-                <StyledTableCell align="center">Tên phim</StyledTableCell>
-                <StyledTableCell align="center">Bí danh</StyledTableCell>
-                <StyledTableCell align="center">Hình ảnh</StyledTableCell>
-                <StyledTableCell align="center">Mô tả</StyledTableCell>
-                <StyledTableCell align="center">Trailer</StyledTableCell>
-                <StyledTableCell align="center">Ngày chiếu</StyledTableCell>
-                <StyledTableCell align="center">Đánh giá</StyledTableCell>
-                <StyledTableCell align="center">Chức năng</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">
+                  Mã phim
+                </StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">
+                  Tên phim
+                </StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">
+                  Bí danh
+                </StyledTableCell>
+                <StyledTableCell
+                  className={classes.tableCellBanner}
+                  align="center"
+                >
+                  Hình ảnh
+                </StyledTableCell>
+                <StyledTableCell
+                  className={classes.tableCellMoTa}
+                  align="center"
+                >
+                  Mô tả
+                </StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">
+                  Trailer
+                </StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">
+                  Ngày chiếu
+                </StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">
+                  Đánh giá
+                </StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">
+                  Chức năng
+                </StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>{renderFilmSearch()}</TableBody>
@@ -188,15 +308,33 @@ function TableFilm(props) {
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="center">Mã phim</StyledTableCell>
-              <StyledTableCell align="center">Tên phim</StyledTableCell>
-              <StyledTableCell align="center">Bí danh</StyledTableCell>
-              <StyledTableCell align="center">Hình ảnh</StyledTableCell>
-              <StyledTableCell align="center">Mô tả</StyledTableCell>
-              <StyledTableCell align="center">Trailer</StyledTableCell>
-              <StyledTableCell align="center">Ngày chiếu</StyledTableCell>
-              <StyledTableCell align="center">Đánh giá</StyledTableCell>
-              <StyledTableCell align="center">Chức năng</StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="center">
+                Mã phim
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="center">
+                Tên phim
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="center">
+                Bí danh
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="center">
+                Hình ảnh
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="center">
+                Mô tả
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="center">
+                Trailer
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="center">
+                Ngày chiếu
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="center">
+                Đánh giá
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="center">
+                Chức năng
+              </StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>{renderListFilm()}</TableBody>

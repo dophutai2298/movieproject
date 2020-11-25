@@ -35,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
     width: "50%",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 3, 3),
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
+      padding: theme.spacing(2),
+    },
   },
   btnAdd: {
     width: "100%",
@@ -42,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #30a5ff",
     color: "#30a5ff",
     fontSize: "18px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "16px",
+    },
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -273,7 +280,7 @@ export default function AddFilm(props) {
                     <p className={classes.error}>{error.trailer}</p>
                   </FormControl>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={7}>
                   <FormControl
                     className={clsx(classes.margin, classes.divInput)}
                   >
@@ -293,8 +300,8 @@ export default function AddFilm(props) {
                     <p className={classes.error}>{error.hinhAnh}</p>
                   </FormControl>
                 </Grid>
-                <Grid item xs={6}>
-                  <img style={{ width: "40%" }} src={imgBase64} alt="demo" />
+                <Grid item xs={5}>
+                  <img style={{ width: "50%" }} src={imgBase64} alt="demo" />
                 </Grid>
                 <FormControl className={clsx(classes.margin, classes.divInput)}>
                   <label
@@ -309,7 +316,7 @@ export default function AddFilm(props) {
                     value={values.moTa}
                     name="moTa"
                     onChange={handleChange}
-                    rowsMin={3}
+                    rowsMin={2}
                     placeholder="Nhập mô tả Phim.."
                   />
                   <p className={classes.error}>{error.moTa}</p>

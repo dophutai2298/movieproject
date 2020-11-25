@@ -18,7 +18,10 @@ const StyledTableCell = withStyles((theme) => ({
     fontWeight: "bold",
   },
   body: {
-    fontSize: 14,
+    fontSize: 13,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 12,
+    },
   },
 }))(TableCell);
 

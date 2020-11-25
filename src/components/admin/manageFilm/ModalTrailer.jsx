@@ -15,8 +15,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: "1px solid #000",
     width: "50%",
-    boxShadow: theme.shadows[5],
-    // padding: theme.spacing(1),
+    boxShadow: theme.shadows[4],
+    [theme.breakpoints.down("sm")]: {
+      width: "80%",
+    },
   },
   trailer: {
     width: "100%",
@@ -25,7 +27,13 @@ const useStyles = makeStyles((theme) => ({
       height: "300px",
     },
   },
-  btnXem: { border: "1px solid #3e515d", color: "#3e515d" },
+  btnXem: {
+    border: "1px solid #3e515d",
+    color: "#3e515d",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2px",
+    },
+  },
 }));
 
 export default function ModalTrailer(props) {

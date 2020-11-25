@@ -7,15 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import Pagination from "@material-ui/lab/Pagination";
 import { fetchFilmFollowPage } from "../../../redux/actions/film.action";
 import { searchFilm } from "../../../redux/actions/admin.action";
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   input: {
     width: "70%",
     height: "50px",
+    [theme.breakpoints.down("sm")]: {
+      width: "60%",
+    },
   },
   btnSearch: {
     height: "60px",
   },
-});
+}));
 
 export default function ManagerFilm() {
   const classes = useStyles();
@@ -71,7 +74,7 @@ export default function ManagerFilm() {
             id="key"
             onChange={handleChangeSearch}
             value={key}
-            label="Tìm kiếm theo tên phim..."
+            label="Tìm kiếm theo Tên.."
           />
           <Button onClick={handleSearch} className={classes.btnSearch}>
             <i

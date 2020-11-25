@@ -19,8 +19,12 @@ const StyledTableCell = withStyles((theme) => ({
     color: theme.palette.common.white,
     fontWeight: "bold",
   },
+
   body: {
     fontSize: 13,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 12,
+    },
   },
 }))(TableCell);
 
@@ -32,7 +36,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   tablecontainer: {
     width: "100%",
   },
@@ -44,8 +48,21 @@ const useStyles = makeStyles({
     border: "1px solid #00ac4d",
     color: "#00ac4d",
   },
-  btnDelete: { border: "1px solid #f7b500", color: "#f7b500" },
-});
+  tableCell: {
+    [theme.breakpoints.down("sm")]: {
+      padding: "2px",
+      width: "19%",
+      border: "1px solid #fff",
+    },
+  },
+  btnDelete: {
+    border: "1px solid #f7b500",
+    color: "#f7b500",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2px",
+    },
+  },
+}));
 
 function TableUser(props) {
   const classes = useStyles();
@@ -58,16 +75,24 @@ function TableUser(props) {
     return search?.map((user, index) => {
       return (
         <StyledTableRow key={index}>
-          <StyledTableCell align="left">{user.taiKhoan}</StyledTableCell>
-          <StyledTableCell align="left">{user.hoTen}</StyledTableCell>
-          <StyledTableCell align="left">{user.email}</StyledTableCell>
-          <StyledTableCell align="left">{user.soDt}</StyledTableCell>
-          <StyledTableCell align="left">
+          <StyledTableCell className={classes.tableCell} align="left">
+            {user.taiKhoan}
+          </StyledTableCell>
+          <StyledTableCell className={classes.tableCell} align="left">
+            {user.hoTen}
+          </StyledTableCell>
+          <StyledTableCell className={classes.tableCell} align="left">
+            {user.email}
+          </StyledTableCell>
+          <StyledTableCell className={classes.tableCell} align="left">
+            {user.soDt}
+          </StyledTableCell>
+          <StyledTableCell className={classes.tableCell} align="left">
             <span style={{ border: "3px dotted #fb4226", padding: "5px" }}>
               {user.maLoaiNguoiDung}
             </span>
           </StyledTableCell>
-          <StyledTableCell align="left">
+          <StyledTableCell className={classes.tableCell} align="left">
             <ModalHistoryUser user={user} />
             <ModalUpdate page={page} user={user} />
             <Button
@@ -88,16 +113,24 @@ function TableUser(props) {
     return listUser.items?.map((user, index) => {
       return (
         <StyledTableRow key={index}>
-          <StyledTableCell align="left">{user.taiKhoan}</StyledTableCell>
-          <StyledTableCell align="left">{user.hoTen}</StyledTableCell>
-          <StyledTableCell align="left">{user.email}</StyledTableCell>
-          <StyledTableCell align="left">{user.soDt}</StyledTableCell>
-          <StyledTableCell align="left">
+          <StyledTableCell className={classes.tableCell} align="left">
+            {user.taiKhoan}
+          </StyledTableCell>
+          <StyledTableCell className={classes.tableCell} align="left">
+            {user.hoTen}
+          </StyledTableCell>
+          <StyledTableCell className={classes.tableCell} align="left">
+            {user.email}
+          </StyledTableCell>
+          <StyledTableCell className={classes.tableCell} align="left">
+            {user.soDt}
+          </StyledTableCell>
+          <StyledTableCell className={classes.tableCell} align="left">
             <span style={{ border: "3px dotted #fb4226", padding: "5px" }}>
               {user.maLoaiNguoiDung}
             </span>
           </StyledTableCell>
-          <StyledTableCell align="left">
+          <StyledTableCell className={classes.tableCell} align="left">
             <ModalHistoryUser user={user} />
             <ModalUpdate user={user} page={page} />
 
@@ -124,12 +157,24 @@ function TableUser(props) {
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="left">Tài khoản</StyledTableCell>
-              <StyledTableCell align="left">Họ tên</StyledTableCell>
-              <StyledTableCell align="left">Email</StyledTableCell>
-              <StyledTableCell align="left">Số điện thoại</StyledTableCell>
-              <StyledTableCell align="left">Loại</StyledTableCell>
-              <StyledTableCell align="left">Chức năng</StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                Tài khoản
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                Họ tên
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                Email
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                Số điện thoại
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                Loại
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                Chức năng
+              </StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>{renderUserSearch()}</TableBody>
@@ -143,12 +188,24 @@ function TableUser(props) {
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="left">Tài khoản</StyledTableCell>
-              <StyledTableCell align="left">Họ tên</StyledTableCell>
-              <StyledTableCell align="left">Email</StyledTableCell>
-              <StyledTableCell align="left">Số điện thoại</StyledTableCell>
-              <StyledTableCell align="left">Loại</StyledTableCell>
-              <StyledTableCell align="left">Chức năng</StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                Tài khoản
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                Họ tên
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                Email
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                Số điện thoại
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                Loại
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                Chức năng
+              </StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>{renderUser()}</TableBody>

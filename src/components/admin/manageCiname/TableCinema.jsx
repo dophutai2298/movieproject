@@ -22,7 +22,10 @@ const StyledTableCell = withStyles((theme) => ({
     fontWeight: "bold",
   },
   body: {
-    fontSize: 14,
+    fontSize: 13,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 12,
+    },
   },
 }))(TableCell);
 
@@ -34,7 +37,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   tablecontainer: {
     width: "100%",
   },
@@ -60,7 +63,26 @@ const useStyles = makeStyles({
     paddingBottom: "1%",
     borderBottom: "1px solid #f7b500",
   },
-});
+  tableCell: {
+    [theme.breakpoints.down("sm")]: {
+      width: "17%",
+      padding: "4px",
+    },
+  },
+  tableCellLogo: {
+    width: "35%",
+    [theme.breakpoints.down("sm")]: {
+      width: "30%",
+      padding: theme.spacing(0),
+    },
+  },
+  logo: {
+    width: "15%",
+    [theme.breakpoints.down("sm")]: {
+      width: "70%",
+    },
+  },
+}));
 
 export default function TableCinema() {
   const classes = useStyles();
@@ -83,18 +105,24 @@ export default function TableCinema() {
       return (
         <>
           <StyledTableRow key={index}>
-            <StyledTableCell align="center" style={{ width: "35%" }}>
-              <img style={{ width: "15%" }} src={cinema.logo} alt="logo" />
+            <StyledTableCell
+              className={classes.tableCellLogo}
+              align="center"
+              style={{ width: "35%" }}
+            >
+              <img className={classes.logo} src={cinema.logo} alt="logo" />
             </StyledTableCell>
-            <StyledTableCell align="center">
+            <StyledTableCell className={classes.tableCell} align="center">
               {cinema.maHeThongRap}
             </StyledTableCell>
-            <StyledTableCell align="center">
+            <StyledTableCell className={classes.tableCell} align="center">
               {cinema.tenHeThongRap}
             </StyledTableCell>
-            <StyledTableCell align="center">{cinema.biDanh}</StyledTableCell>
+            <StyledTableCell className={classes.tableCell} align="center">
+              {cinema.biDanh}
+            </StyledTableCell>
 
-            <StyledTableCell align="center">
+            <StyledTableCell className={classes.tableCell} align="center">
               <Button
                 className={classes.btnDelete}
                 onClick={() => {
@@ -111,7 +139,11 @@ export default function TableCinema() {
             </StyledTableCell>
           </StyledTableRow>
           <StyledTableRow className={classes.tableChild}>
-            <StyledTableCell style={{ padding: "0" }} colSpan="5">
+            <StyledTableCell
+              className={classes.tableCell}
+              style={{ padding: "0" }}
+              colSpan="5"
+            >
               {open.isState && open.id === `${cinema?.maHeThongRap}` && (
                 <>
                   <TableDetailCinema />
@@ -129,11 +161,21 @@ export default function TableCinema() {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">Logo</StyledTableCell>
-            <StyledTableCell align="center">Mã cụm rạp</StyledTableCell>
-            <StyledTableCell align="center">Tên cụm rạp</StyledTableCell>
-            <StyledTableCell align="center">Bí danh</StyledTableCell>
-            <StyledTableCell align="center">Chi tiết cụm Rạp</StyledTableCell>
+            <StyledTableCell className={classes.tableCell} align="center">
+              Logo
+            </StyledTableCell>
+            <StyledTableCell className={classes.tableCell} align="center">
+              Mã cụm rạp
+            </StyledTableCell>
+            <StyledTableCell className={classes.tableCell} align="center">
+              Tên cụm rạp
+            </StyledTableCell>
+            <StyledTableCell className={classes.tableCell} align="center">
+              Bí danh
+            </StyledTableCell>
+            <StyledTableCell className={classes.tableCell} align="center">
+              Chi tiết cụm Rạp
+            </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>{renderListCinema()} </TableBody>

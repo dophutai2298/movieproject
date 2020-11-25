@@ -27,6 +27,10 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 3, 3),
     width: "50%",
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
+      padding: theme.spacing(2),
+    },
   },
   tableCell: {
     padding: "5px",
@@ -34,7 +38,13 @@ const useStyles = makeStyles((theme) => ({
   cellTitle: {
     fontWeight: "700",
   },
-  btnList: { border: "1px solid #3e515d", color: "#3e515d" },
+  btnList: {
+    border: "1px solid #3e515d",
+    color: "#3e515d",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2px",
+    },
+  },
   table: {
     height: "80%",
     overflowY: "scroll",

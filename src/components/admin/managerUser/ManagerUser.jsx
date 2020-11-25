@@ -8,15 +8,18 @@ import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserPage, searchUser } from "../../../redux/actions/admin.action";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   input: {
     width: "70%",
     height: "50px",
+    [theme.breakpoints.down("sm")]: {
+      width: "60%",
+    },
   },
   btnSearch: {
     height: "60px",
   },
-});
+}));
 
 export default function ManagerUser() {
   const classes = useStyles();
