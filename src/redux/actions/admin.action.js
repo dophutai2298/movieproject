@@ -141,7 +141,7 @@ export const resetNotify = () => {
 /*-----USER-----*/
 
 /*-----FILM-----*/
-export const deleteFilm = (id, page) => {
+export const deleteFilm = (id) => {
   return (dispatch) => {
     Swal.fire({
       title: "Bạn muốn xóa ?",
@@ -156,7 +156,7 @@ export const deleteFilm = (id, page) => {
         if (result.isConfirmed) {
           adminService.deleteMovie(id).then((res) => {
             dispatch(createAction(DELETE_MOVIE, res.data));
-            dispatch(fetchFilmFollowPage(page));
+            // dispatch(fetchFilmFollowPage(page));
           });
           Swal.fire("Phim đã bị xóa!", "success");
         }

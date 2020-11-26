@@ -17,6 +17,7 @@ import UserScreen from "./screens/admin/user";
 import ManagerFilmScreen from "./screens/admin/film";
 import MangerCinemaScreen from "./screens/admin/cinema";
 import { Router } from "@material-ui/icons";
+import ShowtimeScreen from "./screens/admin/showtime";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function App() {
   }
   useEffect(() => {
     getCredentialssFromLocal();
-    console.log(getCredentialssFromLocal());
+    // console.log(getCredentialssFromLocal());
   }, []);
   return (
     <BrowserRouter>
@@ -50,6 +51,11 @@ function App() {
           path="/admin/manager-cinema"
           exact
           component={MangerCinemaScreen}
+        />
+        <Router
+          path="/admin/showtime/:maLichChieu"
+          exact
+          component={ShowtimeScreen}
         />
       </Switch>
     </BrowserRouter>

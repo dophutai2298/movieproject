@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import { updateFilm } from "../../../redux/actions/admin.action";
 import validationFilm from "./validationFilm";
+import { fetchFilmFollowPage } from "../../../redux/actions/film.action";
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: "flex",
@@ -96,7 +97,9 @@ export default function UpdateFilm(props) {
     resetForm();
   };
   const [uploadImg, setUploadImg] = useState({});
-
+  useEffect(() => {
+    dispatch(fetchFilmFollowPage(page));
+  }, [page]);
   const [imgBase64, setImgBase64] = useState(movie.hinhAnh);
   const [values, setValues] = useState({
     maPhim: movie.maPhim,
@@ -183,7 +186,7 @@ export default function UpdateFilm(props) {
       const frm = new FormData();
       for (let key in values) {
         frm.append(key, values[key]);
-        //console.log(key + ":", values[key]);
+        console.log("update:", key + ":", values[key]);
       }
       // console.log("frm: ", frm);
       dispatch(updateFilm(frm, page));

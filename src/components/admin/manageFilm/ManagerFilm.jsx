@@ -40,11 +40,11 @@ export default function ManagerFilm() {
     e.preventDefault();
     dispatch(searchFilm(key));
   };
-  // useEffect(() => {
-  //   if (notify === "Xóa thành công!") {
-  //     dispatch(fetchFilmFollowPage(page));
-  //   }
-  // });
+  useEffect(() => {
+    if (notify === "Xóa thành công!") {
+      dispatch(fetchFilmFollowPage(page));
+    }
+  }, [notify]);
   useEffect(() => {
     dispatch(fetchFilmFollowPage(page));
   }, [page]);

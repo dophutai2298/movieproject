@@ -10,6 +10,7 @@ import TableRow from "@material-ui/core/TableRow";
 
 import { useSelector } from "react-redux";
 import ModalListCinemaDetail from "./ModalListCinemaDetail";
+import ModalListFilmShowtime from "./ModalListFilmShowtime";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -58,6 +59,7 @@ export default function TableDetailCinema() {
             {cinema.diaChi}
           </StyledTableCell>
           <StyledTableCell style={{ width: "30%" }} align="center">
+            <ModalListFilmShowtime maRap={cinema.maCumRap} />
             <ModalListCinemaDetail cinema={cinema} />
           </StyledTableCell>
         </StyledTableRow>

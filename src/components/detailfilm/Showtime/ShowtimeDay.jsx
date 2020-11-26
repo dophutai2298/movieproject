@@ -37,7 +37,7 @@ export default function ShowtimeDay(props) {
   const dispatch = useDispatch();
   const dateFormat = require("dateformat");
   let date = new Date("2019-01-01");
-  console.log("d:", date);
+  // console.log("d:", date);
   let changeDay = [];
   for (let i = 0; i < 10; i++) {
     let increateDay =

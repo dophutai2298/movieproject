@@ -24,7 +24,7 @@ function Branch(props) {
         onClick={() => {
           dispatch(fetchCinemaInfoInSystem(`${cinema.maHeThongRap}`));
           dispatch(fetchFilmFollowCinema(`${cinema.maHeThongRap}`));
-          console.log(`${cinema.maHeThongRap}`);
+          // console.log(`${cinema.maHeThongRap}`);
           //handleChange(cinemaInfo.maHeThongRap);
           // console.log(handleChange(cinemaInfo.maHeThongRap));
         }}

@@ -99,7 +99,12 @@
                 border: none;
                 height: 40px;
                 font-weight: fw("fwMedium");
-                @include button(bg("white1"), text("secondary"), fs("h4"), 3px);
+                @include button(
+                  bg("primary"),
+                  text("secondary"),
+                  fs("h4"),
+                  3px
+                );
                 p {
                   margin: 0;
                 }
@@ -135,19 +140,23 @@
               display: flex;
               &--imges {
                 img {
-                  width: 80px;
+                  width: 50px;
                 }
               }
               &--title {
-                margin-left: 15px;
+                margin-left: spacing(1.5);
                 span:first-child {
-                  @include text(text("green"), fs("h4"), fw("fwMedium"));
+                  @include text(text("green"), fs("h5"), fw("fwMedium"));
                 }
                 span:nth-last-of-type(1) {
-                  @include text(text("primary"), fs("h4"), fw("fwMedium"));
+                  @include text(
+                    text("primary"),
+                    fs("subtext1"),
+                    fw("fwMedium")
+                  );
                 }
                 p {
-                  @include text(text("gray1"), fs("h5"), fw("fwMedium"));
+                  @include text(text("gray1"), fs("subtext1"), fw("fwMedium"));
                   a {
                     text-decoration: none;
                     color: text("secondary");
@@ -159,7 +168,7 @@
               padding-bottom: 20px;
               .btn-outline-light {
                 border: 1px solid bg("gray3");
-                padding: spacing(1);
+                padding: spacing(0.5);
                 margin: spacing(0.2);
                 border-radius: 5px;
                 -webkit-border-radius: 5px;
@@ -179,7 +188,7 @@
               }
               .time1 {
                 span:first-child {
-                  @include text(text("green"), fs("h4"), fw("fwMedium"));
+                  @include text(text("green"), fs("h5"), fw("fwMedium"));
                   &:hover {
                     color: text("secondary");
                   }
@@ -287,6 +296,9 @@
   .introduce__title1__content {
     .content1 {
       text-align: center;
+    }
+    h4 {
+      font-size: fs("h5");
     }
   }
   .introduce__title {

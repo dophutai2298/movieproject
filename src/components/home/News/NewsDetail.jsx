@@ -9,7 +9,7 @@ function NewsDetail(props) {
   //     dispatch(fetchNewDetail(id));
   //   }, []);
   const { newDetail } = props;
-  console.log(newDetail);
+  // console.log(newDetail);
   return (
     <section className="news__sections">
       <div className="news__sections__container">

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -165,7 +165,7 @@ function TableFilm(props) {
             <Button
               className={classes.btnDelete}
               onClick={() => {
-                dispatch(deleteFilm(parseInt(movie.maPhim), page));
+                dispatch(deleteFilm(parseInt(movie.maPhim)));
                 dispatch(fetchFilmFollowPage(page));
               }}
             >
@@ -241,7 +241,7 @@ function TableFilm(props) {
             <Button
               className={classes.btnDelete}
               onClick={() => {
-                dispatch(deleteFilm(parseInt(movie.maPhim), page));
+                dispatch(deleteFilm(parseInt(movie.maPhim)));
                 dispatch(fetchFilmFollowPage(page));
               }}
             >
@@ -343,4 +343,4 @@ function TableFilm(props) {
     </div>
   );
 }
-export default memo(TableFilm);
+export default TableFilm;

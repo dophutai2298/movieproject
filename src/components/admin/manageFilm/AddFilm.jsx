@@ -184,7 +184,7 @@ export default function AddFilm(props) {
       const frm = new FormData();
       for (let key in values) {
         frm.append(key, values[key]);
-        //console.log(key + ":", values[key]);
+        console.log(key + ":", values[key]);
       }
       // console.log("frm: ", frm);
       dispatch(addFilm(frm, page));

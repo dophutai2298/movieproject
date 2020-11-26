@@ -23,7 +23,7 @@ const FilmReserve = (props) => {
             <span className="film--age">C18</span>
             <span className="film--name">{item.tenPhim}</span>
             <p className="film--time">{movie.tenCumRap}</p>
-            <p className="film--time">110 phút </p>
+            {/* <p className="film--time">110 phút </p> */}
             <p className="film-type">2D Digital</p>
           </div>
           <div className="film--reserve">

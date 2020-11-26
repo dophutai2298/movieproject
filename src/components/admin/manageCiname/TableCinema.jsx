@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   fetchCinemaInfoInSystem,
   fetchCinemaSystem,
+  fetchFilmFollowCinema,
 } from "../../../redux/actions/cinema.action";
 
 const StyledTableCell = withStyles((theme) => ({
@@ -128,6 +129,7 @@ export default function TableCinema() {
                 onClick={() => {
                   handleToggle(`${cinema.maHeThongRap}`);
                   dispatch(fetchCinemaInfoInSystem(cinema.maHeThongRap));
+                  dispatch(fetchFilmFollowCinema(cinema.maHeThongRap));
                 }}
               >
                 {open.isState && open.id === `${cinema?.maHeThongRap}` ? (
