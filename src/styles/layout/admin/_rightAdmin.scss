@@ -168,3 +168,138 @@
     display: inline-block;
   }
 }
+
+.managershowtime {
+  position: relative;
+  .managershowtime__tab {
+    display: flex;
+    @include MediaQuery($sm) {
+      display: block;
+    }
+    &__chair {
+      width: 60%;
+      @include MediaQuery($sm) {
+        width: 100%;
+      }
+      .list__chair {
+        width: 96%;
+        margin: 2%;
+        .namescreen {
+          img {
+            width: 95%;
+          }
+        }
+        .list__chair--row {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          .chair--item {
+            width: 4.5%;
+            text-align: center;
+            margin: 1% 0.85%;
+            padding: 1px;
+            @include text(text("primary"), fs("subtext1"), fw("fwRegular"));
+
+            @include MediaQuery($lg) {
+              font-size: 10px;
+              width: 4%;
+              margin: 1%;
+            }
+
+            @include MediaQuery($md) {
+              font-size: 8px;
+            }
+          }
+        }
+      }
+      .list__chair-typeseat {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: spacing(3);
+        span {
+          font-size: fs("h4");
+          padding: spacing(1);
+          @include MediaQuery($xs) {
+            padding: spacing(0.4);
+            font-size: 12px;
+          }
+          &::before {
+            content: "\f0c8";
+            font: 14px/1 FontAwesome;
+            font-size: fs("h2");
+          }
+        }
+      }
+
+      .colornormal {
+        color: text("green");
+        span {
+          &::before {
+            color: text("green");
+          }
+        }
+      }
+      .colorvip {
+        color: text("yellow");
+        span {
+          &::before {
+            color: text("yellow");
+          }
+        }
+      }
+      .colordeluxe {
+        color: text("blue");
+        span {
+          &::before {
+            color: text("blue");
+          }
+        }
+      }
+      .colorchosen {
+        color: text("secondary");
+        span {
+          &::before {
+            color: text("secondary");
+          }
+        }
+      }
+      .colornotchosen {
+        color: text("gray");
+        span {
+          &::before {
+            color: text("gray");
+          }
+        }
+      }
+    }
+    &__table {
+      @include MediaQuery($sm) {
+        width: 100%;
+      }
+      h3 {
+        text-align: center;
+        @include text(text("primary"), fs("h2"), fw("fwRegular"));
+        @include MediaQuery($sm) {
+          font-size: fs("h3");
+          margin-top: spacing(1.2);
+        }
+      }
+      p {
+        @include text(text("primary"), fs("h4"), fw("fwRegular"));
+        @include MediaQuery($sm) {
+          font-size: fs("h5");
+        }
+      }
+    }
+  }
+}
+
+.loadingAdmin {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  &__icon {
+    font-size: fs("h2");
+  }
+}

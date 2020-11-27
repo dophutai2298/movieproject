@@ -307,29 +307,38 @@
         .media-comment {
           background: bg("white1");
           border: 1px solid bg("gray3");
-          padding: spacing(0, 4);
+          padding: spacing(0.5, 2);
           display: flex;
           margin-bottom: 10px;
           .media-avatar {
             img {
-              width: 70px;
-              padding-right: 10px;
-              margin-top: 10px;
+              width: 50px;
+              border-radius: 50%;
+              -webkit-border-radius: 50%;
+              -moz-border-radius: 50%;
+              -ms-border-radius: 50%;
+              -o-border-radius: 50%;
             }
           }
 
           .media-body {
-            padding-top: 10px;
-            span {
-              @include text(text("primary"), fs("h3"), fw("fwMedium"));
+            .media-date {
+              @include text(text("primary"), fs("h5"), fw("fwLight"));
+              margin: 0;
+            }
+            .media-rating {
+              color: #ffbd20 !important;
+              font-size: 12px;
+            }
+            margin-left: spacing(1.5);
+            .media-body-name {
+              @include text(text("primary"), fs("h4"), fw("fwMedium"));
               margin: 0;
             }
             p {
               background: textColor("white");
               @include text(text("gray1"), fs("h5"), fw("fwRegular"));
               margin: 0;
-              padding-left: 60px;
-              margin-top: 5px;
             }
           }
         }

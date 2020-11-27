@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import "../../styles/page/booking.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Admin from "../../assets/admin.jpg";
+
 import {
   changeUserInFo,
   fetchInFoBooking,
@@ -41,16 +41,25 @@ export default function HistorySet(props) {
   const classes = useStyles();
   const nguoiDatVe = useSelector((state) => state.userReducer.userInfoBooking);
   const dispatch = useDispatch();
+  let dateFormat = require("dateformat");
   const renderUserBooking = () => {
     return nguoiDatVe.map((tenPhim, index) => {
+      if (tenPhim) {
+        return (
+          <TableRow key={index}>
+            <TableCell align="center">{tenPhim.tenPhim}</TableCell>
+            <TableCell align="center">
+              {dateFormat(tenPhim.ngayDat, "HH:mm dd/mm/yyyy")}
+            </TableCell>
+            <TableCell align="center">{tenPhim.thoiLuongPhim}</TableCell>
+            <TableCell align="center">{tenPhim.giaVe}</TableCell>
+          </TableRow>
+        );
+      }
       return (
         <TableRow key={index}>
-          <TableCell align="center">{tenPhim.tenPhim}</TableCell>
-          <TableCell align="center">{tenPhim.ngayDat}</TableCell>
-          <TableCell align="center">{tenPhim.thoiLuongPhim}</TableCell>
-          <TableCell align="center">{tenPhim.giaVe}</TableCell>
-          <TableCell style={{ color: "red" }} align="center">
-            <i class="fa fa-trash"></i>
+          <TableCell colSpan="4" align="center">
+            Tài khoản chưa đặt vé
           </TableCell>
         </TableRow>
       );
@@ -81,7 +90,7 @@ export default function HistorySet(props) {
         <div style={{ width: "20%" }}>
           <div className="admin">
             <div className="admin__avata">
-              <img src={Admin} alt="admin" />
+              <img src="/images/avatardefault.png" alt="avatar user" />
             </div>
             <div className="admin__sidebar">
               <p>{user.hoTen}</p>
@@ -99,7 +108,7 @@ export default function HistorySet(props) {
 
         <div style={{ width: "80%" }}>
           <div className="info">
-            <h3>Thông Tin Tài Khoản</h3>
+            {/* <h3>Thông Tin Tài Khoản</h3>
             <TableContainer component={Paper}>
               <Table className={classes.table} aria-label="simple table">
                 <TableHead>
@@ -128,8 +137,8 @@ export default function HistorySet(props) {
                   </TableRow>
                 </TableBody>
               </Table>
-            </TableContainer>
-            <div id="myModal" className="modal fade" role="dialog">
+            </TableContainer> */}
+            {/* <div id="myModal" className="modal fade" role="dialog">
               <div className="modal-dialog" style={{ maxWidth: "550px" }}>
                 <div className="modal-content">
                   <div className="modal-header">
@@ -207,7 +216,7 @@ export default function HistorySet(props) {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <h3>Thông Tin Đặt Vé</h3>
             <TableContainer component={Paper}>
@@ -215,10 +224,9 @@ export default function HistorySet(props) {
                 <TableHead>
                   <TableRow>
                     <TableCell align="center">Tên Phim</TableCell>
-                    <TableCell align="center">Ngày Giờ</TableCell>
+                    <TableCell align="center">Ngày Đặt</TableCell>
                     <TableCell align="center">Thời Lượng</TableCell>
                     <TableCell align="center">Giá Vé</TableCell>
-                    <TableCell align="center">Hủy</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>{renderUserBooking()}</TableBody>

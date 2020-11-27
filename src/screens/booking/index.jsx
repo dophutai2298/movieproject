@@ -243,8 +243,8 @@ export default function Booking() {
                           <img src="../images/screen.png" alt />
                         </div>
                       </div>
-                      <div style={{ display: "flex" }}>
-                        <div className="day">
+                      <div>
+                        {/* <div className="day">
                           <Button>A</Button>
                           <Button>B</Button>
                           <Button>C</Button>
@@ -255,7 +255,7 @@ export default function Booking() {
                           <Button>H</Button>
                           <Button>I</Button>
                           <Button>K</Button>
-                        </div>
+                        </div> */}
                         <div className="book__resever--listseat">
                           <div className="book__listseat--rowseat ">
                             <div className="book__listseat--chair">

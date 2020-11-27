@@ -1,8 +1,14 @@
-const { SIGN_IN, USER__INFO_BOOKING, CHANGE__INFO } = require("../types/types");
+const {
+  SIGN_IN,
+  USER__INFO_BOOKING,
+  CHANGE__INFO,
+  FETCH_AVATAR,
+} = require("../types/types");
 
 let initialState = {
   credentials: null,
   userInfoBooking: [],
+  avatar: null,
 };
 
 const UserReducer = (state = initialState, action) => {
@@ -21,6 +27,13 @@ const UserReducer = (state = initialState, action) => {
       credentials = null;
 
       state.credentials = action.payload;
+      return { ...state };
+    }
+    case FETCH_AVATAR: {
+      if (action.payload) {
+        state.avatar = action.payload;
+      }
+
       return { ...state };
     }
     default:

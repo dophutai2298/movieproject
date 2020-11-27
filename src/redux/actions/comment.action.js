@@ -1,6 +1,7 @@
 import { createAction } from ".";
 import { commentService } from "../../services";
 import { FETCH_COMMENT, ADD_COMMENT, DELETE_COMMENT } from "../types/types";
+
 // lấy dữ liệu cơmment
 export const fetchComment = () => {
   return (dispatch) => {

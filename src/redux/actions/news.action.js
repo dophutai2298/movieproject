@@ -10,7 +10,7 @@ export const fetchNews = () => {
       .fetchNews()
       .then((res) => {
         dispatch(createAction(FETCH_NEWS, res.data));
-        console.log("news data:", res.data);
+
         dispatch(stopLoading());
       })
       .catch((err) => {

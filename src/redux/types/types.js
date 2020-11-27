@@ -13,6 +13,10 @@ export const SIGN_IN = "SIGN_IN";
 export const SIGN_UP = "SIGN_UP";
 export const USER__INFO_BOOKING = "USER__INFO_BOOKING";
 export const CHANGE__INFO = "CHANGE__INFO";
+// export const FETCH_AVATAR = "FETCH_AVATAR";
+// export const CREATE_AVATAR = "CREATE_AVATAR";
+// export const UPDATE_AVATAR = "UPDATE_AVATAR";
+// export const DELETE_AVATAR = "DELETE_AVATAR";
 
 //Cinema
 export const FETCH_CINEMA_SYSTEM = "FETCH_CINEMA_SYSTEM";

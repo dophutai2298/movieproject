@@ -5,6 +5,10 @@ import {
   SIGN_UP,
   USER__INFO_BOOKING,
   CHANGE__INFO,
+  FETCH_AVATAR,
+  CREATE_AVATAR,
+  DELETE_AVATAR,
+  UPDATE_AVATAR,
 } from "../types/types";
 import { startLoading, stopLoading } from "./common.action";
 import Swal from "sweetalert2";
@@ -79,8 +83,7 @@ export const fetchInFoBooking = (user) => {
   };
 };
 
-// thây đổi thông tin tài khoản
-
+// thay đổi thông tin tài khoản
 export const changeUserInFo = (user) => {
   return (dispatch) => {
     adminService
@@ -100,3 +103,76 @@ export const changeUserInFo = (user) => {
       });
   };
 };
+
+// //Fetch avatar cho user
+// export const fetchAvatar = (user) => {
+//   return (dispatch) => {
+//     userService
+//       .fetchAvatar(user)
+//       .then((res) => {
+//         dispatch(createAction(FETCH_AVATAR, res.data));
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   };
+// };
+
+// //Tạo avatar cho user
+// export const createAvatar = (data) => {
+//   return (dispatch) => {
+//     userService
+//       .createAvatar(data)
+//       .then((res) => {
+//         dispatch(createAction(CREATE_AVATAR, res.data));
+//         Swal.fire({
+//           icon: "success",
+//           title: "Đã thêm Ảnh đại diện",
+//         });
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         Swal.fire({
+//           icon: "error",
+//           title: "Không thành công",
+//         });
+//       });
+//   };
+// };
+
+// //Update avatar cho user
+// export const updateAvatar = (data) => {
+//   return (dispatch) => {
+//     userService
+//       .updateAvatar(data)
+//       .then((res) => {
+//         dispatch(createAction(UPDATE_AVATAR, res.data));
+//         Swal.fire({
+//           icon: "success",
+//           title: "Đã cập nhật Ảnh đại diện",
+//         });
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         Swal.fire({
+//           icon: "error",
+//           title: "Không thành công",
+//           text: err.response.data,
+//         });
+//       });
+//   };
+// };
+
+// //Xóa user và xóa ảnh đại diện
+// export const deleteAvatar = (user) => {
+//   return (dispatch) => {
+//     userService
+//       .deleteAvatar(user)
+//       .then((res) => {
+//         dispatch(createAction(DELETE_AVATAR, res.data));
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   };
+// };

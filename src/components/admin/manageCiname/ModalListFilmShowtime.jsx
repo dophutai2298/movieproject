@@ -113,11 +113,7 @@ export default function ModalListFilmShowtime(props) {
               {item.tenPhim}
             </TableCell>
             <TableCell className={classes.tableCell} align="center">
-              <img
-                style={{ width: "30%", height: "50px" }}
-                src={item.hinhAnh}
-                alt="film"
-              />
+              <img style={{ width: "25%" }} src={item.hinhAnh} alt="film" />
             </TableCell>
             <TableCell className={classes.tableCellDetail} align="center">
               <ModalTime showTime={item.lstLichChieuTheoPhim} />

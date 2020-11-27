@@ -26,4 +26,38 @@ export class UserService {
       },
     });
   }
+
+  // //Fetch avatar của user
+  // fetchAvatar() {
+  //   return Axios({
+  //     method: "GET",
+  //     url: "https://5fa93e9ac9b4e90016e6a3be.mockapi.io/api/v1/avatar",
+  //   });
+  // }
+
+  // //Tạo avatar cho user
+  // createAvatar(data) {
+  //   return Axios({
+  //     method: "POST",
+  //     url: `https://5fa93e9ac9b4e90016e6a3be.mockapi.io/api/v1/avatar`,
+  //     data,
+  //   });
+  // }
+
+  // //Sửa avatar
+  // updateAvatar(data) {
+  //   return Axios({
+  //     method: "POST",
+  //     url: `https://5fa93e9ac9b4e90016e6a3be.mockapi.io/api/v1/avatar`,
+  //     data,
+  //   });
+  // }
+
+  // //Xóa user và avatar
+  // deleteAvatar(user) {
+  //   return Axios({
+  //     method: "DELETE",
+  //     url: `https://5fa93e9ac9b4e90016e6a3be.mockapi.io/api/v1/avatar/${user}`,
+  //   });
+  // }
 }

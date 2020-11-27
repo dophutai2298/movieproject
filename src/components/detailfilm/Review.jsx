@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-
-import admin from "../../assets/admin.jpg";
+// import { useParams } from "react-router-dom";
+import Rating from "@material-ui/lab/Rating";
+import Box from "@material-ui/core/Box";
+import Swal from "sweetalert2";
 
 import {
   addComment,
@@ -15,12 +16,15 @@ export default function Review(props) {
   const listComment = useSelector((state) => state.commentReducer.comment);
   const dispatch = useDispatch();
   const taiKhoan = useSelector((state) => state.userReducer.credentials);
-
+  let dateFormat = require("dateformat");
+  const dateComment = new Date();
   const [state, setState] = useState({
     hoTen: "",
     binhLuan: "",
     maPhim: maPhim,
     taiKhoan: "",
+    rating: +"",
+    date: dateFormat("", "dd/mm/yyyy HH:mm"),
   });
 
   function handleChange(event) {
@@ -34,7 +38,19 @@ export default function Review(props) {
   function handleSubmit(event) {
     event.preventDefault();
     event.target.reset();
-    dispatch(addComment(state));
+    if (state.binhLuan === "" && state.rating == 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Lỗi...",
+        text: "Bạn chưa chọn đánh giá hoặc bình luận",
+      });
+    } else {
+      setState({
+        ...state,
+        date: dateFormat(dateComment, "dd/mm/yyyy HH:mm"),
+      });
+      dispatch(addComment(state));
+    }
   }
 
   // lấy user từ local
@@ -44,16 +60,24 @@ export default function Review(props) {
     // duyệt
     let index = listComment.findIndex((comment) => comment.id === id);
 
-    // nuế tìm thấy
+    // Nếu tìm thấy
     if (index !== -1) {
       // tìm đúng của mình
       if (listComment[index].taiKhoan === user1.taiKhoan) {
         dispatch(deleteComment(id, index));
       } else {
-        alert("không phải tin của bạn");
+        Swal.fire({
+          icon: "error",
+          title: "Lỗi...",
+          text: "Bạn không thể xóa bình luận của Tài khoản khác",
+        });
       }
     } else {
-      alert("không phải tin của bạn");
+      Swal.fire({
+        icon: "error",
+        title: "Lỗi...",
+        text: "Bạn không thể xóa bình luận của Tài khoản khác",
+      });
     }
   }
 
@@ -67,10 +91,10 @@ export default function Review(props) {
         return (
           <div className="media media-comment" key={index}>
             <div className="media-avatar">
-              <img src={admin} alt="admin" />
+              <img src="/images/avatardefault.png" alt="avatar user" />
             </div>
             <div className="media-body">
-              <span>{user.hoTen}</span>
+              <span className="media-body-name">{user.hoTen}</span>
               {user1 ? (
                 <button
                   style={{ float: "right", fontSize: "10px" }}
@@ -82,12 +106,21 @@ export default function Review(props) {
               ) : (
                 ""
               )}
-              <div className="media-rating">
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
+              <div className="media-date">
+                <span>{user.date}</span>
               </div>
+
+              <div className="media-rating">
+                <Box component="fieldset" borderColor="transparent">
+                  <Rating
+                    style={{ fontSize: "12px", margin: "0" }}
+                    name="rating"
+                    value={user.rating}
+                    readOnly
+                  />
+                </Box>
+              </div>
+
               <p>{user.binhLuan}</p>
             </div>
           </div>
@@ -101,15 +134,20 @@ export default function Review(props) {
       <div className="avaluate">
         <div className="media-danhGia">
           <form onSubmit={handleSubmit}>
+            <Box component="fieldset" borderColor="transparent">
+              <Rating name="rating" onChange={handleChange} />
+            </Box>
+
             <div className="input-group mb-3">
               <input
                 type="text"
                 name="binhLuan"
                 style={{ padding: "25px" }}
                 className="form-control"
-                placeholder="ý kiến đánh giá"
+                placeholder="Bạn nghĩ gì về Phim này ?"
                 onChange={handleChange}
               />
+
               <div className="input-group-append">
                 {taiKhoan !== null ? (
                   <button
@@ -118,14 +156,27 @@ export default function Review(props) {
                         ...state,
                         hoTen: taiKhoan.hoTen,
                         taiKhoan: taiKhoan.taiKhoan,
+                        rating: state.rating,
                       });
+                      console.log(state);
                     }}
                     className="input-group-text"
                   >
-                    bình luận
+                    Bình luận
                   </button>
                 ) : (
-                  <span className="input-group-text">bình luận</span>
+                  <span
+                    className="input-group-text"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      Swal.fire({
+                        icon: "error",
+                        title: "Bạn cần phải đăng nhập..",
+                      });
+                    }}
+                  >
+                    Bình luận
+                  </span>
                 )}
               </div>
             </div>

@@ -37,9 +37,13 @@ export default function Chair(props) {
                 });
               }
             }}
-            className={trangThaiGhe(ghe.daDat, ghe.dangChon, ghe.loaiGhe)}
           >
-            {ghe.tenGhe}
+            <span
+              className={trangThaiGhe(ghe.daDat, ghe.dangChon, ghe.loaiGhe)}
+              style={{ padding: "30%", borderRadius: "5%" }}
+            >
+              {ghe.tenGhe}
+            </span>
           </button>
         );
       }

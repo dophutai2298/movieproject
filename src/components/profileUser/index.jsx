@@ -1,4 +1,4 @@
-import admin from "../../assets/admin.jpg";
+// import admin from "../../assets/admin.jpg";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
@@ -10,7 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
-
+import Grid from "@material-ui/core/Grid";
 import "../../App.scss";
 
 import { changeUserInFo } from "../../redux/actions/user.action";
@@ -37,6 +37,9 @@ const useStyles = makeStyles({
   table: {
     minWidth: 700,
   },
+  TextField: {
+    width: "100%",
+  },
 });
 
 export default function ProfileUser() {
@@ -46,6 +49,7 @@ export default function ProfileUser() {
   const [updateProfile, setUpDateProfile] = useState({
     taiKhoan: profile.taiKhoan,
     matKhau: profile.matKhau,
+    xacNhanMK: profile.matKhau,
     email: profile.email,
     soDt: profile.soDT,
     maNhom: "GP01",
@@ -70,11 +74,12 @@ export default function ProfileUser() {
       <h3>Thông Tin Cá Nhân</h3>
       <div className="profile__content">
         <div className="profile__content__left">
-          <div>
-            <img src={admin} alt="adminprofile" />
+          <div className="avatar">
+            <img src="/images/avatardefault.png" alt="avatar user" />
           </div>
+
           <div>
-            <p>{profile.hoTen}</p>
+            <p className="profile__content--name">{profile.hoTen}</p>
           </div>
         </div>
 
@@ -156,31 +161,52 @@ export default function ProfileUser() {
                 </div>
                 <div className="modal-body">
                   <form>
-                    <TextField
-                      id="outlined-basic"
-                      onChange={handleChange}
-                      name="matKhau"
-                      value={updateProfile.matKhau}
-                      label="matKhau"
-                      variant="outlined"
-                    />
-
-                    <TextField
-                      id="outlined-basic"
-                      onChange={handleChange}
-                      name="soDt"
-                      label="soDT"
-                      value={updateProfile.soDt}
-                      variant="outlined"
-                    />
-                    <TextField
-                      id="outlined-basic"
-                      onChange={handleChange}
-                      name="hoTen"
-                      label="hoTen"
-                      value={updateProfile.hoTen}
-                      variant="outlined"
-                    />
+                    <Grid container spacing={3}>
+                      <Grid item xs={6}>
+                        <TextField
+                          className={classes.textField}
+                          id="outlined-basic"
+                          onChange={handleChange}
+                          name="matKhau"
+                          value={updateProfile.matKhau}
+                          label="Mật khẩu"
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <TextField
+                          className={classes.textField}
+                          id="outlined-basic"
+                          onChange={handleChange}
+                          name="matKhau"
+                          value={updateProfile.xacNhanMK}
+                          label="Xác nhận Mật khẩu"
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <TextField
+                          className={classes.textField}
+                          id="outlined-basic"
+                          onChange={handleChange}
+                          name="soDt"
+                          label="Số điện thoại"
+                          value={updateProfile.soDt}
+                          variant="outlined"
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <TextField
+                          className={classes.textField}
+                          id="outlined-basic"
+                          onChange={handleChange}
+                          name="hoTen"
+                          label="Họ tên"
+                          value={updateProfile.hoTen}
+                          variant="outlined"
+                        />
+                      </Grid>
+                    </Grid>
                   </form>
                 </div>
                 <div className="modal-footer">
