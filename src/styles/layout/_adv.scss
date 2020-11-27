@@ -5,7 +5,15 @@
   height: 600px;
   @include MediaQuery($sm) {
     padding: spacing(2);
-    height: 470px;
+    height: 550px;
+  }
+  @include MediaQuery($xs) {
+    padding: spacing(2);
+    height: 430px;
+  }
+  @include MediaQuery($xss) {
+    padding: spacing(2);
+    height: 450px;
   }
   .adv__section--mobile {
     margin-top: 3%;

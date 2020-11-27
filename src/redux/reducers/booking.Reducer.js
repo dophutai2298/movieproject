@@ -33,7 +33,6 @@ const bookingReducer = (state = initialState, action) => {
 
     case SELECT_CHAIR:
       const updateDsChonVe = [...state.danhSachChonVe];
-      const updataamountMoney = state.amountMoney;
       // tìm index vị trí của ghế trong arr danhSachGhe
       let mangUpdate = [...state.danhSachGhe];
       let index = mangUpdate.findIndex(
@@ -66,6 +65,7 @@ const bookingReducer = (state = initialState, action) => {
         state.danhSachChonVe = updateDsChonVe;
       }
 
+      // updateDsChonVe.sort()
       state.danhSachChonVe = updateDsChonVe;
       state.danhSachGhe = mangUpdate;
       return { ...state };
@@ -127,12 +127,12 @@ const bookingReducer = (state = initialState, action) => {
 
     case AMOUNT_MONEY: {
       // if (action.payload) {
-        state.amountMoney = action.payload;
+      state.amountMoney = action.payload;
 
-        Swal.fire({
-          icon: "success",
-          title: "Đã thêm vào Thanh Toán !",
-        });
+      Swal.fire({
+        icon: "success",
+        title: "Đã thêm vào Thanh Toán !",
+      });
       // } else {
       //   Swal.fire({
       //     icon: "error",

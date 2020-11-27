@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box";
 import Showtimes from "./Showtimes";
 import Information from "./Information";
 import Review from "./Review";
+import { useParams } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,13 +49,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     color: "#fb4226",
     backgroundColor: theme.palette.background.paper,
-    width: "80%",
-    marginLeft: "10%",
     background: "#0a2029",
   },
 }));
 
 export default function SimpleTabs(props) {
+  const { movieID } = useParams();
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const { movieDetail } = props;
@@ -97,8 +97,13 @@ export default function SimpleTabs(props) {
           <TabPanel value={value} index={1}>
             <Information movieDetail={movieDetail} />
           </TabPanel>
-          <TabPanel value={value} index={2}>
-            <Review movieDetail={movieDetail} />
+          <TabPanel
+            className="comment"
+            style={{ overflow: "scroll", height: "584px" }}
+            value={value}
+            index={2}
+          >
+            <Review maPhim={movieID} movieDetail={movieDetail} />
           </TabPanel>
         </div>
       </div>

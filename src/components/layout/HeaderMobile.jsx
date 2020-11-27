@@ -140,13 +140,12 @@ function HeaderMobile() {
               {user ? (
                 <>
                   <li>
-                    <NavLink exact to="/">
+                    <NavLink exact to="/profile">
                       <i class="fa fa-address-card"></i> Thông tin tài khoản
                     </NavLink>
                   </li>
                   {user.maLoaiNguoiDung === "QuanTri" ? (
                     <li>
-                      {" "}
                       <NavLink exact to="/admin">
                         <i class="fa fa-cogs"></i> Trang quản trị
                       </NavLink>

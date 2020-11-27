@@ -7,7 +7,7 @@ class Footer extends PureComponent {
         <div className="container">
           <div className="footer__contact">
             <div className=" footer__contact__client">
-              <p>Đối tác</p>
+              <p>Đối Tác</p>
               <div className="footer__client--list">
                 <div className="footer__client--item">
                   <img src="/images/cgv.png" alt />
@@ -41,13 +41,15 @@ class Footer extends PureComponent {
                   </div>
                   <div className="footer__contact__link">
                     <p>Số Điện Thoại (Hotline): 037 924 3337</p>
-                    <p>Email: dophutai.2298@gmail.com</p>
+                    <p style={{ color: "red" }}>
+                      Email: dophutai.2298@gmail.com
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
             <div className=" footer__contact__app">
-              <p>MOBILE APP</p>
+              <p>Mobile App</p>
               <div className="footer__social">
                 <a href="#">
                   <img src="/images/apple-logo.png" alt="img_contact" />
@@ -58,7 +60,7 @@ class Footer extends PureComponent {
               </div>
             </div>
             <div className=" footer__contact__social">
-              <p>SOCIAL</p>
+              <p>Social</p>
               <div className="footer__social">
                 <a href="#">
                   <img src="/images/facebook-logo.png" alt="img_contact" />

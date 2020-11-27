@@ -58,7 +58,7 @@ export default function Booking() {
   const [value, setValue] = React.useState("one");
   const { maLichChieu } = useParams();
   const classes = useStyles();
-  const [stringTime, settimeString] = useState("");
+  const [stringTime, settimeString] = useState();
   // const [state, setstate] = useState();
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -73,6 +73,7 @@ export default function Booking() {
     (state) => state.bookingReducer.danhSachChonVe
   );
   const amountMoney = useSelector((state) => state.bookingReducer.amountMoney);
+  const user = useSelector((state) => state.userReducer.credentials);
   let isLoading = useSelector((state) => state.commonReducer.isLoading);
 
   // gởi action lên
@@ -82,22 +83,28 @@ export default function Booking() {
     // danh sach ghe
     dispatch(fetchTicketRoom(maLichChieu));
     // count down
+
     formatDate(300);
+    // xóa khi rời trang khác
+    return () => {
+      clearInterval(interVal);
+    };
   }, []);
 
+  let interVal;
   // thời gian đặt vé
   function formatDate(date) {
     if (!isNaN(date)) {
       var timer = date,
         minutes,
         seconds;
-      const interVal = setInterval(function () {
+
+      // hàm đếm ngược interVal
+      interVal = setInterval(function () {
         minutes = parseInt(timer / 60);
         seconds = parseInt(timer % 60);
-
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
-
         settimeString(`${minutes}:${seconds}`);
         if (--timer < 0) {
           clearInterval(interVal);
@@ -107,11 +114,12 @@ export default function Booking() {
             icon: "warning",
             confirmButtonColor: "#3085d6",
             confirmButtonText: "Đặt Vé Lại",
+            showCancelButton: true,
           }).then((result) => {
             if (result.value) {
               window.location.reload(true);
             } else {
-              window.location.reload(true);
+              history.push("/");
             }
           });
         }
@@ -153,8 +161,8 @@ export default function Booking() {
         if (result.isConfirmed) {
           Swal.fire("Thành Công", "", "success");
           dispatch(postBookingRequest(maLichChieu, danhSachVe));
-          history.push("/");
-          history.push("/booking/" + maLichChieu);
+          /*  history.push("/");
+          history.push("/booking/" + maLichChieu); */
         } else if (result.isDenied) {
           Swal.fire("Bạn Đã hủy đặt vé", "", "info");
         }
@@ -190,11 +198,15 @@ export default function Booking() {
                         label="Chọn Ghế & Thanh Toán"
                         {...a11yProps("one")}
                       />
-                      <Tab
-                        value="two"
-                        label="Thông tin Đã Đặt"
-                        {...a11yProps("two")}
-                      />
+                      {user !== null ? (
+                        <Tab
+                          value="two"
+                          label="Thông tin Đã Đặt"
+                          {...a11yProps("two")}
+                        />
+                      ) : (
+                        <Tab label="Thông tin Đã Đặt" disabled />
+                      )}
                     </Tabs>
                   </AppBar>
                 </div>
@@ -270,7 +282,7 @@ export default function Booking() {
                 </div>
               </TabPanel>
               <TabPanel value={value} index="two">
-                <HistorySet />
+                <HistorySet user={user} />
               </TabPanel>
             </div>
           </div>
@@ -302,23 +314,6 @@ export default function Booking() {
                   <BookRight />
                 </div>
               </div>
-              {/* <div className="book__right--input input--email">
-                <form className={classes.root} noValidate autoComplete="off">
-                  <TextField
-                    id="outlined-basic"
-                    label="Email"
-                    variant="outlined"
-                    style={{ marginTop: "20px" }}
-                  />
-                  <TextField
-                    style={{ marginTop: "30px" }}
-                    id="outlined-basic"
-                    label="Phone"
-                    variant="outlined"
-                  />
-                </form>
-              </div> */}
-
               <div className="book__right--input input--discount">
                 <div className="input__discount--text">
                   <TextField

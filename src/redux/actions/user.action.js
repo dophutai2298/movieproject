@@ -1,6 +1,11 @@
 import { createAction } from ".";
-import { userService } from "../../services";
-import { SIGN_IN, SIGN_UP, USER__INFO_BOOKING } from "../types/types";
+import { adminService, userService } from "../../services";
+import {
+  SIGN_IN,
+  SIGN_UP,
+  USER__INFO_BOOKING,
+  CHANGE__INFO,
+} from "../types/types";
 import { startLoading, stopLoading } from "./common.action";
 import Swal from "sweetalert2";
 
@@ -70,6 +75,28 @@ export const fetchInFoBooking = (user) => {
       })
       .catch((err) => {
         console.log(err);
+      });
+  };
+};
+
+// thây đổi thông tin tài khoản
+
+export const changeUserInFo = (user) => {
+  return (dispatch) => {
+    adminService
+      .updateUser(user)
+      .then((res) => {
+        dispatch(createAction(CHANGE__INFO, res.data));
+        Swal.fire({
+          icon: "success",
+          title: "Cập nhật thành công",
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Không thành công ",
+        });
       });
   };
 };

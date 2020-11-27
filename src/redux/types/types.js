@@ -12,6 +12,7 @@ export const FETCH_FILM_SHOWTIME = "FETCH_FILM_SHOWTIME";
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_UP = "SIGN_UP";
 export const USER__INFO_BOOKING = "USER__INFO_BOOKING";
+export const CHANGE__INFO = "CHANGE__INFO";
 
 //Cinema
 export const FETCH_CINEMA_SYSTEM = "FETCH_CINEMA_SYSTEM";
@@ -47,3 +48,9 @@ export const SEARCH_FILM = "SEARCH_FILM";
 export const ADD_FILM = "ADD_FILM";
 export const UPDATE_FILM = "UPDATE_FILM";
 export const CREATE_SHOWTIME = "CREATE_SHOWTIME";
+
+// comment
+
+export const FETCH_COMMENT = "FETCH_COMMENT";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";

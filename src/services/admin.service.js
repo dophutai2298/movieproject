@@ -37,7 +37,7 @@ export class AdminService {
 
   //Cập nhật thông tin người dùng
   updateUser(data) {
-    //const users = JSON.parse(localStorage.getItem("creadentials"));
+    const users = JSON.parse(localStorage.getItem("creadentials"));
     return Axios({
       method: "PUT",
       url:

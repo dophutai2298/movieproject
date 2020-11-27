@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Link, useHistory } from "react-router-dom";
-import { connect, useSelector, useDispatch } from "react-redux";
-import { Button, Menu, MenuItem } from "@material-ui/core";
+import { connect, useSelector } from "react-redux";
+import { Button, Menu } from "@material-ui/core";
 import Swal from "sweetalert2";
 
 function Header() {
@@ -71,6 +71,7 @@ function Header() {
               onClose={handleClose}
             >
               <Link
+                to="/profile"
                 style={{
                   display: "block",
                   fontSize: "14px",
