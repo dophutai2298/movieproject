@@ -22,16 +22,18 @@ import TextField from "@material-ui/core/TextField";
 const useStyles = makeStyles((theme) => ({
   tablecontainer: {
     width: "100%",
+    maxHeight: "500px",
+    overflowY: "scroll",
   },
   table: {
     width: "100%",
   },
 
   tableCell: {
-    width: "25%",
+    width: "20%",
     textAlign: "center",
     [theme.breakpoints.down("sm")]: {
-      width: "20%",
+      width: "18%",
       padding: "2px",
       fontSize: "12px",
       textAlign: "left",
@@ -61,22 +63,28 @@ export default function HistorySet(props) {
   let dateFormat = require("dateformat");
   const renderUserBooking = () => {
     return nguoiDatVe.map((tenPhim, index) => {
-      if (tenPhim) {
-        return (
-          <TableRow key={index}>
-            <TableCell className={classes.tableCell}>
-              {tenPhim.tenPhim}
-            </TableCell>
-            <TableCell className={classes.tableCell}>
-              {dateFormat(tenPhim.ngayDat, "HH:mm dd/mm/yyyy")}
-            </TableCell>
-            <TableCell className={classes.tableCell}>
-              {tenPhim.thoiLuongPhim}
-            </TableCell>
-            <TableCell className={classes.tableCell}>{tenPhim.giaVe}</TableCell>
-          </TableRow>
-        );
-      }
+      return tenPhim.danhSachGhe.map((ghe, index) => {
+        if (tenPhim) {
+          return (
+            <TableRow key={index}>
+              <TableCell className={classes.tableCell}>
+                {tenPhim.tenPhim}
+              </TableCell>
+              <TableCell className={classes.tableCell}>
+                {dateFormat(tenPhim.ngayDat, "HH:mm dd/mm/yyyy")}
+              </TableCell>
+              <TableCell className={classes.tableCell}>{ghe.tenGhe}</TableCell>
+              <TableCell className={classes.tableCell}>
+                {ghe.tenHeThongRap}
+              </TableCell>
+              <TableCell className={classes.tableCell}>
+                {tenPhim.giaVe}
+              </TableCell>
+            </TableRow>
+          );
+        }
+      });
+
       return (
         <TableRow key={index}>
           <TableCell colSpan="4">Tài khoản chưa đặt vé</TableCell>
@@ -238,9 +246,8 @@ export default function HistorySet(props) {
                 <TableRow>
                   <TableCell className={classes.tableCell}>Tên Phim</TableCell>
                   <TableCell className={classes.tableCell}>Ngày Đặt</TableCell>
-                  <TableCell className={classes.tableCell}>
-                    Thời Lượng
-                  </TableCell>
+                  <TableCell className={classes.tableCell}>Số ghế</TableCell>
+                  <TableCell className={classes.tableCell}>Rạp</TableCell>
                   <TableCell className={classes.tableCell}>Giá Vé</TableCell>
                 </TableRow>
               </TableHead>

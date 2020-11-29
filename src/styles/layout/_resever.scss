@@ -587,6 +587,8 @@
         .info {
           width: 70%;
           padding: spacing(2, 1.5);
+          // max-height: 500px;
+          // overflow-y: scroll;
           h3 {
             font-size: fs("h2");
             text-align: center;
