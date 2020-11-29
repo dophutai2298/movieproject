@@ -193,25 +193,26 @@
           width: 100%;
           display: flex;
           flex-wrap: wrap;
-          .chair--item {
-            width: 4.5%;
+          align-items: center;
+          // -----Ghế------
+          span {
+            @include text(text("primary"), fs("h5"), fw("fwRegular"));
+            border-radius: 3px;
+            padding: 0;
+            width: 5%;
+            margin: 6px 0.625%;
             text-align: center;
-            margin: 1% 0.85%;
-            padding: 1px;
-            @include text(text("primary"), fs("subtext1"), fw("fwRegular"));
-
             @include MediaQuery($lg) {
-              font-size: 10px;
-              width: 4%;
-              margin: 1%;
+              font-size: fs("subtext1");
             }
-
             @include MediaQuery($md) {
-              font-size: 8px;
+              font-size: 9px;
             }
           }
+          // -----Ghế------
         }
       }
+
       .list__chair-typeseat {
         display: flex;
         align-items: center;

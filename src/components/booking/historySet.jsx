@@ -19,11 +19,28 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
+const useStyles = makeStyles((theme) => ({
+  tablecontainer: {
+    width: "100%",
   },
-});
+  table: {
+    width: "100%",
+  },
+
+  tableCell: {
+    width: "25%",
+    textAlign: "center",
+    [theme.breakpoints.down("sm")]: {
+      width: "20%",
+      padding: "2px",
+      fontSize: "12px",
+      textAlign: "left",
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "11px",
+    },
+  },
+}));
 
 export default function HistorySet(props) {
   let { user } = props;
@@ -47,20 +64,22 @@ export default function HistorySet(props) {
       if (tenPhim) {
         return (
           <TableRow key={index}>
-            <TableCell align="center">{tenPhim.tenPhim}</TableCell>
-            <TableCell align="center">
+            <TableCell className={classes.tableCell}>
+              {tenPhim.tenPhim}
+            </TableCell>
+            <TableCell className={classes.tableCell}>
               {dateFormat(tenPhim.ngayDat, "HH:mm dd/mm/yyyy")}
             </TableCell>
-            <TableCell align="center">{tenPhim.thoiLuongPhim}</TableCell>
-            <TableCell align="center">{tenPhim.giaVe}</TableCell>
+            <TableCell className={classes.tableCell}>
+              {tenPhim.thoiLuongPhim}
+            </TableCell>
+            <TableCell className={classes.tableCell}>{tenPhim.giaVe}</TableCell>
           </TableRow>
         );
       }
       return (
         <TableRow key={index}>
-          <TableCell colSpan="4" align="center">
-            Tài khoản chưa đặt vé
-          </TableCell>
+          <TableCell colSpan="4">Tài khoản chưa đặt vé</TableCell>
         </TableRow>
       );
     });
@@ -87,45 +106,39 @@ export default function HistorySet(props) {
   return (
     <div className="book__infoUser" id="thongTin">
       <div className="book__infoUser__logo">
-        <div style={{ width: "20%" }}>
-          <div className="admin">
-            <div className="admin__avata">
-              <img src="/images/avatardefault.png" alt="avatar user" />
-            </div>
-            <div className="admin__sidebar">
-              <p>{user.hoTen}</p>
-              <ul>
-                <li>
-                  <Link onClick={handleInfoBooking}>
-                    <i className="fa fa-universal-access" />
-                    Thông Tin Đặt Vé
-                  </Link>
-                </li>
-              </ul>
-            </div>
+        <div className="admin">
+          <div className="admin__avata">
+            <img src="/images/avatardefault.png" alt="avatar user" />
+          </div>
+          <div className="admin__sidebar">
+            <p>{user.hoTen}</p>
+
+            <Link onClick={handleInfoBooking}>
+              <i className="fa fa-universal-access" />
+              Xem chi tiết
+            </Link>
           </div>
         </div>
 
-        <div style={{ width: "80%" }}>
-          <div className="info">
-            {/* <h3>Thông Tin Tài Khoản</h3>
+        <div className="info">
+          {/* <h3>Thông Tin Tài Khoản</h3>
             <TableContainer component={Paper}>
               <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Tài Khoản</TableCell>
-                    <TableCell align="center">Email</TableCell>
-                    <TableCell align="center">Số Điện Thoại</TableCell>
-                    <TableCell align="center">Sửa</TableCell>
+                    <TableCell >Tài Khoản</TableCell>
+                    <TableCell >Email</TableCell>
+                    <TableCell >Số Điện Thoại</TableCell>
+                    <TableCell >Sửa</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell align="center">{user.taiKhoan}</TableCell>
-                    <TableCell align="center">{user.email}</TableCell>
+                    <TableCell >{user.taiKhoan}</TableCell>
+                    <TableCell >{user.email}</TableCell>
 
-                    <TableCell align="center">{user.soDT}</TableCell>
-                    <TableCell align="center" style={{ color: "blue" }}>
+                    <TableCell >{user.soDT}</TableCell>
+                    <TableCell  style={{ color: "blue" }}>
                       <i
                         type="button"
                         class="btn btn-info btn-lg"
@@ -138,7 +151,7 @@ export default function HistorySet(props) {
                 </TableBody>
               </Table>
             </TableContainer> */}
-            {/* <div id="myModal" className="modal fade" role="dialog">
+          {/* <div id="myModal" className="modal fade" role="dialog">
               <div className="modal-dialog" style={{ maxWidth: "550px" }}>
                 <div className="modal-content">
                   <div className="modal-header">
@@ -218,21 +231,22 @@ export default function HistorySet(props) {
               </div>
             </div> */}
 
-            <h3>Thông Tin Đặt Vé</h3>
-            <TableContainer component={Paper}>
-              <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="center">Tên Phim</TableCell>
-                    <TableCell align="center">Ngày Đặt</TableCell>
-                    <TableCell align="center">Thời Lượng</TableCell>
-                    <TableCell align="center">Giá Vé</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>{renderUserBooking()}</TableBody>
-              </Table>
-            </TableContainer>
-          </div>
+          <h3>Thông Tin Đặt Vé</h3>
+          <TableContainer className={classes.tablecontainer}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell className={classes.tableCell}>Tên Phim</TableCell>
+                  <TableCell className={classes.tableCell}>Ngày Đặt</TableCell>
+                  <TableCell className={classes.tableCell}>
+                    Thời Lượng
+                  </TableCell>
+                  <TableCell className={classes.tableCell}>Giá Vé</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{renderUserBooking()}</TableBody>
+            </Table>
+          </TableContainer>
         </div>
       </div>
     </div>

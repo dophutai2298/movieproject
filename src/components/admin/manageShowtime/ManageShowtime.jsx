@@ -51,13 +51,16 @@ export default function ManageShowtime() {
   const renderChair = () => {
     return listChair?.map((ghe, index) => {
       return (
-        <span className="chair--item" key={index}>
-          <span
-            style={{ padding: "20%", borderRadius: "5%", cursor: "pointer" }}
-            className={trangThaiGhe(ghe.daDat, ghe.loaiGhe)}
-          >
-            {ghe.tenGhe}
-          </span>
+        // <span className="chair--item" key={index}>
+        //   <span
+        //     style={{ padding: "20%", borderRadius: "5%", cursor: "pointer" }}
+        //     className={trangThaiGhe(ghe.daDat, ghe.loaiGhe)}
+        //   >
+        //     {ghe.tenGhe}
+        //   </span>
+        // </span>
+        <span className={trangThaiGhe(ghe.daDat, ghe.loaiGhe)} key={index}>
+          {ghe.tenGhe}
         </span>
       );
     });

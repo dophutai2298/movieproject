@@ -87,7 +87,7 @@ const options = {
     },
 
     600: {
-      items: 2,
+      items: 3,
     },
 
     1000: {
@@ -188,9 +188,11 @@ export default function FilmViewList() {
               <OwlCarousel
                 className="owl-theme course__items"
                 loop
+                dots="false"
                 items="4"
                 margin={0}
                 autoPlay
+                nav
                 {...options}
               >
                 {renderFilmNow()}
@@ -202,9 +204,11 @@ export default function FilmViewList() {
               <OwlCarousel
                 className="owl-theme course__items"
                 loop
+                dots="false"
                 items="4"
                 margin={0}
                 autoPlay
+                nav
                 {...options}
               >
                 {renderFilmSoon()}

@@ -20,6 +20,7 @@ import { Router } from "@material-ui/icons";
 import ShowtimeScreen from "./screens/admin/showtime";
 import Profile from "./screens/profile";
 import HeaderMobile from "./components/layout/HeaderMobile";
+import Guard from "./HOC/guard/Guard";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +35,6 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-      <HeaderMobile />
       <Switch>
         <Route path="/" exact component={HomeScreen} />
         <Route path="/detail/:movieID" exact component={DetailMovieScreen} />
@@ -43,7 +43,7 @@ function App() {
         <Route path="/booking/:maLichChieu" exact component={Booking} />
         <Route path="/news/:newID" exact component={NewDetail} />
         <Route path="/profile" exact component={Profile} />
-        <Route path="/admin" exact component={AdminScreen} />
+        {/* <Route path="/admin" exact component={AdminScreen} /> */}
         <Route path="/admin/manager-user" exact component={UserScreen} />
         <Router
           path="/admin/manager-film"
@@ -60,6 +60,33 @@ function App() {
           exact
           component={ShowtimeScreen}
         />
+        <Guard>
+          <Route path="/admin" exact component={AdminScreen} />
+        </Guard>
+        {/* <Guard>
+          <Route path="/admin/manager-user" exact component={UserScreen} />
+        </Guard>
+        <Guard>
+          <Router
+            path="/admin/manager-film"
+            exact
+            component={ManagerFilmScreen}
+          />
+        </Guard>
+        <Guard>
+          <Router
+            path="/admin/manager-cinema"
+            exact
+            component={MangerCinemaScreen}
+          />
+        </Guard>
+        <Guard>
+          <Router
+            path="/admin/showtime/:maLichChieu"
+            exact
+            component={ShowtimeScreen}
+          />
+        </Guard> */}
       </Switch>
     </BrowserRouter>
   );

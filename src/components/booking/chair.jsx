@@ -24,6 +24,7 @@ export default function Chair(props) {
       if (index < 160) {
         return (
           <button
+            className={trangThaiGhe(ghe.daDat, ghe.dangChon, ghe.loaiGhe)}
             key={index}
             onClick={() => {
               if (ghe.daDat !== true) {
@@ -38,12 +39,7 @@ export default function Chair(props) {
               }
             }}
           >
-            <span
-              className={trangThaiGhe(ghe.daDat, ghe.dangChon, ghe.loaiGhe)}
-              style={{ padding: "30%", borderRadius: "5%" }}
-            >
-              {ghe.tenGhe}
-            </span>
+            {ghe.tenGhe}
           </button>
         );
       }

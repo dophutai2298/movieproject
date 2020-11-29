@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #000",
     width: "50%",
     boxShadow: theme.shadows[5],
+    [theme.breakpoints.down("sm")]: {
+      width: "80%",
+    },
   },
   trailer: {
     width: "100%",

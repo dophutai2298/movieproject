@@ -41,7 +41,7 @@ function ShowtimeFilm(props) {
                 {renderImg()}
               </div>
               <div className="showtimes__right__content--address--title">
-                <span style={{ fontSize: "16px", textTransform: "uppercase" }}>
+                <span style={{ textTransform: "uppercase" }}>
                   {movie.tenHeThongRap}
                 </span>
                 <p style={{ margin: "0" }}>{item.tenCumRap}</p>

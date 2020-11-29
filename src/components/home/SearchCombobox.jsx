@@ -1,24 +1,49 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
+// import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import fomat from "dateformat";
-import NativeSelect from "@material-ui/core/NativeSelect";
-//import InputBase from "@material-ui/core/InputBase";
+import Swal from "sweetalert2";
 
 import { fetchFilm, fetchFilmShowTime } from "../../redux/actions/film.action";
-import Button from "@material-ui/core/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Booking from "../../screens/booking";
+// import Booking from "../../screens/booking";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     width: "18%",
+    margin: "1%",
     marginTop: "0",
     zIndex: "10",
+    [theme.breakpoints.down("sm")]: {
+      width: "44%",
+      margin: "0% 3%",
+      fontSize: 13,
+    },
+  },
+  formControlButton: {
+    margin: theme.spacing(1),
+    width: "18%",
+    margin: "1%",
+    marginTop: "0",
+    zIndex: "10",
+    [theme.breakpoints.down("sm")]: {
+      width: "94%",
+      margin: "2% 3%",
+    },
+  },
+  label: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "13px",
+    },
+  },
+  optionValue: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "13px",
+    },
   },
   selectEmpty: {
     marginTop: theme.spacing(0),
@@ -185,8 +210,14 @@ export default function SearchCombobox() {
   return (
     <div className="swiper-tabs">
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel htmlFor="outlined-age-native-simple">Tên Phim</InputLabel>
+        <InputLabel
+          className={classes.label}
+          htmlFor="outlined-age-native-simple"
+        >
+          Tên Phim
+        </InputLabel>
         <Select
+          className={classes.optionValue}
           native
           label="Tên Phim"
           onChange={handleChangeFilm}
@@ -199,29 +230,58 @@ export default function SearchCombobox() {
       </FormControl>
 
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel htmlFor="outlined-age-native-simple">Rạp Chiếu</InputLabel>
-        <Select native onChange={handleChangeTheater} label="Rạp Chiếu">
+        <InputLabel
+          className={classes.label}
+          htmlFor="outlined-age-native-simple"
+        >
+          Rạp Chiếu
+        </InputLabel>
+        <Select
+          className={classes.optionValue}
+          native
+          onChange={handleChangeTheater}
+          label="Rạp Chiếu"
+        >
           <option aria-label="None" value="" />
           {renderTheater()}
         </Select>
       </FormControl>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel htmlFor="outlined-age-native-simple">Ngày Xem</InputLabel>
-        <Select native onChange={handleChangeDate} label="Ngày Xem">
+        <InputLabel
+          className={classes.label}
+          htmlFor="outlined-age-native-simple"
+        >
+          Ngày Xem
+        </InputLabel>
+        <Select
+          className={classes.optionValue}
+          native
+          onChange={handleChangeDate}
+          label="Ngày Xem"
+        >
           <option aria-label="None" value="" />
           {renderDate()}
         </Select>
       </FormControl>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel htmlFor="outlined-age-native-simple">Xuất Chiếu</InputLabel>
-        <Select native label="Xuất Chiếu" onChange={handleShowTimes}>
+        <InputLabel
+          className={classes.label}
+          htmlFor="outlined-age-native-simple"
+        >
+          Xuất Chiếu
+        </InputLabel>
+        <Select
+          className={classes.optionValue}
+          native
+          label="Xuất Chiếu"
+          onChange={handleShowTimes}
+        >
           <option aria-label="None" value="" />
           {renderShowtimes()}
         </Select>
       </FormControl>
-      <FormControl>
+      <FormControl className={classes.formControlButton}>
         {nameFilm.maLichChieu ? (
-          //<Button variant="contained" color="secondary">
           <Link
             className="swipter-tabs__link"
             to={`/booking/${nameFilm.maLichChieu}`}
@@ -229,12 +289,17 @@ export default function SearchCombobox() {
             Mua Vé Ngay
           </Link>
         ) : (
-          // </Button>
-          // <Button variant="contained" color="secondary">
-          <Link className="swipter-tabs__link" to="/">
+          <button
+            onClick={() => {
+              Swal.fire({
+                icon: "warning",
+                title: "Vui lòng chọn đủ thông tin  ",
+              });
+            }}
+            className="swipter-tabs__link"
+          >
             Mua Vé Ngay
-          </Link>
-          //</Button>
+          </button>
         )}
       </FormControl>
     </div>

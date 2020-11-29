@@ -21,6 +21,8 @@ import Box from "@material-ui/core/Box";
 import BookRight from "../../components/booking/BookRight";
 import HistorySet from "../../components/booking/historySet";
 import Chair from "../../components/booking/chair";
+import HeaderMobile from "../../components/layout/HeaderMobile";
+import Header from "../../components/layout/Header";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -159,7 +161,22 @@ export default function Booking() {
         showCancelButton: true,
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire("Thành Công", "", "success");
+          // Swal.fire("Thành Công", "", "success");
+          Swal.fire({
+            icon: "success",
+            title: "Đặt vé thành công",
+            text: "Chúng tôi sẽ liên lạc với bạn sớm !",
+            width: 600,
+            padding: "3em",
+            background: "#fff url(/images/trees.png)",
+            backdrop: `
+              rgba(0,0,123,0.4)
+              url("/images/successBooking.gif")
+              left top
+              no-repeat
+            `,
+          });
+
           dispatch(postBookingRequest(maLichChieu, danhSachVe));
           /*  history.push("/");
           history.push("/booking/" + maLichChieu); */
@@ -178,6 +195,8 @@ export default function Booking() {
   }
   return (
     <>
+      <Header />
+      <HeaderMobile />
       <section className="container-fluid book__section">
         <div className="row book__row">
           <div className="col-sm-12 col-md-8 section--left">

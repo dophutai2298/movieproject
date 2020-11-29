@@ -5,6 +5,7 @@
 
   background: bg("primary");
   .book__row {
+    margin-top: spacing(6);
     overflow: scroll;
   }
   .col-md-8 {
@@ -217,9 +218,21 @@
         .left--title {
           display: flex;
           .title--logocinema {
-            padding-right: 10px;
+            width: 15%;
             img {
-              @include size(70px, 70px);
+              width: 70%;
+            }
+            @include MediaQuery($sm) {
+              width: 20%;
+              img {
+                width: 95%;
+              }
+            }
+            @include MediaQuery($xs) {
+              width: 30%;
+              img {
+                width: 95%;
+              }
             }
           }
           .title-content {
@@ -340,30 +353,26 @@
                 // align-items: center;
                 width: 100%;
                 flex-wrap: wrap;
+                // -----Ghế------
                 button {
-                  @include text(
-                    text("primary"),
-                    fs("subtext1"),
-                    fw("fwRegular")
-                  );
-                  background-color: bg("primary");
+                  @include text(text("primary"), fs("h5"), fw("fwRegular"));
+
                   border: none;
                   outline: none;
                   border-radius: 3px;
-                  width: 4.5%;
-                  text-align: center;
-                  margin: 1% 0.85%;
-                  padding: 1px;
+
+                  padding: 0;
+                  width: 5%;
+                  margin: 6px 0.625%;
                   @include MediaQuery($lg) {
-                    font-size: 10px;
-                    width: 4%;
-                    margin: 1%;
+                    font-size: fs("subtext1");
                   }
 
                   @include MediaQuery($md) {
-                    font-size: 8px;
+                    font-size: 9px;
                   }
                 }
+                // -----Ghế------
 
                 // @include MediaQuery($lg) {
                 //   margin: 4.5px;
@@ -510,7 +519,7 @@
         width: 100%;
 
         .admin {
-          width: 100%;
+          width: 30%;
 
           &__avata {
             width: 100%;
@@ -519,6 +528,9 @@
             background: bg("white1");
             img {
               width: 40%;
+              @include MediaQuery($sm) {
+                width: 60%;
+              }
             }
             p {
               margin-top: 10px;
@@ -532,45 +544,37 @@
             transition: all 0.4s ease;
             p {
               font-size: fs("h3");
-              color: text("white");
+              color: text("secondary");
               text-align: center;
               margin-bottom: 0;
-              line-height: 80px;
-              background: bg("orange1");
+              padding-bottom: spacing(2);
               user-select: none;
               transition: all 0.4s ease;
             }
-            ul {
-              padding: 0;
-              margin: 0;
-              list-style: none;
-              a {
-                text-decoration: none;
-                display: block;
-                height: 100%;
-                width: 100%;
-                line-height: 65px;
-                font-size: fs("h4");
-                color: textcl("orange1");
 
-                box-sizing: border-box;
-                border-top: 1px solid bg("orange1");
-                border-bottom: 1px solid bg("orange1");
-                transition: 0.4s;
-
-                &:hover {
-                  padding-left: 30px;
-                }
-                i {
-                  margin-right: 16px;
-                }
-                @include MediaQuery($sm) {
-                  i {
-                    margin-right: 5px;
-                  }
-                }
+            a {
+              text-decoration: none;
+              display: block;
+              height: 100%;
+              width: 100%;
+              font-size: fs("h4");
+              color: text("secondary");
+              padding: spacing(1.5, 0);
+              box-sizing: border-box;
+              border-top: 1px solid bg("orange1");
+              border-bottom: 1px solid bg("orange1");
+              transition: 0.4s;
+              &:hover {
+                padding-left: 10%;
+              }
+              i {
+                margin-right: 2%;
+              }
+              @include MediaQuery($sm) {
+                font-size: fs("h5");
               }
             }
+
             @include MediaQuery($sm) {
               ul {
                 a {
@@ -581,11 +585,15 @@
           }
         }
         .info {
-          width: 100%;
-          padding: 25px 10px;
+          width: 70%;
+          padding: spacing(2, 1.5);
           h3 {
+            font-size: fs("h2");
             text-align: center;
             margin: 20px 0;
+            @include MediaQuery($sm) {
+              ont-size: fs("h3");
+            }
           }
           .MuiOutlinedInput-root {
             margin: 20px 5px;

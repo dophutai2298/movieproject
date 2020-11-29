@@ -9,6 +9,7 @@ import {
 } from "../../redux/actions/film.action";
 import SimpleTabs from "../../components/detailfilm/BookingMovieDetail";
 import HeaderMobile from "../../components/layout/HeaderMobile";
+import { fetchComment } from "../../redux/actions/comment.action";
 
 class DetailMovieScreen extends Component {
   render() {
@@ -37,6 +38,7 @@ class DetailMovieScreen extends Component {
   componentDidMount() {
     this.props.dispatch(fetchFilmDetail(this.props.match.params.movieID));
     this.props.dispatch(fetchFilmShowTime(this.props.match.params.movieID));
+    this.props.dispatch(fetchComment());
   }
 }
 

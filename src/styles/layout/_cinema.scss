@@ -62,6 +62,10 @@
           border-bottom: 1px solid bg("gray1");
           transition: all 0.3s;
           @include MediaQuery($sm) {
+            width: 50%;
+            margin-left: 25%;
+          }
+          @include MediaQuery($xs) {
             width: 90%;
             margin-left: 5%;
           }
@@ -105,7 +109,11 @@
           -o-transition: all 0.3s;
         }
         @include MediaQuery($sm) {
-          width: 100%;
+          width: 50%;
+        }
+        @include MediaQuery($xs) {
+          width: 80%;
+
           img {
             @include size(90%, 80px);
             @include MediaQuery($sm) {
@@ -129,8 +137,11 @@
           }
         }
         p:nth-child(2) {
-          @include text(text("gray"), fs("subtext2"), fw("fwRegular"));
+          @include text(text("gray1"), fs("subtext1"), fw("fwRegular"));
           margin: 0;
+          @include MediaQuery($sm) {
+            font-size: fs("subtext1")-3;
+          }
         }
         a {
           @include text(text("secondary"), fs("subtext1"), fw("fwBold"));
@@ -171,8 +182,14 @@
         @include MediaQuery($sm) {
           width: 100%;
           img {
-            width: 70%;
-            margin-left: 15%;
+            width: 40%;
+            margin-left: 30%;
+          }
+        }
+        @include MediaQuery($xs) {
+          img {
+            width: 80%;
+            margin-left: 10%;
           }
         }
       }
@@ -220,7 +237,7 @@
           display: flex;
           flex-wrap: wrap;
           @include MediaQuery($sm) {
-            display: block;
+            // display: block;
           }
           .linkBook {
             cursor: pointer;
@@ -242,10 +259,10 @@
               color: text("secondary");
             }
             @include MediaQuery($sm) {
-              font-size: fs("subtext2");
-              padding: spacing(0.2);
-              display: block;
-              margin: 3px 0;
+              font-size: fs("subtext2")-2;
+              padding: 5px 2px;
+              width: 46%;
+              margin: 1.5% 2%;
             }
           }
         }

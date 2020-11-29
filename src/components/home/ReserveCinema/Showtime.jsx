@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const Showtime = (props) => {
   const { showTime } = props;
   const dateFormat = require("dateformat");
-  console.log("Tong time", showTime);
+  // console.log("Tong time", showTime);
   return showTime?.map((time, index) => {
     if (index < 8) {
       return (

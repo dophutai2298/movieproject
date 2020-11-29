@@ -33,7 +33,7 @@ const StyledTableCell = withStyles((theme) => ({
     color: theme.palette.common.white,
   },
   body: {
-    fontSize: 14,
+    fontSize: 13,
   },
 }))(TableCell);
 
@@ -60,6 +60,15 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       width: "90%",
       padding: theme.spacing(2),
+    },
+  },
+  tableCell: {
+    padding: "10px 5px",
+    [theme.breakpoints.down("sm")]: {
+      width: "14%",
+      padding: "5px 2px",
+      border: "1px solid #ccc",
+      fontSize: 12,
     },
   },
   btnUpdate: {
@@ -184,41 +193,51 @@ export default function ProfileUser() {
             <Table className={classes.table} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell align="center">Tài Khoản</StyledTableCell>
-                  <StyledTableCell align="center">Email</StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell className={classes.tableCell} align="center">
+                    Tài Khoản
+                  </StyledTableCell>
+                  <StyledTableCell className={classes.tableCell} align="center">
+                    Email
+                  </StyledTableCell>
+                  <StyledTableCell className={classes.tableCell} align="center">
                     Số Điện Thoại
                   </StyledTableCell>
-                  <StyledTableCell align="center">Họ Tên</StyledTableCell>
-                  <StyledTableCell align="center">Mã nhóm</StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell className={classes.tableCell} align="center">
+                    Họ Tên
+                  </StyledTableCell>
+                  <StyledTableCell className={classes.tableCell} align="center">
+                    Mã nhóm
+                  </StyledTableCell>
+                  <StyledTableCell className={classes.tableCell} align="center">
                     Loại người dùng
                   </StyledTableCell>
-                  <StyledTableCell align="center">Sửa</StyledTableCell>
+                  <StyledTableCell className={classes.tableCell} align="center">
+                    Sửa
+                  </StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 <StyledTableRow>
-                  <StyledTableCell align="center">
+                  <StyledTableCell className={classes.tableCell} align="center">
                     {profile.taiKhoan}
                   </StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell className={classes.tableCell} align="center">
                     {profile.email}
                   </StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell className={classes.tableCell} align="center">
                     {profile.soDT}
                   </StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell className={classes.tableCell} align="center">
                     {profile.hoTen}
                   </StyledTableCell>
 
-                  <StyledTableCell align="center">
+                  <StyledTableCell className={classes.tableCell} align="center">
                     {profile.maNhom}
                   </StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell className={classes.tableCell} align="center">
                     {profile.maLoaiNguoiDung}
                   </StyledTableCell>
-                  <StyledTableCell align="center">
+                  <StyledTableCell className={classes.tableCell} align="center">
                     <i
                       onClick={() => {
                         handleOpen();

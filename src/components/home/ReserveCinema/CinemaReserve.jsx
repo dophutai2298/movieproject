@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchCinemaInfoInSystem,
-  selectedIdCinema,
-} from "../../../redux/actions/cinema.action";
+import { selectedIdCinema } from "../../../redux/actions/cinema.action";
 
 function CinemaReserve(props) {
   const { cum } = props;
 
   let substrTen = cum.maCumRap.substr(0, 3);
-  console.log(substrTen);
+
   const dispatch = useDispatch();
   const renderImg = () => {
     if (substrTen === "bhd") {

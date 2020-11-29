@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#000",
   },
   draw: {
-    width: "250px",
+    width: "100%",
     height: "100%",
   },
 }));
@@ -84,10 +84,10 @@ function HeaderMobile() {
                   style={{
                     color: "#fb4226",
                     fontStyle: "italic",
-                    fontSize: "16px",
+                    fontSize: "14px",
                   }}
                 >
-                  Hi! {user.hoTen}
+                  <i class="fa fa-user-circle"></i> {user.hoTen}
                 </span>
               </Button>
             </>

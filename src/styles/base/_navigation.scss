@@ -16,8 +16,12 @@
 }
 
 .film__section--list {
+  overflow: hidden;
   .sapchieu {
     display: none;
+  }
+  .owl-dots {
+    display: none !important;
   }
   .owl-nav {
     @include MediaQuery($sm) {
@@ -26,13 +30,13 @@
     .owl-prev,
     .owl-next {
       position: absolute;
-      top: 45%;
+      top: 30%;
       font-size: fs("h3");
       @include MediaQuery($sm) {
         font-size: fs("subtext1") !important;
       }
       transform: translateY(-50%);
-      background-color: transparent;
+      background-color: transparent !important;
       border: none;
       @include size(50px, 50px);
       z-index: 2;
@@ -42,12 +46,15 @@
       background-position: center;
       background-size: contain;
       span {
-        font-size: fs("h0");
+        font-size: 50px;
         transform: scale(1.2);
         -webkit-transform: scale(1.2);
         -moz-transform: scale(1.2);
         -ms-transform: scale(1.2);
         -o-transform: scale(1.2);
+        &:hover {
+          color: text("primary");
+        }
       }
       &:hover {
         background-color: transparent;
@@ -55,11 +62,11 @@
       }
     }
     .owl-prev {
-      height: 50px;
-      left: -70px;
+      // height: 50px;
+      left: -20px;
     }
     .owl-next {
-      right: -70px;
+      right: -20px;
     }
   }
 }

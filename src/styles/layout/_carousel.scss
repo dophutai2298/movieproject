@@ -1,6 +1,7 @@
 .carousel__section {
   @include MediaQuery($sm) {
-    display: none;
+    // display: none;
+    margin-top: spacing(6);
   }
   position: relative;
   .swiper-wrapper {
@@ -57,21 +58,32 @@
     border-radius: 5px;
     z-index: 100;
     line-height: 64px;
-    left: 20%;
-    right: 20%;
+    left: 15%;
+    width: 70%;
     box-shadow: 0px 0px 8px 1px bg("line");
+    display: flex;
+    flex-wrap: wrap;
+    @include MediaQuery($sm) {
+      position: relative;
+      left: 5%;
+      width: 90%;
+    }
     .MuiFormControl-root {
-      /* z-index: 10; */
       margin-top: 8px;
     }
     .swipter-tabs__link {
       @include button(bg("green"), text("white"), fs("h4"), 5px);
       text-decoration: none;
+      text-transform: uppercase;
+      outline: none;
       line-height: 55px;
       margin-right: 8px;
       height: 55px;
-      width: 150px;
+      width: 100%;
       opacity: 1;
+      @include MediaQuery($sm) {
+        font-size: fs("subtext1");
+      }
       &:hover {
         opacity: 0.8;
       }
@@ -86,7 +98,7 @@
 
   .carousel__reserve {
     @include MediaQuery($sm) {
-      display: none;
+      //display: none;
     }
     display: flex;
     align-items: center;

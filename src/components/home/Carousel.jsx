@@ -35,9 +35,9 @@ class Carousel extends PureComponent {
               navigation
               autoplay={{
                 delay: 3000,
-                disableOnInteraction: false,
+                // disableOnInteraction: false,
               }}
-              pagination={{ clickable: true }}
+              // pagination={{ clickable: true }}
               // onSwiper={(swiper) => console.log(swiper)}
               // onSlideChange={() => console.log("slide change")}
             >

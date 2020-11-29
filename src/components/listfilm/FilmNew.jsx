@@ -11,14 +11,14 @@ function FilmNew(props) {
     <div className="item">
       <div
         className="item__img"
-        style={{
-          backgroundImage: `url(${movie.hinhAnh})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          width: "100%",
-        }}
+        // style={{
+        //   backgroundImage: `url(${movie.hinhAnh})`,
+        //   backgroundPosition: "center",
+        //   backgroundSize: "cover",
+        //   width: "100%",
+        // }}
       >
-        {/* <img src={movie.hinhAnh} alt="hinhAnh" /> */}
+        <img src={movie.hinhAnh} alt="hinhAnh" />
         <div className="item__img--range">
           <span className="item__img--point">
             <p>{movie.danhGia}</p>

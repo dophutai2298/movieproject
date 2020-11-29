@@ -70,6 +70,7 @@
           }
           @include MediaQuery($sm) {
             padding-top: 25px;
+            width: 25%;
           }
 
           &__logo {
@@ -86,8 +87,9 @@
             &--imges {
               width: 70%;
               margin-left: 15%;
-              @include MediaQuery($sm) {
-                width: 100%;
+              @include MediaQuery($xs) {
+                width: 90%;
+                margin-left: 5%;
                 margin-bottom: 10px;
                 margin-left: 0;
               }
@@ -104,6 +106,9 @@
         &__right {
           width: 85%;
           min-height: 700px;
+          @include MediaQuery($sm) {
+            width: 75%;
+          }
           .scroll1 {
             border-bottom: 2px solid bg("orange1");
           }
@@ -120,11 +125,17 @@
                 height: 40px;
                 font-weight: fw("fwMedium");
                 @include button(bg("white1"), text("secondary"), fs("h4"), 3px);
+                @include MediaQuery($sm) {
+                  font-size: fs("h5");
+                }
                 p {
                   margin: 0;
                 }
                 p:first-child {
                   font-size: fs("h5");
+                  @include MediaQuery($sm) {
+                    font-size: fs("subtext1");
+                  }
                 }
                 &:focus {
                   color: text("primary");
@@ -154,20 +165,37 @@
             &--address {
               display: flex;
               &--imges {
+                width: 10%;
                 img {
-                  width: 80px;
+                  width: 90%;
+                }
+                @include MediaQuery($sm) {
+                  width: 20%;
+                  img {
+                    width: 100%;
+                  }
                 }
               }
               &--title {
+                width: 80%;
                 margin-left: 15px;
                 span:first-child {
                   @include text(text("green"), fs("h4"), fw("fwMedium"));
+                  @include MediaQuery($sm) {
+                    font-size: fs("h5");
+                  }
                 }
                 span:nth-last-of-type(1) {
                   @include text(text("primary"), fs("h4"), fw("fwMedium"));
+                  @include MediaQuery($sm) {
+                    font-size: fs("h5");
+                  }
                 }
                 p {
                   @include text(text("gray1"), fs("h5"), fw("fwMedium"));
+                  @include MediaQuery($sm) {
+                    font-size: fs("subtext1");
+                  }
                   a {
                     text-decoration: none;
                     color: text("secondary");
@@ -193,6 +221,9 @@
                 -moz-transition: all 0.3;
                 -ms-transition: all 0.3;
                 -o-transition: all 0.3;
+                @include MediaQuery($sm) {
+                  padding: spacing(0.5);
+                }
                 &:hover {
                   opacity: 0.7;
                 }
@@ -236,6 +267,7 @@
       .introduce__content1--table {
         table {
           width: 75%;
+
           @include MediaQuery($sm) {
             width: 100%;
           }
@@ -260,7 +292,7 @@
       }
       .introduce__content1--detail {
         p:first-child {
-          @include text(text("secondary"), fs("h3"), fw("fwMedium"));
+          @include text(text("secondary"), fs("h4"), fw("fwMedium"));
           margin-bottom: 0;
           @include MediaQuery($sm) {
             font-size: 15px;
@@ -269,7 +301,7 @@
       }
       .introduce__content1--trailer {
         p:first-child {
-          @include text(text("secondary"), fs("h3"), fw("fwMedium"));
+          @include text(text("secondary"), fs("h4"), fw("fwMedium"));
           margin-bottom: 0;
           @include MediaQuery($sm) {
             font-size: 12px;

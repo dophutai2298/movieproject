@@ -38,11 +38,13 @@ export default function Review(props) {
   function handleSubmit(event) {
     event.preventDefault();
     event.target.reset();
-    if (state.binhLuan === "" && state.rating == 0) {
+    if (state.binhLuan === "") {
       Swal.fire({
-        icon: "error",
-        title: "Lỗi...",
-        text: "Bạn chưa chọn đánh giá hoặc bình luận",
+        title: "Bạn chưa chọn đánh giá",
+      });
+    } else if (state.rating == 0) {
+      Swal.fire({
+        title: "Bạn chưa nhập bình luận",
       });
     } else {
       setState({

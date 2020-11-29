@@ -21,6 +21,11 @@ class CarouselDetail extends Component {
           {/* <div style={{ backgroundImage: `url(${movieDetail.hinhAnh})` }}></div> */}
           {/* <img src={movieDetail.hinhAnh} alt="background" /> */}
         </div>
+        <div className="mycarousel__mobile">
+          <img src={movieDetail.hinhAnh} alt="background" />
+          <p className="mycarousel__content--name">{movieDetail.tenPhim}</p>
+          <p>{dateFormat(movieDetail.ngayKhoiChieu, "dd-mm-yyyy")}</p>
+        </div>
         <div className="mycarousel__content">
           <div className="mycarousel__content__image">
             <img src={movieDetail.hinhAnh} alt="movie" />
