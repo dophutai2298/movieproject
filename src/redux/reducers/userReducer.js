@@ -1,3 +1,6 @@
+import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
+
 const {
   SIGN_IN,
   USER__INFO_BOOKING,
@@ -23,10 +26,21 @@ const UserReducer = (state = initialState, action) => {
       return { ...state };
     }
     case CHANGE__INFO: {
-      let credentials = state.credentials;
-      credentials = null;
+      Swal.fire({
+        title: "Cập nhật thành công",
+        text: "Bạn vui lòng đăng nhập lại ! ",
+        icon: "success",
 
-      state.credentials = action.payload;
+        confirmButtonColor: "#3085d6",
+
+        confirmButtonText: "Đăng nhập",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          localStorage.removeItem("creadentials");
+          window.location.replace("/sign-in");
+        }
+      });
+
       return { ...state };
     }
     case FETCH_AVATAR: {

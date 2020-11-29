@@ -11,6 +11,7 @@ const validateinfomation = [
 ];
 
 export default function validateInfo(values) {
+  console.log("aaa", values);
   // let ktramatkhau = /^[0-9]$/;
   let regexPhone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
   let email = /^([\w\.])+@([a-zA-Z0-9\-])+\.([a-zA-Z]{2,4})(\.[a-zA-Z]{2,4})?$/;
@@ -20,7 +21,7 @@ export default function validateInfo(values) {
   } else if (values.taiKhoan.length < 6) {
     error.taiKhoan = "Tài khoản phải nhiều hơn 6 ký tự";
   }
-  if (!values.matKhau.trim()) {
+  if (!values.matKhau) {
     error.matKhau = validateinfomation[1];
   } else if (values.matKhau.length < 6) {
     error.matKhau = "Mật khẩu phải nhiều hơn 6 ký tự";

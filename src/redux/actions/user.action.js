@@ -5,10 +5,6 @@ import {
   SIGN_UP,
   USER__INFO_BOOKING,
   CHANGE__INFO,
-  FETCH_AVATAR,
-  CREATE_AVATAR,
-  DELETE_AVATAR,
-  UPDATE_AVATAR,
 } from "../types/types";
 import { startLoading, stopLoading } from "./common.action";
 import Swal from "sweetalert2";
@@ -85,15 +81,12 @@ export const fetchInFoBooking = (user) => {
 
 // thay đổi thông tin tài khoản
 export const changeUserInFo = (user) => {
+  console.log("action", user);
   return (dispatch) => {
     adminService
       .updateUser(user)
       .then((res) => {
         dispatch(createAction(CHANGE__INFO, res.data));
-        Swal.fire({
-          icon: "success",
-          title: "Cập nhật thành công",
-        });
       })
       .catch((err) => {
         Swal.fire({

@@ -1,6 +1,6 @@
 // import admin from "../../assets/admin.jpg";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,10 +9,22 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import { Button } from "@material-ui/core";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import clsx from "clsx";
+import validateInfo from "../../screens/signUp/validateInfo";
+import {
+  FormControl,
+  InputLabel,
+  Input,
+  InputAdornment,
+} from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
 import "../../App.scss";
-
 import { changeUserInFo } from "../../redux/actions/user.action";
 
 const StyledTableCell = withStyles((theme) => ({
@@ -33,40 +45,124 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  TextField: {
-    width: "100%",
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #fff",
+    width: "40%",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
+      padding: theme.spacing(2),
+    },
   },
-});
+  btnUpdate: {
+    border: "1px solid #3e515d",
+    color: "#3e515d",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2px",
+    },
+  },
+  title: {
+    textAlign: "center",
+    color: "#4a90e2",
+  },
+  divInput: {
+    width: "90%",
+    margin: "2% 5%",
+  },
+  divBtn: {
+    marginTop: "3%",
+  },
+  error: {
+    margin: "0",
+    fontSize: "13px",
+    fontStyle: "italic",
+    color: "red",
+  },
+}));
 
 export default function ProfileUser() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const profile = useSelector((state) => state.userReducer.credentials);
+  const [open, setOpen] = useState(false);
+  const profile = JSON.parse(localStorage.getItem("creadentials"));
   const [updateProfile, setUpDateProfile] = useState({
     taiKhoan: profile.taiKhoan,
     matKhau: profile.matKhau,
     xacNhanMK: profile.matKhau,
     email: profile.email,
     soDt: profile.soDT,
-    maNhom: "GP01",
-    maLoaiNguoiDung: "KhachHang",
+    maNhom: profile.maNhom,
+    maLoaiNguoiDung: profile.maLoaiNguoiDung,
     hoTen: profile.hoTen,
   });
 
-  function handleChange(event) {
-    const { name, value } = event.target;
+  const [error, setError] = useState({
+    taiKhoan: "",
+    email: "",
+    soDt: "",
+    maNhom: "",
+    maLoaiNguoiDung: "",
+    hoTen: "",
+    matKhau: "",
+    xacNhanMK: "",
+  });
+
+  //---Show hide pass---
+  const handleClickShowPassword = () => {
     setUpDateProfile({
       ...updateProfile,
-      [name]: value,
+      showPassword: !updateProfile.showPassword,
     });
-  }
+  };
 
-  function handleSubmit() {
-    dispatch(changeUserInFo(updateProfile));
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  //---Show hide pass--
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  // Bắt sự kiện
+  const handleChange = (prop) => (event) => {
+    setUpDateProfile({ ...updateProfile, [prop]: event.target.value });
+  };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    let regexPhone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+    let email = /^([\w\.])+@([a-zA-Z0-9\-])+\.([a-zA-Z]{2,4})(\.[a-zA-Z]{2,4})?$/;
+    setError(validateInfo(updateProfile));
+
+    if (
+      updateProfile.matKhau.length > 5 &&
+      updateProfile.matKhau !== "" &&
+      updateProfile.xacNhanMK !== "" &&
+      updateProfile.soDt !== "" &&
+      updateProfile.hoTen !== "" &&
+      updateProfile.maLoaiNguoiDung !== "" &&
+      regexPhone.test(updateProfile.soDt) &&
+      updateProfile.matKhau === updateProfile.xacNhanMK
+    ) {
+      //alert("ok");
+      dispatch(changeUserInFo(updateProfile));
+      console.log(updateProfile);
+      handleClose();
+    }
   }
 
   return (
@@ -124,10 +220,9 @@ export default function ProfileUser() {
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     <i
-                      type="button"
-                      class="btn btn-info btn-lg"
-                      data-toggle="modal"
-                      data-target="#myModal"
+                      onClick={() => {
+                        handleOpen();
+                      }}
                       class="fa fa-edit"
                     ></i>
                   </StyledTableCell>
@@ -136,99 +231,134 @@ export default function ProfileUser() {
             </Table>
           </TableContainer>
 
-          <div class="editProfile">
-            <button
-              class="btn btn-dark"
-              data-toggle="modal"
-              data-target="#myModal"
-              onClick={() => handleSubmit}
-            >
-              Sửa thông tin
-            </button>
-          </div>
-          <div id="myModal" className="modal fade" role="dialog">
-            <div className="modal-dialog" style={{ maxWidth: "550px" }}>
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h4 className="modal-title">Sửa Thông Tin</h4>
-                  <button
-                    type="button"
-                    className="close close-dark"
-                    data-dismiss="modal"
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <div className={classes.paper}>
+                <h2 className={classes.title}>Cập nhật người dùng</h2>
+                <form
+                  className={classes.root}
+                  onSubmit={handleSubmit}
+                  noValidate
+                >
+                  <FormControl
+                    className={clsx(classes.margin, classes.divInput)}
                   >
-                    ×
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <form>
-                    <Grid container spacing={3}>
-                      <Grid item xs={6}>
-                        <TextField
-                          className={classes.textField}
-                          id="outlined-basic"
-                          onChange={handleChange}
-                          name="matKhau"
-                          value={updateProfile.matKhau}
-                          label="Mật khẩu"
-                          variant="outlined"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <TextField
-                          className={classes.textField}
-                          id="outlined-basic"
-                          onChange={handleChange}
-                          name="matKhau"
-                          value={updateProfile.xacNhanMK}
-                          label="Xác nhận Mật khẩu"
-                          variant="outlined"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <TextField
-                          className={classes.textField}
-                          id="outlined-basic"
-                          onChange={handleChange}
-                          name="soDt"
-                          label="Số điện thoại"
-                          value={updateProfile.soDt}
-                          variant="outlined"
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <TextField
-                          className={classes.textField}
-                          id="outlined-basic"
-                          onChange={handleChange}
-                          name="hoTen"
-                          label="Họ tên"
-                          value={updateProfile.hoTen}
-                          variant="outlined"
-                        />
-                      </Grid>
-                    </Grid>
-                  </form>
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="submit"
-                    className="btn btn-success"
-                    data-dismiss="modal"
-                    onClick={() => handleSubmit()}
+                    <InputLabel htmlFor="standard-adornment-taiKhoan">
+                      Tài khoản
+                    </InputLabel>
+                    <Input
+                      id="standard-adornment-taiKhoan"
+                      value={updateProfile.taiKhoan}
+                      disabled
+                    />
+
+                    <p className={classes.error}>{error.taiKhoan}</p>
+                  </FormControl>
+                  <FormControl
+                    className={clsx(classes.margin, classes.divInput)}
                   >
-                    Lưu
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-dark"
-                    data-dismiss="modal"
+                    <InputLabel htmlFor="standard-adornment-matKhau">
+                      Mật khẩu
+                    </InputLabel>
+                    <Input
+                      id="standard-adornment-matKhau"
+                      type={updateProfile.showPassword ? "text" : "password"}
+                      value={updateProfile.matKhau}
+                      onChange={handleChange("matKhau")}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                          >
+                            {updateProfile.showPassword ? (
+                              <Visibility />
+                            ) : (
+                              <VisibilityOff />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                    <p className={classes.error}>{error.matKhau}</p>
+                  </FormControl>
+                  <FormControl
+                    className={clsx(classes.margin, classes.divInput)}
                   >
-                    Close
-                  </button>
-                </div>
+                    <InputLabel htmlFor="standard-adornment-xacNhanMK">
+                      Nhập lại mật khẩu
+                    </InputLabel>
+                    <Input
+                      id="standard-adornment-xacNhanMK"
+                      type={updateProfile.showPassword ? "text" : "password"}
+                      value={updateProfile.xacNhanMK}
+                      onChange={handleChange("xacNhanMK")}
+                      error={error.xacNhanMK}
+                      helperText={error.xacNhanMK}
+                    />
+                    <p className={classes.error}>{error.xacNhanMK}</p>
+                  </FormControl>
+
+                  <FormControl
+                    className={clsx(classes.margin, classes.divInput)}
+                  >
+                    <InputLabel htmlFor="standard-adornment-hoTen">
+                      Họ tên
+                    </InputLabel>
+                    <Input
+                      id="standard-adornment-hoTen"
+                      value={updateProfile.hoTen}
+                      onChange={handleChange("hoTen")}
+                    />
+                    <p className={classes.error}>{error.hoTen}</p>
+                  </FormControl>
+                  <FormControl
+                    className={clsx(classes.margin, classes.divInput)}
+                  >
+                    <InputLabel htmlFor="standard-adornment-soDt">
+                      Số điện thoại
+                    </InputLabel>
+                    <Input
+                      id="standard-adornment-soDt"
+                      value={updateProfile.soDt}
+                      onChange={handleChange("soDt")}
+                    />
+                    <p className={classes.error}>{error.soDt}</p>
+                  </FormControl>
+
+                  <div className={classes.divBtn}>
+                    <Button
+                      onClick={() => {
+                        handleClose();
+                      }}
+                    >
+                      Thoát
+                    </Button>
+                    <Button
+                      type="submit"
+                      style={{ marginLeft: "10px" }}
+                      color="primary"
+                      variant="contained"
+                    >
+                      Cập nhật
+                    </Button>
+                  </div>
+                </form>
               </div>
-            </div>
-          </div>
+            </Fade>
+          </Modal>
         </div>
       </div>
     </div>
