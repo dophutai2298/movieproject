@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
     "chart.js": "^2.9.4",
+    "date-fns": "^2.16.1",
     "dateformat": "^3.0.3",
     "node-module": "^2.0.0",
     "node-modules": "^1.0.1",
