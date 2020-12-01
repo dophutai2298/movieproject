@@ -51,18 +51,48 @@ function ShowtimeFilm(props) {
         };
 
         // -----------------Code fix mới---------------------
+        // const renderTime = () => {
+        //   if (maHeThongRap === id) {
+        //     return item.lichChieuPhim.map((time) => {
+        //       let { ngayChieuGioChieu } = time;
+        //       let formatDay = ngayChieuGioChieu.slice(0, 10);
+        //       if (formatDay === day) {
+        //         return (
+        //           <>
+        //             <TimeFilm time={time} />
+        //           </>
+        //         );
+        //       }
+        //     });
+        //   }
+        // };
+        let datencomparison = item.lichChieuPhim.filter((time) => {
+          let { ngayChieuGioChieu } = time;
+          let formatDay = ngayChieuGioChieu.slice(0, 10);
+          return formatDay === day;
+        });
         const renderTime = () => {
           if (maHeThongRap === id) {
-            return item.lichChieuPhim.map((time, index) => {
-              let { ngayChieuGioChieu } = time;
-              let formatDay = ngayChieuGioChieu.slice(0, 10);
-              if (formatDay === day) {
-                return (
-                  <>
-                    <TimeFilm time={time} />
-                  </>
-                );
-              }
+            console.log(datencomparison);
+            if (datencomparison.length < 1) {
+              return (
+                <p
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: " 600",
+                    color: "#fb4226",
+                  }}
+                >
+                  Rạp chưa có lịch chiếu !!!
+                </p>
+              );
+            }
+            return datencomparison?.map((time) => {
+              return (
+                <>
+                  <TimeFilm time={time} />
+                </>
+              );
             });
           }
         };
@@ -76,7 +106,6 @@ function ShowtimeFilm(props) {
               </h4>
               <div className="showtimes__right__content--time">
                 {renderTime()}
-                {console.log(renderTime())}
               </div>
             </div>
           );
