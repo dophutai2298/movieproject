@@ -5,7 +5,7 @@ export class FilmService {
   fetchFilm() {
     return Axios({
       url:
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP10",
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP09",
       method: "GET",
     });
   }
@@ -14,7 +14,7 @@ export class FilmService {
   fetchFilmFollowDay() {
     return Axios({
       url:
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimTheoNgay?maNhom=GP10&soTrang=1&soPhanTuTrenTrang=10&tuNgay=20%2F09%2F2020&denNgay=30%2F12%2F2020",
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimTheoNgay?maNhom=GP09&soTrang=1&soPhanTuTrenTrang=10&tuNgay=20%2F09%2F2020&denNgay=30%2F12%2F2020",
       method: "GET",
     });
   }
@@ -22,7 +22,7 @@ export class FilmService {
   //Lấy danh sách phim phân trang
   fetchFilmFollowPage(page) {
     return Axios({
-      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP10&soTrang=${page}&soPhanTuTrenTrang=5`,
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP09&soTrang=${page}&soPhanTuTrenTrang=5`,
       method: "GET",
     });
   }

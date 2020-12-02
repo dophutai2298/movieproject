@@ -21,7 +21,7 @@ export class CinemaService {
   //Lấy danh sách phim theo cụm rạp
   fetchFilmFollowCinema(id) {
     return Axios({
-      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=${id}&maNhom=GP10`,
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=${id}&maNhom=GP09`,
       method: "GET",
     });
   }

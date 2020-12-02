@@ -61,7 +61,7 @@ export class AdminService {
   //Tìm phim
   searchFilm(keyword) {
     return Axios({
-      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP10&tenPhim=${keyword}`,
+      url: `https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP09&tenPhim=${keyword}`,
       method: "GET",
     });
   }

@@ -108,7 +108,7 @@ export default function UpdateFilm(props) {
     trailer: movie.trailer,
     moTa: movie.moTa,
     hinhAnh: uploadImg,
-    maNhom: "GP10",
+    maNhom: "GP09",
     ngayKhoiChieu: dateFormat(movie.ngayKhoiChieu, "dd/mm/yyyy"),
     danhGia: 10,
   });
@@ -134,7 +134,7 @@ export default function UpdateFilm(props) {
       trailer: "",
       moTa: "",
       hinhAnh: uploadImg,
-      maNhom: "GP10",
+      maNhom: "GP09",
       ngayKhoiChieu: dateFormat("", "dd/mm/yyyy"),
       danhGia: 10,
     });
@@ -208,7 +208,7 @@ export default function UpdateFilm(props) {
             trailer: movie.trailer,
             moTa: movie.moTa,
             hinhAnh: movie.hinhAnh,
-            maNhom: "GP10",
+            maNhom: "GP09",
             ngayKhoiChieu: dateFormat(movie.ngayKhoiChieu, "dd/mm/yyyy"),
             danhGia: 10,
           });

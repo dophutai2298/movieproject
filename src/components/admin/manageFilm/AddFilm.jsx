@@ -103,7 +103,7 @@ export default function AddFilm(props) {
     trailer: "",
     moTa: "",
     hinhAnh: uploadImg,
-    maNhom: "GP10",
+    maNhom: "GP09",
     ngayKhoiChieu: dateFormat("", "dd/mm/yyyy"),
     danhGia: 10,
   });
@@ -131,7 +131,7 @@ export default function AddFilm(props) {
       trailer: "",
       moTa: "",
       hinhAnh: uploadImg,
-      maNhom: "GP10",
+      maNhom: "GP09",
       ngayKhoiChieu: dateFormat("", "dd/mm/yyyy"),
       danhGia: 10,
     });
