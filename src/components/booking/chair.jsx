@@ -5,6 +5,7 @@ import useStyles from "../../screens/booking/style";
 export default function Chair(props) {
   let { listChair } = props;
   const dispatch = useDispatch();
+
   const classes = useStyles();
   // trang thái ghế
   function trangThaiGhe(daDat, dangChon, type) {

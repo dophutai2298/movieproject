@@ -84,14 +84,14 @@ export default function Booking() {
     dispatch(fetchTicketRoomChair(maLichChieu));
     // danh sach ghe
     dispatch(fetchTicketRoom(maLichChieu));
-    // count down
 
+    // count down
     formatDate(300);
     // xóa khi rời trang khác
     return () => {
       clearInterval(interVal);
     };
-  }, []);
+  }, [maLichChieu]);
 
   let interVal;
   // thời gian đặt vé
@@ -162,6 +162,8 @@ export default function Booking() {
       }).then((result) => {
         if (result.isConfirmed) {
           // Swal.fire("Thành Công", "", "success");
+          dispatch(postBookingRequest(maLichChieu, danhSachVe));
+          dispatch(fetchTicketRoom(maLichChieu));
           Swal.fire({
             icon: "success",
             title: "Đặt vé thành công",
@@ -177,7 +179,6 @@ export default function Booking() {
             `,
           });
 
-          dispatch(postBookingRequest(maLichChieu, danhSachVe));
           /*  history.push("/");
           history.push("/booking/" + maLichChieu); */
         } else if (result.isDenied) {
