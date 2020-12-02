@@ -55,6 +55,14 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     width: "50%",
   },
+  form:{
+
+    [theme.breakpoints.down("sm")]: {
+      height:"400px",
+    
+      overflowY:"scroll",
+    },
+  },
   title: {
     textAlign: "center",
     color: "#4a90e2",
@@ -212,7 +220,7 @@ export default function AddFilm(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 className={classes.title}>Thêm Phim</h2>
-            <form className={classes.root} onSubmit={handleSubmit} noValidate>
+            <form className={classes.form} onSubmit={handleSubmit} noValidate>
               <Grid container spacing={1}>
                 <Grid item xs={12} sm={6}>
                   <FormControl

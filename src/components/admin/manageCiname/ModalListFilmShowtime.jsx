@@ -18,12 +18,14 @@ import { selectedIdCinema } from "../../../redux/actions/cinema.action";
 import ModalTime from "./ModalTime";
 
 const useStyles = makeStyles((theme) => ({
-  modal: {
+  modal: {    overflowY:"scroll",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  
   },
   paper: {
+
     backgroundColor: theme.palette.background.paper,
     border: "1px solid #000",
     boxShadow: theme.shadows[5],
@@ -32,6 +34,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       width: "90%",
       padding: theme.spacing(2),
+    },
+  },
+  tableContainer:{
+    height:"500px",
+    [theme.breakpoints.down("sm")]: {
+      height:"400px"
     },
   },
   tableCell: {
@@ -150,7 +158,7 @@ export default function ModalListFilmShowtime(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <p className={classes.title}>Danh sách phim Chiếu</p>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} className={classes.tableContainer}>
               <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                   <TableRow>

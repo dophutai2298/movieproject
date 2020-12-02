@@ -41,6 +41,14 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(2),
     },
   },
+  form:{
+   
+    [theme.breakpoints.down("sm")]: {
+      height:"400px",
+    
+      overflowY:"scroll",
+    },
+  },
   imgDemo: {
     width: "40%",
     [theme.breakpoints.down("sm")]: {
@@ -231,7 +239,7 @@ export default function UpdateFilm(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 className={classes.title}>Cập nhật Phim</h2>
-            <form className={classes.root} onSubmit={handleSubmit} noValidate>
+            <form className={classes.form} onSubmit={handleSubmit} noValidate>
               <Grid container spacing={1}>
                 <Grid item xs={12} sm={6}>
                   <FormControl
