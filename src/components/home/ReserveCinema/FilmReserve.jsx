@@ -5,6 +5,7 @@ import Showtime from "./Showtime";
 const FilmReserve = (props) => {
   const { movie } = props;
   const { danhSachPhim } = movie;
+
   return danhSachPhim.map((item, index) => {
     return (
       <div className="cinema__film--detail film__cgv" key={index}>

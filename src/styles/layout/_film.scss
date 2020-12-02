@@ -65,11 +65,9 @@
           filter: brightness(60%);
           -webkit-filter: brightness(60%);
         }
-        @include MediaQuery($sm) {
-          height: 320px;
-        }
+
         @include MediaQuery($xs) {
-          height: 220px;
+          height: 200px;
         }
 
         img {
@@ -81,11 +79,9 @@
           -moz-transition: all 0.3s;
           -ms-transition: all 0.3s;
           -o-transition: all 0.3s;
-          @include MediaQuery($sm) {
-            height: 320px;
-          }
+
           @include MediaQuery($xs) {
-            height: 220px;
+            height: 200px;
           }
         }
         .item__img--range {
@@ -104,10 +100,16 @@
             p:first-child {
               margin: 0;
               @include text(text("white"), fs("h4"), fw("fwBold"));
+              @include MediaQuery($sm) {
+                font-size: fs("h5");
+              }
             }
             p:last-child {
               width: 50px;
               margin: 0;
+              @include MediaQuery($sm) {
+                width: 40px;
+              }
               i {
                 @include text(text("secondary"), fs("subtext3"), fw("fwLight"));
               }
@@ -140,6 +142,9 @@
         padding-top: spacing(0.8);
         position: relative;
         height: 100px;
+        @include MediaQuery($sm) {
+          height: 50px;
+        }
         .showHover {
           display: none;
           cursor: pointer;
@@ -173,9 +178,15 @@
           text-align: center;
           display: inline-block;
           margin-right: spacing(0.8);
+          @include MediaQuery($xs) {
+            font-size: fs("h5")-2;
+          }
         }
         .item__title--name {
           @include text(text("primary"), fs("h5"), fw("fwMedium"));
+          @include MediaQuery($xs) {
+            font-size: fs("h5")-2;
+          }
         }
         .item__title--time {
           @include text(text("green"), fs("h5"), fw("fwLight"));

@@ -94,7 +94,7 @@
                 margin-left: 0;
               }
               img {
-                width: 100%;
+                width: 80%;
                 padding: 10%;
                 @include MediaQuery($sm) {
                   padding: 0px;
@@ -124,7 +124,7 @@
                 border: none;
                 height: 40px;
                 font-weight: fw("fwMedium");
-                @include button(bg("white1"), text("secondary"), fs("h4"), 3px);
+                @include button(bg("primary"), text("secondary"), fs("h4"), 3px);
                 @include MediaQuery($sm) {
                   font-size: fs("h5");
                 }

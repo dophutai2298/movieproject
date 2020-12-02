@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectedIdCinema } from "../../../redux/actions/cinema.action";
 
@@ -28,7 +28,9 @@ function CinemaReserve(props) {
       return <img src="/images/rapmega.jpg" alt="cinema" />;
     }
   };
-
+  // useEffect(() => {
+  //   dispatch(selectedIdCinema(cum[0]?.maCumRap));
+  // }, []);
   return (
     <div>
       <span onClick={() => dispatch(selectedIdCinema(`${cum.maCumRap}`))}>

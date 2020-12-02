@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "100px",
     boxShadow: "none",
     [theme.breakpoints.down("sm")]: {
-      marginTop: "70px",
+      marginTop: "30px",
     },
   },
   appBar: {
@@ -169,10 +169,12 @@ export default function FilmViewList() {
             <Tab
               className={classes.tabbtn}
               label="Đang chiếu"
+              style={{ outline: "none" }}
               {...a11yProps(0)}
             />
             <Tab
               className={classes.tabbtn}
+              style={{ outline: "none" }}
               label="Sắp chiếu"
               {...a11yProps(1)}
             />

@@ -14,7 +14,7 @@ export class FilmService {
   fetchFilmFollowDay() {
     return Axios({
       url:
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimTheoNgay?maNhom=GP09&soTrang=1&soPhanTuTrenTrang=10&tuNgay=20%2F09%2F2020&denNgay=30%2F12%2F2020",
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimTheoNgay?maNhom=GP09&soTrang=1&soPhanTuTrenTrang=10&tuNgay=01%2F08%2F2020&denNgay=31%2F12%2F2020",
       method: "GET",
     });
   }

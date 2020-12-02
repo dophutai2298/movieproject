@@ -73,7 +73,6 @@ function ShowtimeFilm(props) {
         });
         const renderTime = () => {
           if (maHeThongRap === id) {
-            console.log(datencomparison);
             if (datencomparison.length < 1) {
               return (
                 <p

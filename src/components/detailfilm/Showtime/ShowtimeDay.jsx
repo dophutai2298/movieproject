@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { selectedDate } from "../../../redux/actions/cinema.action";
 
@@ -48,6 +48,9 @@ export default function ShowtimeDay(props) {
       changeZero(date.getDate() + i).toString();
     changeDay = [...changeDay, increateDay];
   }
+  useEffect(() => {
+    dispatch(selectedDate(date));
+  }, []);
   return changeDay.map((day, index) => {
     return (
       <div className="showtimes__right__date--scroll1 " key={index}>

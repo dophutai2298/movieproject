@@ -7,7 +7,7 @@ import {
   fetchCinemaInfoInSystem,
   fetchCinemaSystem,
   selectedIdCinema,
-  fetchFilmFollowCinema
+  fetchFilmFollowCinema,
 } from "../../../redux/actions/cinema.action";
 
 class ReserveCinema extends Component {
@@ -26,6 +26,7 @@ class ReserveCinema extends Component {
   //Render cụm Rạp
   renderCinemaReserse = () => {
     const { cinemaInfo } = this.props;
+
     // if (cinemaInfo.length < 1) {
     //   return (
     //     <div className="cinema__rap--detail ">
@@ -37,7 +38,7 @@ class ReserveCinema extends Component {
     //         </p>
     //       </div>
     //     </div>
-        
+
     //   );
     // }
     return cinemaInfo.map((cum, index) => {
@@ -53,24 +54,22 @@ class ReserveCinema extends Component {
   renderFilm = () => {
     const { movieFowllowCinema } = this.props;
     const { selectedCinema } = this.props;
-
-    if (!selectedCinema) {
-      return (
-        <div className="cinema__section--film">
-          <p
-            style={{
-              color: "#fb4226",
-              fontSize: "14px",
-              fontWeight: " 600",
-              marginLeft: "2%",
-            }}
-          >
-            Vui lòng chọn Cụm Rạp !!!
-          </p>
-        </div>
-      );
-      
-    }
+    // if (!selectedCinema) {
+    //   return (
+    //     <div className="cinema__section--film">
+    //       <p
+    //         style={{
+    //           color: "#fb4226",
+    //           fontSize: "14px",
+    //           fontWeight: " 600",
+    //           marginLeft: "2%",
+    //         }}
+    //       >
+    //         Vui lòng chọn Cụm Rạp !!!
+    //       </p>
+    //     </div>
+    //   );
+    // }
 
     let arrFilmNew = movieFowllowCinema.filter(
       (movie) => movie.maCumRap === selectedCinema
@@ -87,7 +86,7 @@ class ReserveCinema extends Component {
               marginLeft: "2%",
             }}
           >
-           ...
+            ...
           </p>
         </div>
       );
@@ -100,6 +99,7 @@ class ReserveCinema extends Component {
       );
     });
   };
+
   render() {
     return (
       <section className="container" id="cumrap">
@@ -111,6 +111,7 @@ class ReserveCinema extends Component {
           {/* Cinema */}
           <div className="scroll scroll2">
             <div className="cinema__section--rap">
+              {this.props.fetchFirst}
               {this.renderCinemaReserse()}
             </div>
           </div>
@@ -122,16 +123,16 @@ class ReserveCinema extends Component {
       </section>
     );
   }
+
   componentDidMount() {
     this.props.dispatch(fetchCinemaSystem());
     this.props.dispatch(
       fetchCinemaInfoInSystem(this.props.cinemaList.maHeThongRap)
     );
-    this.props.dispatch(
-      fetchCinemaInfoInSystem("BHDStar")
-    );
-    this.props.dispatch(selectedIdCinema('bhd-star-cineplex-3-2'));
-      this.props.dispatch(fetchFilmFollowCinema("BHDStar"));
+    //Fetch lần đầu
+    this.props.dispatch(fetchCinemaInfoInSystem("BHDStar"));
+    this.props.dispatch(selectedIdCinema("bhd-star-cineplex-3-2"));
+    this.props.dispatch(fetchFilmFollowCinema("BHDStar"));
   }
 }
 
