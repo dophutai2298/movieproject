@@ -28,9 +28,7 @@ function CinemaReserve(props) {
       return <img src="/images/rapmega.jpg" alt="cinema" />;
     }
   };
-  // useEffect(() => {
-  //   dispatch(selectedIdCinema('bhd-star-cineplex-3-2'))
-  // }, []);
+
   return (
     <div>
       <span onClick={() => dispatch(selectedIdCinema(`${cum.maCumRap}`))}>
