@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import {
   fetchCinemaInfoInSystem,
   fetchCinemaSystem,
+  selectedIdCinema,
+  fetchFilmFollowCinema
 } from "../../../redux/actions/cinema.action";
 
 class ReserveCinema extends Component {
@@ -24,19 +26,20 @@ class ReserveCinema extends Component {
   //Render cụm Rạp
   renderCinemaReserse = () => {
     const { cinemaInfo } = this.props;
-    if (cinemaInfo.length < 1) {
-      return (
-        <div className="cinema__rap--detail ">
-          <div className="cimena__rap--titile">
-            <p>
-              <span style={{ fontSize: "14px" }}>
-                Vui lòng chọn Hệ thống Rạp !!!
-              </span>
-            </p>
-          </div>
-        </div>
-      );
-    }
+    // if (cinemaInfo.length < 1) {
+    //   return (
+    //     <div className="cinema__rap--detail ">
+    //       <div className="cimena__rap--titile">
+    //         <p>
+    //           <span style={{ fontSize: "14px" }}>
+    //             Vui lòng chọn Hệ thống Rạp !!!
+    //           </span>
+    //         </p>
+    //       </div>
+    //     </div>
+        
+    //   );
+    // }
     return cinemaInfo.map((cum, index) => {
       return (
         <div key={index}>
@@ -51,22 +54,23 @@ class ReserveCinema extends Component {
     const { movieFowllowCinema } = this.props;
     const { selectedCinema } = this.props;
 
-    if (!selectedCinema) {
-      return (
-        <div className="cinema__section--film">
-          <p
-            style={{
-              color: "#fb4226",
-              fontSize: "14px",
-              fontWeight: " 600",
-              marginLeft: "2%",
-            }}
-          >
-            Vui lòng chọn Cụm Rạp !!!
-          </p>
-        </div>
-      );
-    }
+    // if (!selectedCinema) {
+    //   return (
+    //     <div className="cinema__section--film">
+    //       <p
+    //         style={{
+    //           color: "#fb4226",
+    //           fontSize: "14px",
+    //           fontWeight: " 600",
+    //           marginLeft: "2%",
+    //         }}
+    //       >
+    //         Vui lòng chọn Cụm Rạp !!!
+    //       </p>
+    //     </div>
+    //   );
+      
+    // }
 
     let arrFilmNew = movieFowllowCinema.filter(
       (movie) => movie.maCumRap === selectedCinema
@@ -123,6 +127,11 @@ class ReserveCinema extends Component {
     this.props.dispatch(
       fetchCinemaInfoInSystem(this.props.cinemaList.maHeThongRap)
     );
+    this.props.dispatch(
+      fetchCinemaInfoInSystem("BHDStar")
+    );
+     this.props.dispatch(selectedIdCinema('bhd-star-cineplex-3-2'));
+      this.props.dispatch(fetchFilmFollowCinema("BHDStar"));
   }
 }
 

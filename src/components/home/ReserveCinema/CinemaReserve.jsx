@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectedIdCinema } from "../../../redux/actions/cinema.action";
 
@@ -28,6 +28,9 @@ function CinemaReserve(props) {
       return <img src="/images/rapmega.jpg" alt="cinema" />;
     }
   };
+  // useEffect(() => {
+  //   dispatch(selectedIdCinema('bhd-star-cineplex-3-2'))
+  // }, []);
   return (
     <div>
       <span onClick={() => dispatch(selectedIdCinema(`${cum.maCumRap}`))}>

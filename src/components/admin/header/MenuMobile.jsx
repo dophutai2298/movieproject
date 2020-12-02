@@ -68,7 +68,7 @@ export default function MenuMobile() {
               </li>
               <li>
                 <NavLink className="menuAdmin__link" exact to="/admin">
-                  <i className="fa fa-dashboard"></i>Daskborad
+                  <i className="fa fa-dashboard"></i>Daskboard
                 </NavLink>
               </li>
               <li>
