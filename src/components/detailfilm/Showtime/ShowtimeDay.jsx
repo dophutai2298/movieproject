@@ -49,7 +49,7 @@ export default function ShowtimeDay(props) {
     changeDay = [...changeDay, increateDay];
   }
   useEffect(() => {
-    dispatch(selectedDate(date));
+    dispatch(selectedDate("2019-01-01"));
   }, []);
   return changeDay.map((day, index) => {
     return (
