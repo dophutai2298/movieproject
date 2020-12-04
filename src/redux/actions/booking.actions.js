@@ -63,6 +63,7 @@ export const postBookingRequest = (maLichChieu, danhSachVe) => {
       /*  localStorage.setItem("NguoiDatVe", JSON.stringify(res.data)); */
 
       dispatch(createAction(BOKING_TICKETS, res));
+      dispatch(fetchTicketRoom(maLichChieu));
     } catch (error) {
       Swal.fire({
         title: "Bạn chưa đăng nhập tài khoản",

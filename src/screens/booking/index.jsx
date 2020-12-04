@@ -161,23 +161,23 @@ export default function Booking() {
         showCancelButton: true,
       }).then((result) => {
         if (result.isConfirmed) {
-          // Swal.fire("Thành Công", "", "success");
+          Swal.fire("Đặt vé thành công", "", "success");
           dispatch(postBookingRequest(maLichChieu, danhSachVe));
-          dispatch(fetchTicketRoom(maLichChieu));
-          Swal.fire({
-            icon: "success",
-            title: "Đặt vé thành công",
-            text: "Chúng tôi sẽ liên lạc với bạn sớm !",
-            width: 600,
-            padding: "3em",
-            background: "#fff url(/images/trees.png)",
-            backdrop: `
-              rgba(0,0,123,0.4)
-              url("/images/successBooking.gif")
-              left top
-              no-repeat
-            `,
-          });
+          // dispatch(fetchTicketRoom(maLichChieu));
+          // Swal.fire({
+          //   icon: "success",
+          //   title: "Đặt vé thành công",
+          //   text: "Chúng tôi sẽ liên lạc với bạn sớm !",
+          //   width: 600,
+          //   padding: "3em",
+          //   background: "#fff url(/images/trees.png)",
+          //   backdrop: `
+          //     rgba(0,0,123,0.4)
+          //     url("/images/successBooking.gif")
+          //     left top
+          //     no-repeat
+          //   `,
+          // });
 
           /*  history.push("/");
           history.push("/booking/" + maLichChieu); */
